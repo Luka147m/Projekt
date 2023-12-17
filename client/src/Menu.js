@@ -1,72 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from 'react';
 
-const Menu = ({ onUpdateMarkerData, onCheckboxChange, isChecked }) => {
-    const [number, setNumber] = useState("");
-    const [selectedRoute, setSelectedRoute] = useState(null);
+const Menu = ({ setRoute }) => {
+  const [inputValue, setInputValue] = useState('');
 
-    const handleCheckboxChange = () => {
-        const newCheckedState = !isChecked;
-        onCheckboxChange(newCheckedState);
-    };
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
 
-    const handleNumberChange = (e) => {
-        setNumber(e.target.value);
-    };
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      setRoute(inputValue);
+    }
+  };
 
-    const fetchData = () => {
-        fetch(`/api/route/${number}`)
-            .then((response) => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error("Pogreška u odgovoru");
-                }
-            })
-            .then((data) => {
-                //console.log(data);
-                onUpdateMarkerData(data);
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            });
-    };
+  return (
+    <div className='menu-component'>
+      <h1>Zet tracker</h1>
+      <input
+        type='text'
+        value={inputValue}
+        placeholder='Unesi broj linije!'
+        onChange={handleInputChange}
+        onKeyDown={handleKeyDown}
+      />
 
-    useEffect(() => {
-        if (selectedRoute) {
-            fetchData();
-
-            const interval = setInterval(fetchData, 30000);
-            return () => clearInterval(interval);
-        }
-    }, [selectedRoute]);
-
-    const handleSelectRoute = () => {
-        setSelectedRoute(number);
-    };
-
-    return (
-        <div className="menu-component">
-            <h1>Zet tracker</h1>
-            <input
-                type="text"
-                value={number}
-                onChange={handleNumberChange}
-                placeholder="Unesi broj linije!"
-            />
-
-            {selectedRoute && (
-                <label>
-                    Prikaži rutu:
-                    <input
-                        type="checkbox"
-                        checked={isChecked}
-                        onChange={handleCheckboxChange}
-                    />
-                </label>
-            )}
-            <button onClick={handleSelectRoute}>Prikaži</button>
-        </div>
-    );
+      <button onClick={() => setRoute(inputValue)}>Prikaži</button>
+    </div>
+  );
 };
 
 export default Menu;

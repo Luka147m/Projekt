@@ -26,6 +26,7 @@ async function fetchData() {
         parseTripUpdate(entity.tripUpdate);
       }
     });
+    // console.log(Object.keys(data));
   } catch (error) {
     console.log(error);
   }

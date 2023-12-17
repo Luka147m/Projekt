@@ -1,14 +1,13 @@
 const express = require('express');
 const app = express();
 
-const fs = require('fs').promises;
+const fs = require('fs');
 
 const { latestTrips } = require('./gtfsfetch');
 
 const { spawnSync } = require('child_process');
 
 const { Pool } = require('pg');
-const { start } = require('repl');
 require('dotenv').config();
 
 const pool = new Pool({
@@ -26,7 +25,7 @@ const stopsPath = './stops.json';
 async function fetchStops() {
   try {
     const result = await pool.query(`SELECT * FROM stopsJson`);
-    await fs.writeFile(stopsPath, JSON.stringify(result.rows[0].stops));
+    fs.writeFileSync(stopsPath, JSON.stringify(result.rows[0].stops));
     console.log(`Stops.json created successfully`);
   } catch (error) {
     console.error('Error creating stops.json', error);
@@ -54,7 +53,6 @@ async function fetchAndRefreshData() {
 app.get('/api/route/:routeId', (req, res) => {
   const routeId = req.params.routeId;
   if (zetData.hasOwnProperty(routeId)) {
-    //console.log(zetData[routeId]);
     res.json(zetData[routeId]);
   } else {
     res.status(404).json({ error: 'Route not found' });

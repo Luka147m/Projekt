@@ -1,30 +1,46 @@
-import React, { useState } from "react";
-import "./App.css";
-import Menu from "./Menu.js";
-import Map from "./Map.js";
+import React, { useEffect, useState } from 'react';
+import './App.css';
+import Menu from './Menu.js';
+import Map from './Map.js';
 
 function App() {
-    const [markerData, setMarkerData] = useState([]);
-    const [isChecked, setIsChecked] = useState(false);
+  const [route, setRoute] = useState(null);
+  const [routeData, setRouteData] = useState(null);
+  const [tripInfo, setTripInfo] = useState(null);
 
-    const updateMarkerData = (newData) => {
-        setMarkerData(newData);
-    };
+  useEffect(() => {
+    if (route) {
+      const fetchData = () => {
+        fetch(`/api/route/${route}`)
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error('Pogreška u odgovoru');
+            }
+          })
+          .then((data) => {
+            // console.log(data);
+            setRouteData(data);
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+      };
+      fetchData();
 
-    const handleCheckboxChange = (isChecked) => {
-        setIsChecked(isChecked);
-    };
+      const intervalId = setInterval(fetchData, 10000);
 
-    return (
-        <div className="container">
-            <Menu
-                onUpdateMarkerData={updateMarkerData}
-                onCheckboxChange={handleCheckboxChange}
-                isChecked={isChecked}
-            />
-            <Map markerData={markerData} isChecked={isChecked} />
-        </div>
-    );
+      return () => clearInterval(intervalId);
+    }
+  }, [route]);
+
+  return (
+    <div className='container'>
+      <Menu setRoute={setRoute} tripInfo={tripInfo} />
+      <Map routeData={routeData} setTripInfo={setTripInfo} />
+    </div>
+  );
 }
 
 export default App;
