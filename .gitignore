@@ -1,2 +1,4 @@
 /server/node_modules
-dump.sql
+/server/backup
+/server/.env
+/server/stops.json
