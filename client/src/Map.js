@@ -1,11 +1,16 @@
 import { MapContainer, TileLayer, ZoomControl } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import MapRouteLine from './MapRouteLine';
 import Markers from './Markers';
 
 const Map = ({ routeData, tripInfo, setTripInfo }) => {
   const [coordinates, setCoordinates] = useState(null);
+  useEffect(() => {
+    if (!tripInfo) {
+      setCoordinates(null);
+    }
+  }, [tripInfo]);
 
   return (
     <MapContainer

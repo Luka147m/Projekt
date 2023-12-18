@@ -59,6 +59,10 @@ app.get('/api/route/:routeId', (req, res) => {
   }
 });
 
+app.get('/api/routes', (req, res) => {
+  res.json(Object.keys(zetData));
+});
+
 app.get('/api/trip/:tripId', async (req, res) => {
   const tripId = req.params.tripId;
   try {
