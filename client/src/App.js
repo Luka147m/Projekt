@@ -38,7 +38,11 @@ function App() {
   return (
     <div className='container'>
       <Menu setRoute={setRoute} tripInfo={tripInfo} />
-      <Map routeData={routeData} setTripInfo={setTripInfo} />
+      <Map
+        routeData={routeData}
+        tripInfo={tripInfo}
+        setTripInfo={setTripInfo}
+      />
     </div>
   );
 }
