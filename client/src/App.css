@@ -23,11 +23,24 @@
     z-index: 800;
 }
 
+.clock-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 20px;
+    /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); */
+    z-index: 800;
+}
+
+.react-clock__face {
+    background-color: white ;
+}
+
 .h2-title-sidebar {
     margin-left: 50px;
 }
 
 .timeline-container {
-    max-height: 70vh; /* Set the maximum height to the height of the viewport */
-    overflow-y: auto; /* Enable vertical scrolling if the content overflows */
-  }
+    max-height: 70vh; 
+    overflow-y: auto; 
+}

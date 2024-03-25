@@ -50,6 +50,19 @@ async function fetchAndRefreshData() {
   }, 30000);
 }
 
+app.get('/api/routeInfo/:routeId', async (req, res) => {
+  const routeId = req.params.routeId;
+  try {
+    const result = await pool.query(
+      `SELECT get_route_info('${routeId}') AS route_info`
+    );
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error executing query', error);
+    res.status(500).json({ error: 'An error occurred' });
+  }
+});
+
 app.get('/api/route/:routeId', (req, res) => {
   const routeId = req.params.routeId;
   if (zetData.hasOwnProperty(routeId)) {

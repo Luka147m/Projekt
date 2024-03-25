@@ -61,5 +61,6 @@ module.exports = {
 
 async function latestTrips() {
   await fetchData();
+  fs.writeFileSync('./backup/last.json', JSON.stringify(data));
   return data;
 }

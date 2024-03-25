@@ -1,7 +1,7 @@
 import { Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 
 const customIcon = new L.Icon({
   iconUrl: process.env.PUBLIC_URL + '/tram.png',
@@ -9,8 +9,15 @@ const customIcon = new L.Icon({
   iconAnchor: [16, 32],
 });
 
-const Markers = ({ routeData, tripInfo, setTripInfo, setCoordinates }) => {
-  const handleMarkerClick = (tripId) => {
+const Markers = ({
+  routeData,
+  tripInfo,
+  setTripInfo,
+  setCoordinates,
+  setScrollToStop,
+}) => {
+  const handleMarkerClick = (tripId, stop_id) => {
+    setScrollToStop(stop_id);
     fetch(`/api/trip/${tripId}`)
       .then((response) => response.json())
       .then((data) => {
