@@ -14,6 +14,7 @@ const Sidebar = ({
   setShowTrips,
   setRouteData,
   scrollToStop,
+  setSelectedMarker,
 }) => {
   const [routeInfo, setRouteInfo] = useState(null);
   const [options, setOptions] = useState('');
@@ -23,6 +24,7 @@ const Sidebar = ({
   const handleOptionChange = (event) => {
     const optionValue = event.target.value;
     setSelectedOption(optionValue);
+    setSelectedMarker(null);
   };
 
   useEffect(() => {
@@ -58,6 +60,7 @@ const Sidebar = ({
     if (choice) {
       setRouteData(null);
       setTripInfo(null);
+      setSelectedMarker(null);
       setSelectedOption('svi');
 
       const selectedValue = choice.value;
@@ -156,7 +159,7 @@ const Sidebar = ({
                 contentArrowStyle={{
                   borderRight: '7px solid  rgb(33, 150, 243)',
                 }}
-                date={stop.arrival_time}
+                date={'Vrijeme dolaska ' + stop.arrival_time}
                 icon={
                   <img
                     src={process.env.PUBLIC_URL + 'stanica.png'}

@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'digital-7';
+    src: url('./fonts/digital-7.ttf');
+}
+
 .leaflet-container{
     height: 100vh;
 }
@@ -19,7 +24,7 @@
     top: 20px;
     left: 20px;
     padding: 20px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.8); 
     z-index: 800;
 }
 
@@ -27,8 +32,7 @@
     position: absolute;
     top: 20px;
     right: 20px;
-    padding: 20px;
-    /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); */
+    padding: 5px;
     z-index: 800;
 }
 
@@ -43,4 +47,23 @@
 .timeline-container {
     max-height: 70vh; 
     overflow-y: auto; 
+}
+
+.digital-clock{
+    display: flex;
+    font-family: 'digital-7', sans-serif;   
+    font-size: xx-large;
+    background-color: #fff;
+    border: 4px #1264ab solid;
+    padding: 5px 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.8); 
+    width: 90px;
+    justify-content: center;
+    align-items: center;
+}
+
+.analog-clock {
+    border: 4px #1264ab solid;
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.8); 
 }

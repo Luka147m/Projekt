@@ -10,9 +10,13 @@ const Map = ({
   setTripInfo,
   showTrips,
   setScrollToStop,
+  scrollToStop,
+  selectedMarker,
+  setSelectedMarker,
 }) => {
   const [coordinates, setCoordinates] = useState(null);
   const [filteredRouteData, setFilteredRouteData] = useState(null);
+  const [mapContext, setMapContext] = useState();
 
   useEffect(() => {
     if (!tripInfo) {
@@ -38,6 +42,7 @@ const Map = ({
       center={[45.808680463038435, 15.977835680373971]}
       zoom={13}
       zoomControl={false}
+      whenReady={(event) => setMapContext(event.target)}
     >
       <ZoomControl position="bottomright" />
       <TileLayer
@@ -49,7 +54,11 @@ const Map = ({
         tripInfo={tripInfo}
         setTripInfo={setTripInfo}
         setCoordinates={setCoordinates}
+        coordinates={coordinates}
         setScrollToStop={setScrollToStop}
+        selectedMarker={selectedMarker}
+        setSelectedMarker={setSelectedMarker}
+        mapContext={mapContext}
       />
       <MapRouteLine coordinates={coordinates} />
     </MapContainer>

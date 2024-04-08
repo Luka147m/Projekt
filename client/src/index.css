@@ -42,4 +42,5 @@ code {
 
 .vertical-timeline-element {
   margin-left: 20px;
+  scroll-margin-top: 10px;
 }

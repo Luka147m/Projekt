@@ -14,6 +14,8 @@ function App() {
   const [showTrips, setShowTrips] = useState(null);
   const [scrollToStop, setScrollToStop] = useState(null);
   const [time, setTime] = useState(new Date());
+  const [selectedMarker, setSelectedMarker] = useState(null);
+  const [clockType, setClockType] = useState('analog');
 
   useEffect(() => {
     const interval = setInterval(() => setTime(new Date()), 1000);
@@ -67,6 +69,10 @@ function App() {
     }
   }, [route]);
 
+  const toggleClockType = () => {
+    setClockType(clockType === 'analog' ? 'digital' : 'analog');
+  };
+
   return (
     <div className="container">
       <Sidebar
@@ -77,6 +83,7 @@ function App() {
         setRouteData={setRouteData}
         setShowTrips={setShowTrips}
         scrollToStop={scrollToStop}
+        setSelectedMarker={setSelectedMarker}
       />
       <Map
         routeData={routeData}
@@ -84,9 +91,22 @@ function App() {
         showTrips={showTrips}
         setTripInfo={setTripInfo}
         setScrollToStop={setScrollToStop}
+        selectedMarker={selectedMarker}
+        setSelectedMarker={setSelectedMarker}
       />
-      <div className="clock-container">
-        <Clock locale="hr" value={time} renderNumbers="True" />
+      <div className="clock-container" onClick={toggleClockType}>
+        {clockType === 'analog' ? (
+          <Clock
+            className="analog-clock"
+            locale="hr"
+            value={time}
+            renderNumbers={true}
+          />
+        ) : (
+          <div className="digital-clock">
+            {time.toLocaleTimeString([], { hour12: false })}
+          </div>
+        )}
       </div>
     </div>
   );
