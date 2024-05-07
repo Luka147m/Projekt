@@ -2,7 +2,7 @@ import { Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import 'leaflet.motion/dist/leaflet.motion.js';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 const defaultIcon = new L.Icon({
   iconUrl: process.env.PUBLIC_URL + '/tram.png',
@@ -33,9 +33,9 @@ const Markers = ({
   setSelectedMarker,
   mapContext,
 }) => {
-  const [movingCoordinates, setMovingCoordinates] = useState(null);
-  const [time, setTime] = useState(null);
-  const [motionPolyline, setMotionPolyline] = useState(null);
+  // const [movingCoordinates, setMovingCoordinates] = useState(null);
+  // const [time, setTime] = useState(null);
+  // const [motionPolyline, setMotionPolyline] = useState(null);
 
   const handleMarkerClick = (tripId, stop_id, index) => {
     setScrollToStop(stop_id);
@@ -54,84 +54,105 @@ const Markers = ({
         }));
 
         setCoordinates(newCoordinates);
-        const startIndex = tripInfoData.trip_info.findIndex(
-          (entry) => entry.stop_id === stop_id
-        );
-
-        if (startIndex !== -1) {
-          // Step 2: Slice the array from the found index to the end
-          const relevantEntries = tripInfoData.trip_info.slice(startIndex);
-
-          // Step 3: Calculate the total time
-          let totalTimeInMillis = 0;
-          for (let i = 0; i < relevantEntries.length; i++) {
-            const timeParts = relevantEntries[i].time_till_next_stop.split(':');
-            const hours = parseInt(timeParts[0]);
-            const minutes = parseInt(timeParts[1]);
-            const seconds = parseInt(timeParts[2]);
-            totalTimeInMillis +=
-              (hours * 60 * 60 + minutes * 60 + seconds) * 1000;
-          }
-
-          const movingCoord = relevantEntries.map((tram) => ({
-            lat: parseFloat(tram.stop_lat),
-            lon: parseFloat(tram.stop_lon),
-          }));
-
-          setMovingCoordinates(movingCoord);
-          setTime(totalTimeInMillis);
-          console.log('Total time in milliseconds:', totalTimeInMillis);
-        } else {
-          console.log('Stop ID not found in the array.');
-        }
-      })
-      .catch((error) => {
-        console.error('Error fetching route data:', error);
       });
-
-    // Remove existing motion polyline when a new marker is clicked
-    if (motionPolyline) {
-      mapContext.removeLayer(motionPolyline);
-    }
   };
 
   useEffect(() => {
-    if (time && movingCoordinates && coordinates && mapContext) {
-      const instance = L.motion.polyline(
-        [movingCoordinates],
-        {
-          color: 'green',
-        },
-        {
-          auto: true,
-          duration: time,
-        },
-        {
-          removeOnEnd: false,
-          showMarker: true,
-          icon: travellingIcon,
-        }
-      );
+    if (routeData) {
+      const animateMarkers = async () => {
+        const animationDataArray = [];
 
-      mapContext.addLayer(instance);
-      setMotionPolyline(instance);
+        // Create an array of promises for all fetch requests
+        const fetchPromises = routeData.map((tram) =>
+          fetch(`/api/trip/${tram.trip_id}`)
+            .then((response) => response.json())
+            .then((data) => {
+              const tripInfoData = data[0];
+              const startIndex = tripInfoData.trip_info.findIndex(
+                (entry) => entry.stop_id === tram.stop_id
+              );
+
+              if (startIndex !== -1) {
+                const relevantEntries =
+                  tripInfoData.trip_info.slice(startIndex);
+
+                let totalTimeInMillis = 0;
+                for (let i = 0; i < relevantEntries.length; i++) {
+                  const timeParts =
+                    relevantEntries[i].time_till_next_stop.split(':');
+                  const hours = parseInt(timeParts[0]);
+                  const minutes = parseInt(timeParts[1]);
+                  const seconds = parseInt(timeParts[2]);
+                  totalTimeInMillis +=
+                    (hours * 60 * 60 + minutes * 60 + seconds) * 1000;
+                }
+
+                const movingCoord = relevantEntries.map((entry) => ({
+                  lat: parseFloat(entry.stop_lat),
+                  lon: parseFloat(entry.stop_lon),
+                }));
+
+                animationDataArray.push({
+                  movingCoordinates: movingCoord,
+                  time: totalTimeInMillis,
+                });
+              } else {
+                console.log('Stop ID not found in the array.');
+              }
+            })
+            .catch((error) => {
+              console.error('Error fetching route data:', error);
+            })
+        );
+
+        // Wait for all fetch requests to complete
+        await Promise.all(fetchPromises);
+        return animationDataArray;
+      };
+
+      animateMarkers().then((animationDataArray) => {
+        animationDataArray.forEach((animationData) => {
+          const { movingCoordinates, time } = animationData;
+
+          const instance = L.motion.polyline(
+            [movingCoordinates],
+            {
+              color: 'transparent',
+            },
+            {
+              auto: true,
+              duration: time,
+            },
+            {
+              removeOnEnd: true,
+              showMarker: true,
+              icon: travellingIcon,
+            }
+          );
+
+          mapContext.addLayer(instance);
+        });
+      });
     }
-  }, [mapContext, movingCoordinates, coordinates, time]);
+  }, [routeData, mapContext]);
 
   return (
     <div>
       {routeData &&
-        routeData.map((tram, index) => (
+        routeData.map((tram) => (
           <Marker
-            key={index}
+            key={tram.id}
             position={[parseFloat(tram.stop_lat), parseFloat(tram.stop_lon)]}
-            icon={selectedMarker === index ? hoverIcon : defaultIcon}
+            icon={selectedMarker === tram.id ? hoverIcon : defaultIcon}
             eventHandlers={{
-              click: () => handleMarkerClick(tram.trip_id, tram.stop_id, index),
+              click: () =>
+                handleMarkerClick(tram.trip_id, tram.stop_id, tram.id),
             }}
           >
             <Popup offset={L.point(0, -24)}>
-              {'Tramvaj: ' + tram.route_id}
+              {'Tramvaj: ' + tram.id}
+              <br />
+              {'Ruta: ' + tram.route_id}
               <br />
               {'Trenutna stanica: ' + tram.stop_name}
             </Popup>

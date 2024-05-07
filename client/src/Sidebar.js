@@ -49,6 +49,7 @@ const Sidebar = ({
   }, [selectedOption, routeInfo, setShowTrips, setTripInfo]);
 
   useEffect(() => {
+    // console.log(routes);
     if (routes) {
       setOptions(routes.map((number) => ({ value: number, label: number })));
       setTripInfo(null);

@@ -35,6 +35,7 @@ function App() {
         }
       })
       .then((data) => {
+        // console.log(data);
         setRoutes(data);
       })
       .catch((error) => {
