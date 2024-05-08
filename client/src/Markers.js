@@ -94,6 +94,8 @@ const Markers = ({
                   (entry) => entry.id === tram.id
                 );
 
+                // console.log(existingEntryIndex);
+
                 // Ako postoji
                 if (existingEntryIndex !== -1) {
                   // Ako je na drugoj stanici, redraw
@@ -101,12 +103,29 @@ const Markers = ({
                     animationDataArray[existingEntryIndex].stop_id !==
                     tram.stop_id
                   ) {
+                    // console.log(
+                    //   'pronasao ' +
+                    //     animationDataArray[existingEntryIndex].stop_id +
+                    //     ' ' +
+                    //     tram.stop_id
+                    // );
                     animationDataArray.splice(existingEntryIndex, 1);
                     newAnimationDataArray.push({
                       id: tram.id,
                       moved: true,
                       movingCoordinates: movingCoord,
                       time: totalTimeInMillis,
+                      stop_id: tram.stop_id,
+                    });
+                  }
+                  if (animationDataArray[existingEntryIndex].moved) {
+                    animationDataArray.splice(existingEntryIndex, 1);
+                    newAnimationDataArray.push({
+                      id: tram.id,
+                      moved: false,
+                      movingCoordinates: movingCoord,
+                      time: totalTimeInMillis,
+                      stop_id: tram.stop_id,
                     });
                   }
                 } else {
@@ -116,6 +135,7 @@ const Markers = ({
                     moved: false,
                     movingCoordinates: movingCoord,
                     time: totalTimeInMillis,
+                    stop_id: tram.stop_id,
                   });
                 }
               } else {
@@ -149,20 +169,16 @@ const Markers = ({
     animationDataArray.forEach((animationData) => {
       const { id, moved, movingCoordinates, time } = animationData;
 
-      console.log(`${id} tramvaj se pomakao ${moved}`);
-
-      // Check if there's already an instance with the same ID
+      // console.log(`${id} tramvaj se pomakao ${moved}`);
       // console.log(instanceIds);
       const instanceExists = instanceIds.includes(id);
       if (instanceExists) {
-        console.log('postoji');
-        // If the tram has moved, remove the existing instance
+        // console.log('postoji');
         if (moved) {
-          console.log('pomako se');
+          // console.log('pomako se');
           removeInstanceById(id);
-          animationData.moved = false;
         } else {
-          console.log('skipp');
+          // console.log('skipp');
           // If the tram hasn't moved, skip adding a new instance
           return;
         }
@@ -184,6 +200,8 @@ const Markers = ({
           icon: travellingIcon,
         }
       );
+      const popupContent = 'Predikcija Tramvaj ' + id;
+      instance.bindPopup(popupContent, { offset: L.point(0, -24) });
       instance._id = id;
       mapContext.addLayer(instance);
       setInstanceIds((prevInstanceIds) => [...prevInstanceIds, id]);
