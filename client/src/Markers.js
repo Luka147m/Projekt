@@ -2,7 +2,7 @@ import { Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import 'leaflet.motion/dist/leaflet.motion.js';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const defaultIcon = new L.Icon({
   iconUrl: process.env.PUBLIC_URL + '/tram.png',
@@ -24,19 +24,15 @@ const travellingIcon = new L.Icon({
 
 const Markers = ({
   routeData,
-  tripInfo,
   setTripInfo,
   setCoordinates,
-  coordinates,
   setScrollToStop,
   selectedMarker,
   setSelectedMarker,
   mapContext,
 }) => {
-  // const [movingCoordinates, setMovingCoordinates] = useState(null);
-  // const [time, setTime] = useState(null);
-  // const [motionPolyline, setMotionPolyline] = useState(null);
-
+  const [animationDataArray, setAnimationDataArray] = useState([]);
+  const [instanceIds, setInstanceIds] = useState([]);
   const handleMarkerClick = (tripId, stop_id, index) => {
     setScrollToStop(stop_id);
 
@@ -60,9 +56,8 @@ const Markers = ({
   useEffect(() => {
     if (routeData) {
       const animateMarkers = async () => {
-        const animationDataArray = [];
+        const newAnimationDataArray = [];
 
-        // Create an array of promises for all fetch requests
         const fetchPromises = routeData.map((tram) =>
           fetch(`/api/trip/${tram.trip_id}`)
             .then((response) => response.json())
@@ -76,6 +71,7 @@ const Markers = ({
                 const relevantEntries =
                   tripInfoData.trip_info.slice(startIndex);
 
+                // Vrijeme za animaciju
                 let totalTimeInMillis = 0;
                 for (let i = 0; i < relevantEntries.length; i++) {
                   const timeParts =
@@ -87,15 +83,41 @@ const Markers = ({
                     (hours * 60 * 60 + minutes * 60 + seconds) * 1000;
                 }
 
+                // Kordinate za animaciju
                 const movingCoord = relevantEntries.map((entry) => ({
                   lat: parseFloat(entry.stop_lat),
                   lon: parseFloat(entry.stop_lon),
                 }));
 
-                animationDataArray.push({
-                  movingCoordinates: movingCoord,
-                  time: totalTimeInMillis,
-                });
+                // Provjeri postoji li animacija za taj tramvaj
+                const existingEntryIndex = animationDataArray.findIndex(
+                  (entry) => entry.id === tram.id
+                );
+
+                // Ako postoji
+                if (existingEntryIndex !== -1) {
+                  // Ako je na drugoj stanici, redraw
+                  if (
+                    animationDataArray[existingEntryIndex].stop_id !==
+                    tram.stop_id
+                  ) {
+                    animationDataArray.splice(existingEntryIndex, 1);
+                    newAnimationDataArray.push({
+                      id: tram.id,
+                      moved: true,
+                      movingCoordinates: movingCoord,
+                      time: totalTimeInMillis,
+                    });
+                  }
+                } else {
+                  // Ako ne postoji dodaj
+                  newAnimationDataArray.push({
+                    id: tram.id,
+                    moved: false,
+                    movingCoordinates: movingCoord,
+                    time: totalTimeInMillis,
+                  });
+                }
               } else {
                 console.log('Stop ID not found in the array.');
               }
@@ -105,36 +127,81 @@ const Markers = ({
             })
         );
 
-        // Wait for all fetch requests to complete
         await Promise.all(fetchPromises);
-        return animationDataArray;
+
+        // Brise tramvaje koje vise ne pratimo
+        const filteredAnimationDataArray = animationDataArray.filter((entry) =>
+          routeData.some((tram) => tram.id === entry.id)
+        );
+
+        setAnimationDataArray([
+          ...filteredAnimationDataArray,
+          ...newAnimationDataArray,
+        ]);
       };
 
-      animateMarkers().then((animationDataArray) => {
-        animationDataArray.forEach((animationData) => {
-          const { movingCoordinates, time } = animationData;
-
-          const instance = L.motion.polyline(
-            [movingCoordinates],
-            {
-              color: 'transparent',
-            },
-            {
-              auto: true,
-              duration: time,
-            },
-            {
-              removeOnEnd: true,
-              showMarker: true,
-              icon: travellingIcon,
-            }
-          );
-
-          mapContext.addLayer(instance);
-        });
-      });
+      animateMarkers();
     }
-  }, [routeData, mapContext]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [routeData]);
+
+  useEffect(() => {
+    animationDataArray.forEach((animationData) => {
+      const { id, moved, movingCoordinates, time } = animationData;
+
+      console.log(`${id} tramvaj se pomakao ${moved}`);
+
+      // Check if there's already an instance with the same ID
+      // console.log(instanceIds);
+      const instanceExists = instanceIds.includes(id);
+      if (instanceExists) {
+        console.log('postoji');
+        // If the tram has moved, remove the existing instance
+        if (moved) {
+          console.log('pomako se');
+          removeInstanceById(id);
+          animationData.moved = false;
+        } else {
+          console.log('skipp');
+          // If the tram hasn't moved, skip adding a new instance
+          return;
+        }
+      }
+
+      // Create a new animation instance
+      const instance = L.motion.polyline(
+        [movingCoordinates],
+        {
+          color: 'transparent',
+        },
+        {
+          auto: true,
+          duration: time,
+        },
+        {
+          removeOnEnd: true,
+          showMarker: true,
+          icon: travellingIcon,
+        }
+      );
+      instance._id = id;
+      mapContext.addLayer(instance);
+      setInstanceIds((prevInstanceIds) => [...prevInstanceIds, id]);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [animationDataArray, mapContext]);
+
+  const removeInstanceById = (id) => {
+    mapContext.eachLayer((layer) => {
+      if (layer instanceof L.Polyline && layer._id === id) {
+        mapContext.removeLayer(layer);
+        // Remove the ID from the instanceIds state
+        setInstanceIds((prevInstanceIds) =>
+          prevInstanceIds.filter((instanceId) => instanceId !== id)
+        );
+      }
+    });
+  };
 
   return (
     <div>
