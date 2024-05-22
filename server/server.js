@@ -47,7 +47,7 @@ async function fetchAndRefreshData() {
     } catch (error) {
       console.error('Error while refreshing data:', error);
     }
-  }, 30000);
+  }, 15000);
 }
 
 app.get('/api/routeInfo/:routeId', async (req, res) => {

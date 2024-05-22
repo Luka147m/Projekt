@@ -1,10 +1,16 @@
-import { MapContainer, TileLayer, ZoomControl } from 'react-leaflet';
+import {
+  MapContainer,
+  TileLayer,
+  ZoomControl,
+  useMapEvents,
+} from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useState, useEffect } from 'react';
 import MapRouteLine from './MapRouteLine';
 import Markers from './Markers';
 
 const Map = ({
+  route,
   routeData,
   tripInfo,
   setTripInfo,
@@ -15,27 +21,26 @@ const Map = ({
   setSelectedMarker,
 }) => {
   const [coordinates, setCoordinates] = useState(null);
-  const [filteredRouteData, setFilteredRouteData] = useState(null);
   const [mapContext, setMapContext] = useState();
+  const [watchedRoute, setWatchedRoute] = useState(null);
 
   useEffect(() => {
-    if (!tripInfo) {
+    if (!tripInfo || !route || !route.includes(watchedRoute)) {
       setCoordinates(null);
+      setTripInfo(null);
     }
-  }, [tripInfo]);
+    // console.log(tripInfo);
+  }, [tripInfo, route, watchedRoute, setTripInfo]);
 
-  useEffect(() => {
-    if (routeData) {
-      if (!showTrips) {
-        setFilteredRouteData(routeData);
-      } else {
-        const filteredData = routeData.filter((obj) =>
-          showTrips.includes(obj.trip_id)
-        );
-        setFilteredRouteData(filteredData);
-      }
-    }
-  }, [showTrips, routeData]);
+  const MapClickHandler = () => {
+    useMapEvents({
+      click: () => {
+        setSelectedMarker(null);
+        setWatchedRoute(null);
+      },
+    });
+    return null;
+  };
 
   return (
     <MapContainer
@@ -50,7 +55,7 @@ const Map = ({
         url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <Markers
-        routeData={filteredRouteData}
+        routeData={routeData}
         tripInfo={tripInfo}
         setTripInfo={setTripInfo}
         setCoordinates={setCoordinates}
@@ -59,8 +64,10 @@ const Map = ({
         selectedMarker={selectedMarker}
         setSelectedMarker={setSelectedMarker}
         mapContext={mapContext}
+        setWatchedRoute={setWatchedRoute}
       />
       <MapRouteLine coordinates={coordinates} />
+      <MapClickHandler />
     </MapContainer>
   );
 };

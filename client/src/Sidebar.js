@@ -5,8 +5,10 @@ import {
   VerticalTimelineElement,
 } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
+import './App.css';
 
 const Sidebar = ({
+  route,
   setRoute,
   tripInfo,
   routes,
@@ -27,26 +29,39 @@ const Sidebar = ({
     setSelectedMarker(null);
   };
 
-  useEffect(() => {
-    if (routeInfo) {
-      setTripInfo(null);
+  const addValueToRoute = (newValue) => {
+    setRoute((prevRoute) => [...(prevRoute || []), newValue]);
+  };
 
-      const tripIds = [];
+  const deleteValueFromRoute = (indexToRemove) => {
+    setRoute((prevRoute) => {
+      const updatedRoute = prevRoute.filter(
+        (_, index) => index !== indexToRemove
+      );
+      return updatedRoute.length > 0 ? updatedRoute : null;
+    });
+  };
 
-      routeInfo[0].route_info.forEach((route) => {
-        // console.log('Usporedujem ' + route.trip_headsign + ' sa ' + optionValue);
-        // Z.kolodvor i Zap. kolodvor .... isuse kriste
-        if (
-          selectedOption === 'svi' ||
-          route.trip_headsign.trim() === selectedOption.trim()
-        ) {
-          tripIds.push(route.trip_id);
-        }
-      });
-      // console.log(tripIds);
-      setShowTrips(tripIds);
-    }
-  }, [selectedOption, routeInfo, setShowTrips, setTripInfo]);
+  // useEffect(() => {
+  //   if (routeInfo) {
+  //     setTripInfo(null);
+
+  //     const tripIds = [];
+
+  //     routeInfo[0].route_info.forEach((route) => {
+  //       // console.log('Usporedujem ' + route.trip_headsign + ' sa ' + optionValue);
+  //       // Z.kolodvor i Zap. kolodvor .... isuse kriste
+  //       if (
+  //         selectedOption === 'svi' ||
+  //         route.trip_headsign.trim() === selectedOption.trim()
+  //       ) {
+  //         tripIds.push(route.trip_id);
+  //       }
+  //     });
+  //     // console.log(tripIds);
+  //     setShowTrips(tripIds);
+  //   }
+  // }, [selectedOption, routeInfo, setShowTrips, setTripInfo]);
 
   useEffect(() => {
     // console.log(routes);
@@ -65,7 +80,8 @@ const Sidebar = ({
       setSelectedOption('svi');
 
       const selectedValue = choice.value;
-      setRoute(selectedValue);
+      // setRoute(selectedValue);
+      addValueToRoute(selectedValue);
 
       fetch(`/api/routeInfo/${selectedValue}`)
         .then((response) => {
@@ -105,7 +121,24 @@ const Sidebar = ({
         />
       )}
 
-      {routeInfo && (
+      {route && (
+        <fieldset className="selected-routes">
+          <legend>Odabrane rute: </legend>
+          {route.map((value, index) => (
+            <div className="selected" key={index}>
+              <p>{value}</p>
+              <button
+                className="deleteButton"
+                onClick={() => deleteValueFromRoute(index)}
+              >
+                Obriši
+              </button>
+            </div>
+          ))}
+        </fieldset>
+      )}
+
+      {/* {routeInfo && (
         <div className="selector-div">
           <h2>{routeInfo[0].route_info[0].route_long_name}</h2>
           <div className="radio-group">
@@ -144,7 +177,8 @@ const Sidebar = ({
             </label>
           </div>
         </div>
-      )}
+      )} */}
+
       {tripInfo && (
         <div className="timeline-container">
           <VerticalTimeline layout={'1-column-left'} lineColor="#000">

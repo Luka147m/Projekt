@@ -22,6 +22,12 @@ const travellingIcon = new L.Icon({
   iconAnchor: [16, 32],
 });
 
+const travellingSelectedIcon = new L.Icon({
+  iconUrl: process.env.PUBLIC_URL + '/travSelected.png',
+  iconSize: [32, 32],
+  iconAnchor: [16, 32],
+});
+
 const Markers = ({
   routeData,
   setTripInfo,
@@ -30,15 +36,31 @@ const Markers = ({
   selectedMarker,
   setSelectedMarker,
   mapContext,
+  setWatchedRoute,
 }) => {
   const [animationDataArray, setAnimationDataArray] = useState([]);
-  const [instanceIds, setInstanceIds] = useState([]);
-  const handleMarkerClick = (tripId, stop_id, index) => {
+  const [instanceMap, setInstanceMap] = useState({});
+
+  const handleMarkerClick = (trip_id, stop_id, tram_id, route_id) => {
     setScrollToStop(stop_id);
 
-    setSelectedMarker(index);
+    setWatchedRoute(route_id);
 
-    fetch(`/api/trip/${tripId}`)
+    const oldInstance = instanceMap[selectedMarker];
+    if (oldInstance) {
+      let marker = oldInstance.getMarker();
+      marker.setIcon(travellingIcon);
+    }
+
+    const instance = instanceMap[tram_id];
+    if (instance) {
+      let marker = instance.getMarker();
+      marker.setIcon(travellingSelectedIcon);
+    }
+
+    setSelectedMarker(tram_id);
+
+    fetch(`/api/trip/${trip_id}`)
       .then((response) => response.json())
       .then((data) => {
         const tripInfoData = data[0];
@@ -70,7 +92,6 @@ const Markers = ({
               if (startIndex !== -1) {
                 const relevantEntries =
                   tripInfoData.trip_info.slice(startIndex);
-
                 // Vrijeme za animaciju
                 let totalTimeInMillis = 0;
                 for (let i = 0; i < relevantEntries.length; i++) {
@@ -93,8 +114,6 @@ const Markers = ({
                 const existingEntryIndex = animationDataArray.findIndex(
                   (entry) => entry.id === tram.id
                 );
-
-                // console.log(existingEntryIndex);
 
                 // Ako postoji
                 if (existingEntryIndex !== -1) {
@@ -154,6 +173,14 @@ const Markers = ({
           routeData.some((tram) => tram.id === entry.id)
         );
 
+        const markersToDelete = animationDataArray.filter(
+          (entry) => !routeData.some((tram) => tram.id === entry.id)
+        );
+
+        markersToDelete.forEach((marker) => {
+          removeInstanceById(marker.id);
+        });
+
         setAnimationDataArray([
           ...filteredAnimationDataArray,
           ...newAnimationDataArray,
@@ -161,6 +188,11 @@ const Markers = ({
       };
 
       animateMarkers();
+    } else {
+      Object.keys(instanceMap).forEach((id) => {
+        removeInstanceById(id);
+      });
+      setAnimationDataArray([]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [routeData]);
@@ -168,10 +200,9 @@ const Markers = ({
   useEffect(() => {
     animationDataArray.forEach((animationData) => {
       const { id, moved, movingCoordinates, time } = animationData;
-
+      const instanceExists = !!instanceMap[id];
       // console.log(`${id} tramvaj se pomakao ${moved}`);
       // console.log(instanceIds);
-      const instanceExists = instanceIds.includes(id);
       if (instanceExists) {
         // console.log('postoji');
         if (moved) {
@@ -179,32 +210,42 @@ const Markers = ({
           removeInstanceById(id);
         } else {
           // console.log('skipp');
-          // If the tram hasn't moved, skip adding a new instance
           return;
         }
       }
 
       // Create a new animation instance
-      const instance = L.motion.polyline(
-        [movingCoordinates],
-        {
-          color: 'transparent',
-        },
-        {
-          auto: true,
-          duration: time,
-        },
-        {
-          removeOnEnd: true,
-          showMarker: true,
-          icon: travellingIcon,
+      if (routeData) {
+        let icon = travellingIcon;
+
+        if (selectedMarker === id) {
+          icon = travellingSelectedIcon;
         }
-      );
-      const popupContent = 'Predikcija Tramvaj ' + id;
-      instance.bindPopup(popupContent, { offset: L.point(0, -24) });
-      instance._id = id;
-      mapContext.addLayer(instance);
-      setInstanceIds((prevInstanceIds) => [...prevInstanceIds, id]);
+
+        const instance = L.motion.polyline(
+          [movingCoordinates],
+          {
+            color: 'transparent',
+          },
+          {
+            auto: true,
+            duration: time,
+          },
+          {
+            removeOnEnd: true,
+            showMarker: true,
+            icon: icon,
+          }
+        );
+        const popupContent = 'Predikcija Tramvaj ' + id;
+        instance.bindPopup(popupContent, { offset: L.point(0, -24) });
+        instance._id = id;
+        mapContext.addLayer(instance);
+        setInstanceMap((prevInstanceMap) => ({
+          ...prevInstanceMap,
+          [id]: instance,
+        }));
+      }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [animationDataArray, mapContext]);
@@ -213,10 +254,11 @@ const Markers = ({
     mapContext.eachLayer((layer) => {
       if (layer instanceof L.Polyline && layer._id === id) {
         mapContext.removeLayer(layer);
-        // Remove the ID from the instanceIds state
-        setInstanceIds((prevInstanceIds) =>
-          prevInstanceIds.filter((instanceId) => instanceId !== id)
-        );
+        setInstanceMap((prevInstanceMap) => {
+          const newMap = { ...prevInstanceMap };
+          delete newMap[id];
+          return newMap;
+        });
       }
     });
   };
@@ -231,7 +273,12 @@ const Markers = ({
             icon={selectedMarker === tram.id ? hoverIcon : defaultIcon}
             eventHandlers={{
               click: () =>
-                handleMarkerClick(tram.trip_id, tram.stop_id, tram.id),
+                handleMarkerClick(
+                  tram.trip_id,
+                  tram.stop_id,
+                  tram.id,
+                  tram.route_id
+                ),
             }}
           >
             <Popup offset={L.point(0, -24)}>
