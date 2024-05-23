@@ -40,6 +40,19 @@ const Markers = ({
 }) => {
   const [animationDataArray, setAnimationDataArray] = useState([]);
   const [instanceMap, setInstanceMap] = useState({});
+  const [oldSelected, setOldSelected] = useState(null);
+
+  useEffect(() => {
+    if (selectedMarker === null) {
+      const oldInstance = instanceMap[oldSelected];
+      if (oldInstance) {
+        let marker = oldInstance.getMarker();
+        marker.setIcon(travellingIcon);
+      }
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedMarker]);
 
   const handleMarkerClick = (trip_id, stop_id, tram_id, route_id) => {
     setScrollToStop(stop_id);
@@ -59,6 +72,7 @@ const Markers = ({
     }
 
     setSelectedMarker(tram_id);
+    setOldSelected(tram_id);
 
     fetch(`/api/trip/${trip_id}`)
       .then((response) => response.json())
@@ -79,7 +93,6 @@ const Markers = ({
     if (routeData) {
       const animateMarkers = async () => {
         const newAnimationDataArray = [];
-
         const fetchPromises = routeData.map((tram) =>
           fetch(`/api/trip/${tram.trip_id}`)
             .then((response) => response.json())
@@ -92,7 +105,6 @@ const Markers = ({
               if (startIndex !== -1) {
                 const relevantEntries =
                   tripInfoData.trip_info.slice(startIndex);
-                // Vrijeme za animaciju
                 let totalTimeInMillis = 0;
                 for (let i = 0; i < relevantEntries.length; i++) {
                   const timeParts =
@@ -120,14 +132,9 @@ const Markers = ({
                   // Ako je na drugoj stanici, redraw
                   if (
                     animationDataArray[existingEntryIndex].stop_id !==
-                    tram.stop_id
+                      tram.stop_id &&
+                    animationDataArray[existingEntryIndex] !== undefined
                   ) {
-                    // console.log(
-                    //   'pronasao ' +
-                    //     animationDataArray[existingEntryIndex].stop_id +
-                    //     ' ' +
-                    //     tram.stop_id
-                    // );
                     animationDataArray.splice(existingEntryIndex, 1);
                     newAnimationDataArray.push({
                       id: tram.id,
@@ -137,7 +144,10 @@ const Markers = ({
                       stop_id: tram.stop_id,
                     });
                   }
-                  if (animationDataArray[existingEntryIndex].moved) {
+                  if (
+                    animationDataArray[existingEntryIndex].moved &&
+                    animationDataArray[existingEntryIndex] !== undefined
+                  ) {
                     animationDataArray.splice(existingEntryIndex, 1);
                     newAnimationDataArray.push({
                       id: tram.id,
@@ -158,11 +168,11 @@ const Markers = ({
                   });
                 }
               } else {
-                console.log('Stop ID not found in the array.');
+                console.log('[Info] Tram ID not found in the array.');
               }
             })
             .catch((error) => {
-              console.error('Error fetching route data:', error);
+              console.error('[Error]:', error);
             })
         );
 
@@ -201,20 +211,14 @@ const Markers = ({
     animationDataArray.forEach((animationData) => {
       const { id, moved, movingCoordinates, time } = animationData;
       const instanceExists = !!instanceMap[id];
-      // console.log(`${id} tramvaj se pomakao ${moved}`);
-      // console.log(instanceIds);
       if (instanceExists) {
-        // console.log('postoji');
         if (moved) {
-          // console.log('pomako se');
           removeInstanceById(id);
         } else {
-          // console.log('skipp');
           return;
         }
       }
 
-      // Create a new animation instance
       if (routeData) {
         let icon = travellingIcon;
 
@@ -263,13 +267,25 @@ const Markers = ({
     });
   };
 
+  //Redo poslije
+  const calculateOffset = (index) => {
+    const offsetAngle = (index % 8) * (Math.PI / 4);
+    const offsetDistance = 0.0001;
+    const offsetX = Math.cos(offsetAngle) * offsetDistance;
+    const offsetY = Math.sin(offsetAngle) * offsetDistance;
+    return [offsetX, offsetY];
+  };
+
   return (
     <div>
       {routeData &&
-        routeData.map((tram) => (
+        routeData.map((tram, index) => (
           <Marker
             key={tram.id}
-            position={[parseFloat(tram.stop_lat), parseFloat(tram.stop_lon)]}
+            position={[
+              parseFloat(tram.stop_lat) + calculateOffset(index)[0],
+              parseFloat(tram.stop_lon) + calculateOffset(index)[1],
+            ]}
             icon={selectedMarker === tram.id ? hoverIcon : defaultIcon}
             eventHandlers={{
               click: () =>

@@ -21,14 +21,6 @@ const Sidebar = ({
   const [routeInfo, setRouteInfo] = useState(null);
   const [options, setOptions] = useState('');
 
-  const [selectedOption, setSelectedOption] = useState('svi');
-
-  const handleOptionChange = (event) => {
-    const optionValue = event.target.value;
-    setSelectedOption(optionValue);
-    setSelectedMarker(null);
-  };
-
   const addValueToRoute = (newValue) => {
     setRoute((prevRoute) => [...(prevRoute || []), newValue]);
   };
@@ -64,7 +56,6 @@ const Sidebar = ({
   // }, [selectedOption, routeInfo, setShowTrips, setTripInfo]);
 
   useEffect(() => {
-    // console.log(routes);
     if (routes) {
       setOptions(routes.map((number) => ({ value: number, label: number })));
       setTripInfo(null);
@@ -77,10 +68,8 @@ const Sidebar = ({
       setRouteData(null);
       setTripInfo(null);
       setSelectedMarker(null);
-      setSelectedOption('svi');
 
       const selectedValue = choice.value;
-      // setRoute(selectedValue);
       addValueToRoute(selectedValue);
 
       fetch(`/api/routeInfo/${selectedValue}`)
@@ -88,14 +77,14 @@ const Sidebar = ({
           if (response.ok) {
             return response.json();
           } else {
-            throw new Error('Pogreška u odgovoru');
+            throw new Error('[Error] Response error');
           }
         })
         .then((data) => {
           setRouteInfo(data);
         })
         .catch((error) => {
-          console.error('Error:', error);
+          console.error('[Error]:', error);
         });
     }
   };

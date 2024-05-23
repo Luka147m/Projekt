@@ -29,7 +29,6 @@ const Map = ({
       setCoordinates(null);
       setTripInfo(null);
     }
-    // console.log(tripInfo);
   }, [tripInfo, route, watchedRoute, setTripInfo]);
 
   const MapClickHandler = () => {

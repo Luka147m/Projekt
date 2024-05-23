@@ -39,7 +39,7 @@ function App() {
         if (response.ok) {
           return response.json();
         } else {
-          throw new Error('Pogreška u odgovoru');
+          throw new Error('[Error] Response error');
         }
       })
       .then((data) => {
@@ -47,62 +47,109 @@ function App() {
         setRoutes(data);
       })
       .catch((error) => {
-        console.error('Error:', error);
+        console.error('[Error]:', error);
       });
   }, []);
 
+  const fetchDataForRoute = async (routeValue) => {
+    // console.log(`[Request] Requested new routeData for route: ${routeValue}`);
+    try {
+      const response = await fetch(`/api/route/${routeValue}`);
+      if (!response.ok) {
+        throw new Error('[Error] Response error');
+      }
+      return await response.json();
+    } catch (error) {
+      console.error('[Error] Fetching route data:', error);
+      return [];
+    }
+  };
+
   useEffect(() => {
     if (route && route.length > 0) {
-      const fetchDataForRoute = (routeValue) => {
-        return fetch(`/api/route/${routeValue}`)
-          .then((response) => {
-            if (response.ok) {
-              return response.json();
-            } else {
-              throw new Error('Pogreška u odgovoru');
-            }
-          })
-          .catch((error) => {
-            console.error('Error:', error);
-            return [];
-          });
+      const fetchInitialData = async () => {
+        try {
+          const allRouteData = await Promise.all(route.map(fetchDataForRoute));
+          const combinedData = allRouteData.flat();
+          // console.log(`[Initial Data] Combined route data:`, combinedData);
+          setRouteData(combinedData);
+        } catch (error) {
+          console.error('[Error] fetching initial route data:', error);
+        }
       };
 
-      // Promises za fetch svake rute
-      const fetchPromises = route.map((routeValue) =>
-        fetchDataForRoute(routeValue)
-      );
+      fetchInitialData();
 
-      // Inicijalno
-      // Zahtjevamo svaki fetch odjednom i cekamo sve
-      Promise.all(fetchPromises)
-        .then((allRouteData) => {
-          // Kombiniramo sve podatke u jedno
+      const intervalId = setInterval(async () => {
+        try {
+          const allRouteData = await Promise.all(route.map(fetchDataForRoute));
           const combinedData = allRouteData.flat();
-          // console.log(combinedData);
+          // console.log(`[Interval Data] Combined route data:`, combinedData);
           setRouteData(combinedData);
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
-
-      // Interval osvjezavanja podataka svakih 10sek
-      const intervalId = setInterval(() => {
-        Promise.all(fetchPromises)
-          .then((allRouteData) => {
-            const combinedData = allRouteData.flat();
-            setRouteData(combinedData);
-          })
-          .catch((error) => {
-            console.error('Error:', error);
-          });
+        } catch (error) {
+          console.error('[Error] fetching interval route data:', error);
+        }
       }, 10000);
 
       return () => clearInterval(intervalId);
     } else {
       setRouteData(null);
     }
-  }, [route, routeData]);
+  }, [route, setRouteData]);
+
+  // useEffect(() => {
+  //   if (route && route.length > 0) {
+  //     const fetchDataForRoute = (routeValue) => {
+  //       console.log(`[Request] Requested new routeData for routes: ${route}`);
+  //       return fetch(`/api/route/${routeValue}`)
+  //         .then((response) => {
+  //           if (response.ok) {
+  //             return response.json();
+  //           } else {
+  //             throw new Error('Pogreška u odgovoru');
+  //           }
+  //         })
+  //         .catch((error) => {
+  //           console.error('Error:', error);
+  //           return [];
+  //         });
+  //     };
+
+  //     // Promises za fetch svake rute
+  //     const fetchPromises = route.map((routeValue) =>
+  //       fetchDataForRoute(routeValue)
+  //     );
+
+  //     // Inicijalno
+  //     // Zahtjevamo svaki fetch odjednom i cekamo sve
+  //     Promise.all(fetchPromises)
+  //       .then((allRouteData) => {
+  //         // Kombiniramo sve podatke u jedno
+  //         const combinedData = allRouteData.flat();
+  //         // console.log(combinedData);
+  //         setRouteData(combinedData);
+  //       })
+  //       .catch((error) => {
+  //         console.error('Error:', error);
+  //       });
+
+  //     // Interval osvjezavanja podataka svakih 10sek
+  //     const intervalId = setInterval(() => {
+  //       Promise.all(fetchPromises)
+  //         .then((allRouteData) => {
+  //           const combinedData = allRouteData.flat();
+  //           setRouteData(combinedData);
+  //         })
+  //         .catch((error) => {
+  //           console.error('Error:', error);
+  //         });
+  //     }, 10000);
+
+  //     return () => clearInterval(intervalId);
+  //   } else {
+  //     setRouteData(null);
+  //   }
+  // }, [route]);
 
   const toggleClockType = () => {
     setClockType(clockType === 'analog' ? 'digital' : 'analog');

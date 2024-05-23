@@ -26,9 +26,9 @@ async function fetchStops() {
   try {
     const result = await pool.query(`SELECT * FROM stopsJson`);
     fs.writeFileSync(stopsPath, JSON.stringify(result.rows[0].stops));
-    console.log(`Stops.json created successfully`);
+    console.log(`[Info] Stops.json created successfully`);
   } catch (error) {
-    console.error('Error creating stops.json', error);
+    console.error('[Error] Creating stops.json', error);
     process.exit(1);
   }
 }
@@ -36,16 +36,16 @@ async function fetchStops() {
 async function fetchAndRefreshData() {
   try {
     zetData = await latestTrips();
-    console.log('Inital data downloaded');
+    console.log('[Info] Inital data downloaded');
   } catch (error) {
     console.error(error);
   }
   setInterval(async () => {
     try {
       zetData = await latestTrips();
-      console.log('Data refreshed');
+      console.log('[Info] Data refreshed');
     } catch (error) {
-      console.error('Error while refreshing data:', error);
+      console.error('[Error] Refreshing data:', error);
     }
   }, 15000);
 }
@@ -58,7 +58,7 @@ app.get('/api/routeInfo/:routeId', async (req, res) => {
     );
     res.json(result.rows);
   } catch (error) {
-    console.error('Error executing query', error);
+    console.error('[Error] Executing query', error);
     res.status(500).json({ error: 'An error occurred' });
   }
 });
@@ -84,24 +84,24 @@ app.get('/api/trip/:tripId', async (req, res) => {
     );
     res.json(result.rows);
   } catch (error) {
-    console.error('Error executing query', error);
+    console.error('[Error] executing query', error);
     res.status(500).json({ error: 'An error occurred' });
   }
 });
 
-// let result = spawnSync('python', [pythonScriptPath]);
-// if (result.error) {
-//   console.error(`Error running Python script: ${result.error.message}`);
-// } else {
-//   console.log(`Python script output: ${result.stdout}`);
-// }
+let result = spawnSync('python', [pythonScriptPath]);
+if (result.error) {
+  console.error(`[Error] Running Python script: ${result.error.message}`);
+} else {
+  console.log(`[Info] Python script output: ${result.stdout}`);
+}
 
 async function startServer() {
   await fetchStops();
   fetchAndRefreshData();
 
   app.listen(8080, () => {
-    console.log('Server started on port 8080');
+    console.log('[Info] Server started on port 8080');
   });
 }
 
