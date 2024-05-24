@@ -3,9 +3,30 @@ import requests
 import zipfile
 import os
 
-zip_url = ''
-local_destination = ''
-extracted_folder = ''
+from dotenv import load_dotenv
+load_dotenv(dotenv_path="C:\\Users\\Public\\data\\.env")
+
+db_params = {
+    'host': os.getenv('DB_HOST'),
+    'database': os.getenv('DB_DATABASE'),
+    'user': os.getenv('DB_USER'),
+    'password': os.getenv('DB_PASSWORD'),
+}
+
+"""
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!                                                                                                                                                                                               !!
+!!                 Zbog petljanja oko postgre permission ova skripta se nalazi u public gdje postgre moze pristupiti, tako da su pathovi ovdje absolute svi i treba ih promjeniti                !!
+!!                  (probao s psycopg2.copy_from i expert, ali problemi tijekom loadanja velikog filea kao stdin, znam da nije najljepse rijesenje)                                              !!
+!!                                                                                                                                                                                               !!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+"""
+
+
+
+zip_url = 'https://www.zet.hr/gtfs-scheduled/latest'
+local_destination = 'C:\\Users\\Public\\data\\latest.zip'
+extracted_folder = 'C:\\Users\\Public\\data'
 
 def download_zip(url, destination):
     response = requests.get(url)
@@ -30,38 +51,41 @@ def execute_sql(connection, cursor, sql):
 
 # Function to load data from CSV to PostgreSQL
 def load_csv_to_postgres(connection, cursor, table_name, csv_file_path):
-    # Drop existing data from the table
-    drop_table_sql = f'TRUNCATE {table_name} CASCADE;'
-    execute_sql(connection, cursor, drop_table_sql)
-
-    # Load new data from CSV
-    copy_sql = f"""
-        COPY {table_name} FROM '{csv_file_path}' WITH
+    abs_csv_file_path = "C:\\Users\\Public\\data\\" + csv_file_path
+    try:
+        # Drop existing data from the table
+        drop_table_sql = f'TRUNCATE {table_name} CASCADE;'
+        execute_sql(connection, cursor, drop_table_sql)
+        
+        copy_sql = f"""
+        COPY {table_name} FROM '{abs_csv_file_path}' WITH
             CSV
             HEADER
             DELIMITER as ','
         """
-    execute_sql(connection, cursor, copy_sql)
-    print(f"Loaded {table_name}")
+        execute_sql(connection, cursor, copy_sql)
+        print(f"Loaded {table_name}")
+    except Exception as e:
+        print(f"Error loading {table_name}: {e}")
 
-# PostgreSQL connection parameters
-db_params = {
-    'host': '',
-    'database': '',
-    'user': '',
-    'password': '',
-}
 
 download_zip(zip_url, local_destination)
 unzip_file(local_destination, extracted_folder)
 
-# Connect to PostgreSQL
-connection = psycopg2.connect(**db_params)
-cursor = connection.cursor()
+try:
+    # Connect to PostgreSQL
+    connection = psycopg2.connect(**db_params)
+    cursor = connection.cursor()
 
-# Load data to each table
-load_csv_to_postgres(connection, cursor, '', '')
+    # Load data to each table
+    load_csv_to_postgres(connection, cursor, 'routes', 'routes.txt')
+    load_csv_to_postgres(connection, cursor, 'stops', 'stops.txt')
+    load_csv_to_postgres(connection, cursor, 'trips', 'trips.txt')
+    load_csv_to_postgres(connection, cursor, 'stop_times', 'stop_times.txt')
 
-# Close the cursor and connection
-cursor.close()
-connection.close()
+finally:
+    # Close the cursor and connection
+    if cursor:
+        cursor.close()
+    if connection:
+        connection.close()

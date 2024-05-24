@@ -19,7 +19,7 @@ const pool = new Pool({
 });
 
 var zetData;
-const pythonScriptPath = 'C:\\Users\\Public\\test\\script.py';
+const pythonScriptPath = '../scripts/script.py';
 const stopsPath = './stops.json';
 
 async function fetchStops() {
@@ -93,7 +93,7 @@ let result = spawnSync('python', [pythonScriptPath]);
 if (result.error) {
   console.error(`[Error] Running Python script: ${result.error.message}`);
 } else {
-  console.log(`[Info] Python script output: ${result.stdout}`);
+  console.log(`[Info] Python script output:\n ${result.stdout}`);
 }
 
 async function startServer() {

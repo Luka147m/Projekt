@@ -2,3 +2,5 @@
 /server/backup
 /server/.env
 /server/stops.json
+/data
+/scripts/.env
