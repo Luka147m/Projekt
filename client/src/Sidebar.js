@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
-import {
-  VerticalTimeline,
-  VerticalTimelineElement,
-} from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 import './App.css';
 
@@ -13,8 +9,6 @@ const Sidebar = ({
   tripInfo,
   routes,
   setTripInfo,
-  setShowTrips,
-  setRouteData,
   scrollToStop,
   setSelectedMarker,
 }) => {
@@ -25,7 +19,12 @@ const Sidebar = ({
   const [noRoutesFound, setNoRoutesFound] = useState(false);
 
   const addValueToRoute = (newValue) => {
-    setRoute((prevRoute) => [...(prevRoute || []), newValue]);
+    setRoute((prevRoute) => {
+      if (prevRoute && prevRoute.includes(newValue)) {
+        return prevRoute;
+      }
+      return [...(prevRoute || []), newValue];
+    });
   };
 
   const deleteValueFromRoute = (indexToRemove) => {
@@ -61,10 +60,8 @@ const Sidebar = ({
 
   const handleRouteChange = async (choice) => {
     if (choice) {
-      setRouteData(null);
       setTripInfo(null);
       setSelectedMarker(null);
-
       const selectedValue = choice.value;
       addValueToRoute(selectedValue);
     }
@@ -90,15 +87,6 @@ const Sidebar = ({
         });
     }
   };
-
-  useEffect(() => {
-    if (scrollToStop) {
-      const elementToScrollTo = document.getElementById(`${scrollToStop}`);
-      if (elementToScrollTo) {
-        elementToScrollTo.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-  }, [scrollToStop, tripInfo]);
 
   return (
     <div className="sidebar-component">
@@ -144,68 +132,25 @@ const Sidebar = ({
       {route && (
         <fieldset className="selected-routes">
           <legend>Odabrane rute: </legend>
-          {route.map((value, index) => (
-            <div className="selected" key={index}>
-              <p>{value}</p>
-              <button
-                className="customBtn"
-                onClick={() => deleteValueFromRoute(index)}
-              >
-                Obriši
-              </button>
-            </div>
-          ))}
+          <div className="routeScroll">
+            {route.map((value, index) => (
+              <div className="selected" key={index}>
+                <p>{value}</p>
+                <button
+                  className="customBtn"
+                  onClick={() => deleteValueFromRoute(index)}
+                >
+                  Obriši
+                </button>
+              </div>
+            ))}
+          </div>
           {route.length > 3 && (
             <button className="customBtn" onClick={() => setRoute(null)}>
               Obriši sve
             </button>
           )}
         </fieldset>
-      )}
-
-      {tripInfo && (
-        <div className="timeline-container">
-          <VerticalTimeline layout={'1-column-left'} lineColor="#000">
-            {tripInfo.trip_info.map((stop, index) => (
-              <VerticalTimelineElement
-                id={`${stop.stop_id}`}
-                key={index}
-                contentStyle={{
-                  background: 'rgb(33, 150, 243)',
-                  color: '#fff',
-                  padding: '10px',
-                }}
-                contentArrowStyle={{
-                  borderRight: '7px solid  rgb(33, 150, 243)',
-                }}
-                date={'Vrijeme dolaska ' + stop.arrival_time}
-                icon={
-                  <img
-                    src={process.env.PUBLIC_URL + 'stanica.png'}
-                    alt="stanica"
-                    height="35px"
-                    width="auto"
-                  />
-                }
-                iconStyle={{
-                  background: 'rgb(33, 150, 243)',
-                  color: '#fff',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-                data-id={stop.stop_id}
-              >
-                <h3 className="vertical-timeline-element-title">
-                  {stop.stop_name}
-                </h3>
-                <p>
-                  Vrijeme potrebno do sljedeće stanice{' '}
-                  {stop.time_till_next_stop}
-                </p>
-              </VerticalTimelineElement>
-            ))}
-          </VerticalTimeline>
-        </div>
       )}
     </div>
   );

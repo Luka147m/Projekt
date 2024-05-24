@@ -14,9 +14,7 @@ const Map = ({
   routeData,
   tripInfo,
   setTripInfo,
-  showTrips,
   setScrollToStop,
-  scrollToStop,
   selectedMarker,
   setSelectedMarker,
 }) => {
