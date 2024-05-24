@@ -56,7 +56,11 @@ function App() {
     try {
       const response = await fetch(`/api/route/${routeValue}`);
       if (!response.ok) {
-        throw new Error('[Error] Response error');
+        if (response.status === 404) {
+          return [];
+        } else {
+          throw new Error('[Error] Response error');
+        }
       }
       return await response.json();
     } catch (error) {

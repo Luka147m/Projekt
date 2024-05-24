@@ -18,8 +18,11 @@ const Sidebar = ({
   scrollToStop,
   setSelectedMarker,
 }) => {
-  const [routeInfo, setRouteInfo] = useState(null);
   const [options, setOptions] = useState('');
+  const [stops, setStops] = useState(null);
+  const [selectedValue1, setSelectedValue1] = useState(null);
+  const [selectedValue2, setSelectedValue2] = useState(null);
+  const [noRoutesFound, setNoRoutesFound] = useState(false);
 
   const addValueToRoute = (newValue) => {
     setRoute((prevRoute) => [...(prevRoute || []), newValue]);
@@ -34,26 +37,19 @@ const Sidebar = ({
     });
   };
 
-  // useEffect(() => {
-  //   if (routeInfo) {
-  //     setTripInfo(null);
-
-  //     const tripIds = [];
-
-  //     routeInfo[0].route_info.forEach((route) => {
-  //       // console.log('Usporedujem ' + route.trip_headsign + ' sa ' + optionValue);
-  //       // Z.kolodvor i Zap. kolodvor .... isuse kriste
-  //       if (
-  //         selectedOption === 'svi' ||
-  //         route.trip_headsign.trim() === selectedOption.trim()
-  //       ) {
-  //         tripIds.push(route.trip_id);
-  //       }
-  //     });
-  //     // console.log(tripIds);
-  //     setShowTrips(tripIds);
-  //   }
-  // }, [selectedOption, routeInfo, setShowTrips, setTripInfo]);
+  useEffect(() => {
+    // console.log('[Info] Fetch all stops');
+    fetch(`/api/stops`)
+      .then((response) => response.json())
+      .then((data) => {
+        const stopNamesArray = data.map((stop) => ({
+          value: stop.stop_name,
+          label: stop.stop_name,
+        }));
+        // console.log(stopNamesArray);
+        setStops(stopNamesArray);
+      });
+  }, []);
 
   useEffect(() => {
     if (routes) {
@@ -71,20 +67,26 @@ const Sidebar = ({
 
       const selectedValue = choice.value;
       addValueToRoute(selectedValue);
+    }
+  };
 
-      fetch(`/api/routeInfo/${selectedValue}`)
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          } else {
-            throw new Error('[Error] Response error');
-          }
-        })
+  const findRoute = () => {
+    if (selectedValue1 !== null || selectedValue2 !== null) {
+      fetch(`/api/findRoute/${selectedValue1}_${selectedValue2}`)
+        .then((response) => response.json())
         .then((data) => {
-          setRouteInfo(data);
-        })
-        .catch((error) => {
-          console.error('[Error]:', error);
+          // console.log(data[0].routes[0]);
+          if (data[0]?.routes[0]?.length === 0) {
+            setNoRoutesFound(true);
+            setTimeout(() => {
+              setNoRoutesFound(false);
+            }, 5000);
+          } else {
+            const stringifiedNumbers = data[0].routes[0].map((number) =>
+              number.toString()
+            );
+            setRoute(stringifiedNumbers);
+          }
         });
     }
   };
@@ -109,6 +111,35 @@ const Sidebar = ({
           onChange={handleRouteChange}
         />
       )}
+      <fieldset className="routeFind-box">
+        <legend>Pronađi liniju</legend>
+        <h4>Polazište:</h4>
+        <Select
+          options={stops}
+          isClearable={false}
+          isSearchable={true}
+          onChange={(selectedOption) => {
+            setSelectedValue1(selectedOption.value);
+          }}
+        />
+        <h4>Odredište:</h4>
+        <Select
+          options={stops}
+          isClearable={false}
+          isSearchable={true}
+          onChange={(selectedOption) => {
+            setSelectedValue2(selectedOption.value);
+          }}
+        />
+        <button className="customBtn" onClick={() => findRoute()}>
+          Pronađi
+        </button>
+        {noRoutesFound && (
+          <div className="no-routes-message">
+            Nije pronađena nijedna linija!
+          </div>
+        )}
+      </fieldset>
 
       {route && (
         <fieldset className="selected-routes">
@@ -117,56 +148,20 @@ const Sidebar = ({
             <div className="selected" key={index}>
               <p>{value}</p>
               <button
-                className="deleteButton"
+                className="customBtn"
                 onClick={() => deleteValueFromRoute(index)}
               >
                 Obriši
               </button>
             </div>
           ))}
+          {route.length > 3 && (
+            <button className="customBtn" onClick={() => setRoute(null)}>
+              Obriši sve
+            </button>
+          )}
         </fieldset>
       )}
-
-      {/* {routeInfo && (
-        <div className="selector-div">
-          <h2>{routeInfo[0].route_info[0].route_long_name}</h2>
-          <div className="radio-group">
-            <label>
-              <input
-                type="radio"
-                value={routeInfo[0].route_info[0].route_long_name.split('-')[0]}
-                checked={
-                  selectedOption ===
-                  routeInfo[0].route_info[0].route_long_name.split('-')[0]
-                }
-                onChange={handleOptionChange}
-              />
-              {routeInfo[0].route_info[0].route_long_name.split('-')[0]}
-            </label>
-            <label>
-              <input
-                type="radio"
-                value="svi"
-                checked={selectedOption === 'svi'}
-                onChange={handleOptionChange}
-              />
-              Svi
-            </label>
-            <label>
-              <input
-                type="radio"
-                value={routeInfo[0].route_info[0].route_long_name.split('-')[1]}
-                checked={
-                  selectedOption ===
-                  routeInfo[0].route_info[0].route_long_name.split('-')[1]
-                }
-                onChange={handleOptionChange}
-              />
-              {routeInfo[0].route_info[0].route_long_name.split('-')[1]}
-            </label>
-          </div>
-        </div>
-      )} */}
 
       {tripInfo && (
         <div className="timeline-container">

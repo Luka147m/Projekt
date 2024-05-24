@@ -72,6 +72,29 @@ app.get('/api/route/:routeId', (req, res) => {
   }
 });
 
+app.get('/api/findRoute/:stops', async (req, res) => {
+  const stops = req.params.stops.split('_');
+  try {
+    const result = await pool.query(
+      `SELECT find_routes_between_stops('${stops[0]}', '${stops[1]}') AS routes`
+    );
+    res.json(result.rows);
+  } catch (error) {
+    console.error('[Error] Executing query', error);
+    res.status(500).json({ error: 'An error occurred' });
+  }
+});
+
+app.get('/api/stops', async (req, res) => {
+  try {
+    const result = await pool.query(`SELECT DISTINCT stop_name FROM stops`);
+    res.json(result.rows);
+  } catch (error) {
+    console.error('[Error] Executing query', error);
+    res.status(500).json({ error: 'An error occurred' });
+  }
+});
+
 app.get('/api/routes', (req, res) => {
   res.json(Object.keys(zetData));
 });
@@ -89,12 +112,12 @@ app.get('/api/trip/:tripId', async (req, res) => {
   }
 });
 
-let result = spawnSync('python', [pythonScriptPath]);
-if (result.error) {
-  console.error(`[Error] Running Python script: ${result.error.message}`);
-} else {
-  console.log(`[Info] Python script output:\n ${result.stdout}`);
-}
+// let result = spawnSync('python', [pythonScriptPath]);
+// if (result.error) {
+//   console.error(`[Error] Running Python script: ${result.error.message}`);
+// } else {
+//   console.log(`[Info] Python script output:\n ${result.stdout}`);
+// }
 
 async function startServer() {
   await fetchStops();
