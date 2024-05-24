@@ -17,6 +17,60 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
+-- Name: find_routes_between_stops(text, text); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION public.find_routes_between_stops(stop_a_name text, stop_b_name text) RETURNS json
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    route_ids INTEGER[];
+BEGIN
+    SELECT ARRAY(
+        SELECT DISTINCT a.route_id
+        FROM route_find a
+        JOIN route_find b ON a.route_id = b.route_id
+        WHERE a.stop_name = stop_a_name
+          AND b.stop_name = stop_b_name
+          AND a.stop_sequence < b.stop_sequence
+    ) INTO route_ids;
+
+    RETURN json_agg(route_ids);
+END;
+$$;
+
+
+ALTER FUNCTION public.find_routes_between_stops(stop_a_name text, stop_b_name text) OWNER TO postgres;
+
+--
+-- Name: get_route_info(integer); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION public.get_route_info(route_id_param integer) RETURNS json
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    result_json json;
+BEGIN
+    SELECT json_agg(json_build_object(
+        'route_id', route_id,
+        'trip_id', trip_id,
+        'route_long_name', route_long_name,
+        'trip_headsign', trip_headsign
+    ))
+    INTO result_json
+    FROM trips 
+    JOIN routes USING(route_id) 
+    WHERE route_id = route_id_param;
+
+    RETURN result_json;
+END;
+$$;
+
+
+ALTER FUNCTION public.get_route_info(route_id_param integer) OWNER TO postgres;
+
+--
 -- Name: get_trip_info(text); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
@@ -77,6 +131,21 @@ ALTER FUNCTION public.get_trip_info(trip_id_param text) OWNER TO postgres;
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
+
+--
+-- Name: route_find; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.route_find (
+    route_id integer,
+    trip_id character varying(255),
+    stop_sequence integer,
+    stop_id character varying,
+    stop_name character varying(255)
+);
+
+
+ALTER TABLE public.route_find OWNER TO postgres;
 
 --
 -- Name: routes; Type: TABLE; Schema: public; Owner: postgres
@@ -230,6 +299,27 @@ ALTER TABLE ONLY public.stop_times
 
 ALTER TABLE ONLY public.trips
     ADD CONSTRAINT trips_pkey PRIMARY KEY (trip_id);
+
+
+--
+-- Name: idx_route_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX idx_route_id ON public.route_find USING btree (route_id);
+
+
+--
+-- Name: idx_stop_name; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX idx_stop_name ON public.route_find USING btree (stop_name);
+
+
+--
+-- Name: idx_stop_sequence; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX idx_stop_sequence ON public.route_find USING btree (stop_sequence);
 
 
 --

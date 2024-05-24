@@ -4,7 +4,7 @@ import zipfile
 import os
 
 from dotenv import load_dotenv
-load_dotenv(dotenv_path="C:\\Users\\Public\\data\\.env")
+load_dotenv()
 
 db_params = {
     'host': os.getenv('DB_HOST'),
@@ -16,7 +16,7 @@ db_params = {
 """
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!                                                                                                                                                                                               !!
-!!                 Zbog petljanja oko postgre permission ova skripta se nalazi u public gdje postgre moze pristupiti, tako da su pathovi ovdje absolute svi i treba ih promjeniti                !!
+!!                 Zbog petljanja oko postgre permission podaci se nalaze u public gdje postgre moze pristupiti, tako da su pathovi ovdje absolute svi i treba ih promjeniti                     !!
 !!                  (probao s psycopg2.copy_from i expert, ali problemi tijekom loadanja velikog filea kao stdin, znam da nije najljepse rijesenje)                                              !!
 !!                                                                                                                                                                                               !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -68,6 +68,35 @@ def load_csv_to_postgres(connection, cursor, table_name, csv_file_path):
     except Exception as e:
         print(f"Error loading {table_name}: {e}")
 
+def create_route_find_table(connection, cursor):
+    create_table_sql = """
+    CREATE TABLE route_find AS
+     SELECT trips.route_id,
+        trips.trip_id,
+        stop_times.stop_sequence,
+        stop_id,
+        stops.stop_name
+       FROM stop_times
+         JOIN trips USING (trip_id)
+         JOIN stops USING (stop_id);
+    """
+    create_index_sql = """
+    CREATE INDEX idx_route_id ON route_find (route_id);
+    CREATE INDEX idx_stop_name ON route_find (stop_name);
+    CREATE INDEX idx_stop_sequence ON route_find (stop_sequence);
+    """
+    
+    try:
+        drop_table_sql = 'DROP TABLE IF EXISTS route_find;'
+        execute_sql(connection, cursor, drop_table_sql)
+        
+        execute_sql(connection, cursor, create_table_sql)
+        
+        execute_sql(connection, cursor, create_index_sql)
+        
+        print("route_find table created successfully.")
+    except Exception as e:
+        print(f"Error creating route_find table: {e}")
 
 download_zip(zip_url, local_destination)
 unzip_file(local_destination, extracted_folder)
@@ -83,6 +112,8 @@ try:
     load_csv_to_postgres(connection, cursor, 'trips', 'trips.txt')
     load_csv_to_postgres(connection, cursor, 'stop_times', 'stop_times.txt')
 
+    create_route_find_table(connection, cursor)
+    
 finally:
     # Close the cursor and connection
     if cursor:
