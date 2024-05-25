@@ -6,10 +6,8 @@ import './App.css';
 const Sidebar = ({
   route,
   setRoute,
-  tripInfo,
   routes,
   setTripInfo,
-  scrollToStop,
   setSelectedMarker,
 }) => {
   const [options, setOptions] = useState('');
@@ -97,6 +95,7 @@ const Sidebar = ({
           isClearable={false}
           isSearchable={true}
           onChange={handleRouteChange}
+          className="main-select"
         />
       )}
       <fieldset className="routeFind-box">

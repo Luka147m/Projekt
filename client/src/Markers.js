@@ -28,9 +28,16 @@ const travellingSelectedIcon = new L.Icon({
   iconAnchor: [16, 32],
 });
 
+const stopIcon = new L.Icon({
+  iconUrl: process.env.PUBLIC_URL + '/stanica.png',
+  iconSize: [24, 24],
+  iconAnchor: [16, 32],
+});
+
 const Markers = ({
   routeData,
   setTripInfo,
+  tripInfo,
   setCoordinates,
   setScrollToStop,
   selectedMarker,
@@ -80,11 +87,11 @@ const Markers = ({
         const tripInfoData = data[0];
         setTripInfo(tripInfoData);
 
+        // console.log(tripInfoData.trip_info);
         const newCoordinates = tripInfoData.trip_info.map((tram) => ({
           lat: parseFloat(tram.stop_lat),
           lon: parseFloat(tram.stop_lon),
         }));
-
         setCoordinates(newCoordinates);
       });
   };
@@ -297,7 +304,7 @@ const Markers = ({
                 ),
             }}
           >
-            <Popup offset={L.point(0, -24)}>
+            <Popup autoPan={false} offset={L.point(0, -24)}>
               {'Tramvaj: ' + tram.id}
               <br />
               {'Ruta: ' + tram.route_id}
@@ -306,7 +313,19 @@ const Markers = ({
             </Popup>
           </Marker>
         ))}
-      ;
+
+      {tripInfo &&
+        tripInfo.trip_info.map((stop) => (
+          <Marker
+            key={stop.stop_id}
+            position={[parseFloat(stop.stop_lat), parseFloat(stop.stop_lon)]}
+            icon={stopIcon}
+          >
+            <Popup autoPan={false} offset={L.point(0, -24)}>
+              {'Stanica: ' + stop.stop_name}
+            </Popup>
+          </Marker>
+        ))}
     </div>
   );
 };

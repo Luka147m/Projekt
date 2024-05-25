@@ -3,7 +3,10 @@
   src: url('./fonts/digital-7.ttf');
 }
 
+
+
 body {
+  background-color: #1264ab;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -13,43 +16,66 @@ body {
 }
 
 .leaflet-container{
-  height: 100vh;
+  height: 60vh;
+  min-height: 60vh;
 }
+
 .container {
-  position: relative;
+  background-color: #1264ab;
+  display: flex;
+  flex-direction: column;
   width: 100vw; 
   height: 100vh; 
 }
+
+.sidebar-component:nth-child(1){
+  order: 4;
+}
+
+.leaflet-container:nth-child(2){
+  order: 1;
+}
+
+.clock-container:nth-child(3){
+  order: 3;
+}
+
+.info-container:nth-child(4){
+  order: 2;
+}
+
 .sidebar-component{
+  overflow-y: auto;
   display: flex;
+  justify-content: flex-start;
   flex-direction: column;
+  align-items: center;
   row-gap: 10px;
-  width: fit-content;
-  max-height: 90vh;
+  width: 100vw;
+  min-height: 75vh;
   background-color: #1264ab;
-  border: #354451 solid 2px;
-  border-radius: 5px;
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  padding: 20px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.8); 
-  z-index: 800;
   text-align: center;
-  transition:all 1s ease-in-out;
-  max-width: 300px;
+  transition:all 0.5s ease-in-out;
+  padding-bottom: 10px;
 }
 
 .sidebar-component > h1 {
+  margin-top: 5px;
   color: white;
 }
 
+.main-select{
+  width: 300px;
+}
+
 .clock-container {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  padding: 5px;
-  z-index: 800;
+  background-color: #1264ab;
+  margin-right: auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
 }
 
 .react-clock__face {
@@ -61,11 +87,9 @@ body {
 }
 
 .info-container {
-  position: absolute;
-  bottom: 40px;
-  right: 60px;
-  z-index: 800;
-  max-width: 25vw;
+  padding-left: 15vw;
+  width: 70vw;
+  transition: all 0.5s ease-in-out;
 }
 
 .timeline-container {
@@ -83,16 +107,14 @@ body {
 
 .sticky-header {
   color:white;
-  position: -webkit-sticky;
-  position: sticky;
+  margin-top: 20px;
   top: 0;
   background-color: #1264ab;
   z-index: 1; 
   padding-left: 12px;
-  border: #354451 solid 2px;
-  border-top-left-radius: 5px; 
-  border-top-right-radius: 5px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.8); 
+  border-top: #354451 solid 2px;
+  border-bottom: #354451 solid 2px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.8); 
 }
 
 .info-legend {
@@ -100,12 +122,11 @@ body {
   display: flex;
   flex-direction: column;
   row-gap: 5px;
-  bottom: 100px;
+  top: 10px;
   right: 5px;
   z-index: 800;
   background-color: white;
   border: #354451 solid 2px;
-  border-radius: 5px;
   max-width: 60px;
   max-height: 200px;
   justify-content: center;
@@ -126,7 +147,8 @@ body {
   background-color: #fff;
   border: 4px #1264ab solid;
   padding: 5px 10px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.8); 
+  margin-bottom: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.8); 
   width: 90px;
   justify-content: center;
   align-items: center;
@@ -146,6 +168,8 @@ body {
   border-radius: 4px;
   border-style: solid;
   border-width: 1px;
+  align-items: flex-start;
+  width: 80vw;
 }
 
 .selected {
@@ -153,6 +177,7 @@ body {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  width: 200px;
 }
 
 .routeScroll {
@@ -222,6 +247,7 @@ body {
 .customBtn:-webkit-details-marker {
   display: none;
 }
+
 .routeFind-box {
   display: flex;
   flex-direction: column;
@@ -230,8 +256,255 @@ body {
   border-style: solid;
   border-width: 1px;
   align-items: flex-start;
-  gap:10px
+  gap: 10px;
+  width: 80vw;
 }
+
 .routeFind-box > legend {color:white}
 .routeFind-box > h4 {margin:0px; color:white}
 .no-routes-message {color:white}
+
+@media  (min-width: 1000px) and (min-height: 540px) {
+  .leaflet-container{
+    height: 100vh;
+  }
+  .container {
+    position: relative;
+    width: 100vw; 
+    height: 100vh; 
+  }
+
+  .sidebar-component{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 10px;
+    width: fit-content;
+    max-height: 90vh;
+    background-color: #1264ab;
+    border: #354451 solid 2px;
+    border-radius: 5px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.8); 
+    z-index: 800;
+    text-align: center;
+    transition:all 0.5s ease-in-out;
+    max-width: 300px;
+    overflow-y: unset;
+    min-height: unset;
+  }
+
+  .sidebar-component > h1 {
+    color: white;
+  }
+
+  .clock-container {
+    background-color: transparent;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 5px;
+    z-index: 800;
+    width: fit-content;
+  }
+
+  .react-clock__face {
+    background-color: white ;
+  }
+
+  .h2-title-sidebar {
+    margin-left: 50px;
+  }
+
+  .info-container {
+    transition:all 0.5s ease-in-out;
+    position: absolute;
+    bottom: 40px;
+    right: 60px;
+    z-index: 800;
+    max-width: 25vw;
+    padding-left: unset;
+    width: unset;
+  }
+
+  .timeline-container {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.8); 
+    padding: 15px;
+    overflow-y: auto;
+    background-color: white;
+    max-height: 40vh; 
+  }
+
+  .vertical-timeline-element {
+    margin-left: 20px;
+    scroll-margin-top: 10px;
+  }
+
+  .sticky-header {
+    margin-top: unset;
+    color:white;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background-color: #1264ab;
+    z-index: 1; 
+    padding-left: 12px;
+    border: #354451 solid 2px;
+    border-top-left-radius: 5px; 
+    border-top-right-radius: 5px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.8); 
+  }
+
+  .info-legend {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    top: unset;
+    bottom: 100px;
+    right: 5px;
+    z-index: 800;
+    background-color: white;
+    border: #354451 solid 2px;
+    border-radius: 5px;
+    max-width: 60px;
+    max-height: 200px;
+    justify-content: center;
+    align-content: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .info-legend > img {
+    height: auto;
+    width: 40px;
+  }
+
+  .digital-clock {
+    display: flex;
+    font-family: 'digital-7', sans-serif;   
+    font-size: xx-large;
+    background-color: #fff;
+    border: 4px #1264ab solid;
+    padding: 5px 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.8); 
+    width: 90px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .analog-clock {
+    border: 4px #1264ab solid;
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.8); 
+  }
+
+  .selected-routes{
+    box-sizing: border-box;
+    color: white;
+    display: flex;
+    flex-direction: column-reverse;
+    border-color: hsl(0, 0%, 80%);
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    width: 100%;
+  }
+
+  .selected {
+    color: white;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  .routeScroll {
+    max-height: 200px;
+    overflow-y: auto; 
+  }
+
+  .main-select{
+    width: 200px;
+  }
+
+  .customBtn {
+    width: fit-content;
+    height: fit-content;
+    appearance: none;
+    background-color: #FAFBFC;
+    border: 1px solid rgba(27, 31, 35, 0.15);
+    border-radius: 6px;
+    box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+    box-sizing: border-box;
+    color: #24292E;
+    cursor: pointer;
+    display: inline-block;
+    font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    list-style: none;
+    padding: 4px 14px;
+    position: relative;
+    transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+    align-items: center;
+    white-space: nowrap;
+    word-wrap: break-word;
+  }
+
+  .customBtn:hover {
+    transition: all 100ms;
+    border-color: #2684FF;
+    background-color: #F3F4F6;
+    text-decoration: none;
+    transition-duration: 0.1s;
+  }
+
+  .customBtn:disabled {
+    background-color: #FAFBFC;
+    border-color: rgba(27, 31, 35, 0.15);
+    color: #959DA5;
+    cursor: default;
+  }
+
+  .customBtn:active {
+    background-color: #EDEFF2;
+    box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
+    transition: none 0s;
+  }
+
+  .customBtn:focus {
+    outline: 1px transparent;
+  }
+
+  .customBtn:before {
+    display: none;
+  }
+
+  .customBtn:-webkit-details-marker {
+    display: none;
+  }
+  
+  .routeFind-box {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    border-color: hsl(0, 0%, 80%);
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    align-items: flex-start;
+    gap: 10px;
+    width: 100%;
+  }
+  .routeFind-box > legend {color:white}
+  .routeFind-box > h4 {margin:0px; color:white}
+  .no-routes-message {color:white}
+}

@@ -109,7 +109,6 @@ function App() {
       <Sidebar
         route={route}
         setRoute={setRoute}
-        tripInfo={tripInfo}
         routes={routes}
         setTripInfo={setTripInfo}
         setSelectedMarker={setSelectedMarker}

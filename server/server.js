@@ -112,12 +112,12 @@ app.get('/api/trip/:tripId', async (req, res) => {
   }
 });
 
-// let result = spawnSync('python', [pythonScriptPath]);
-// if (result.error) {
-//   console.error(`[Error] Running Python script: ${result.error.message}`);
-// } else {
-//   console.log(`[Info] Python script output:\n ${result.stdout}`);
-// }
+let result = spawnSync('python', [pythonScriptPath]);
+if (result.error) {
+  console.error(`[Error] Running Python script: ${result.error.message}`);
+} else {
+  console.log(`[Info] Python script output:\n ${result.stdout}`);
+}
 
 async function startServer() {
   await fetchStops();
