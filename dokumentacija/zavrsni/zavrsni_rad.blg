@@ -1,0 +1,60 @@
+This is BibTeX, Version 0.99d (TeX Live 2023)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: zavrsni_rad.aux
+The style file: fer_IEEEtran_HR.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 150 items from 100.
+Database file #1: literatura.bib
+Warning--I didn't find a database entry for "6248073"
+Warning--I didn't find a database entry for "6247753"
+Warning--I didn't find a database entry for "ghiglia_pritt_phase_unwrapping"
+Warning--I didn't find a database entry for "hartley2003multiple"
+Warning--I didn't find a database entry for "4250461"
+Warning--I didn't find a database entry for "123DCatch"
+You've used 1 entry,
+            4225 wiz_defined-function locations,
+            854 strings with 7985 characters,
+and the built_in function-call counts, 959 in all, are:
+= -- 81
+> -- 14
+< -- 8
++ -- 7
+- -- 2
+* -- 55
+:= -- 179
+add.period$ -- 3
+call.type$ -- 1
+change.case$ -- 2
+chr.to.int$ -- 15
+cite$ -- 1
+duplicate$ -- 59
+empty$ -- 59
+format.name$ -- 3
+if$ -- 200
+int.to.chr$ -- 0
+int.to.str$ -- 1
+missing$ -- 10
+newline$ -- 32
+num.names$ -- 1
+pop$ -- 13
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 68
+stack$ -- 0
+substring$ -- 37
+swap$ -- 55
+text.length$ -- 3
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 1
+warning$ -- 0
+while$ -- 5
+width$ -- 2
+write$ -- 41
+(There were 6 warnings)
