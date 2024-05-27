@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.3)  27 MAY 2024 13:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.3)  27 MAY 2024 18:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -880,42 +880,86 @@ e
 e 91.
 LaTeX Font Info:    Font shape `T1/opensans-TLF/b/n' will be
 (Font)              scaled to size 16.0pt on input line 91.
+LaTeX Font Info:    Font shape `T1/opensans-TLF/bx/n' in size <12> not availabl
+e
+(Font)              Font shape `T1/opensans-TLF/b/n' tried instead on input lin
+e 100.
+LaTeX Font Info:    Font shape `T1/opensans-TLF/b/n' will be
+(Font)              scaled to size 12.0pt on input line 100.
+<Figures/zetinfo.png, id=146, 2415.77531pt x 1680.2775pt>
+File: Figures/zetinfo.png Graphic file (type png)
+<use Figures/zetinfo.png>
+Package pdftex.def Info: Figures/zetinfo.png  used on input line 106.
+(pdftex.def)             Requested size: 374.86775pt x 260.72235pt.
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.3}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.122 
-       [3
+l.111 \newpage
+               [3
 
-] [4] [5]
+]
+<Figures/mapnificent-zagreb.jpg, id=158, 1155.1155pt x 546.24075pt>
+File: Figures/mapnificent-zagreb.jpg Graphic file (type jpg)
+<use Figures/mapnificent-zagreb.jpg>
+Package pdftex.def Info: Figures/mapnificent-zagreb.jpg  used on input line 126
+.
+(pdftex.def)             Requested size: 396.91325pt x 187.69478pt.
+ [4 <./Figures/zetinfo.png>]
+<Figures/gtfs-model.png, id=171, 7858.35875pt x 4599.1825pt>
+File: Figures/gtfs-model.png Graphic file (type png)
+<use Figures/gtfs-model.png>
+Package pdftex.def Info: Figures/gtfs-model.png  used on input line 142.
+(pdftex.def)             Requested size: 396.91325pt x 232.28847pt.
+ [5 <./Figures/mapnificent-zagreb.jpg>]
+LaTeX Font Info:    Trying to load font information for TS1+stix2 on input line
+ 152.
+
+(c:/Program Files/texlive/2023/texmf-dist/tex/latex/stix2-type1/ts1stix2.fd
+File: ts1stix2.fd 2018/04/02 v2.0.0-latex stix2 TS1 font definitions
+)
+[6{c:/Program Files/texlive/2023/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-t
+s1.enc} <./Figures/gtfs-model.png>] [7] [8]
 Poglavlje 3..
-[6
+[9
 
 ]
 Poglavlje 4..
-(./zavrsni_rad.bbl [7
+(./zavrsni_rad.bbl [10
 
-]) [8
+]
+Underfull \hbox (badness 10000) in paragraph at lines 47--51
+[]\T1/stix2/m/n/12 General Tran-sit Feed Spe-ci-fi-ca-tion, ``GTFS - Sc-he-dule
+/Static'', []$https :
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 47--51
+\T1/stix2/m/n/12 / / gtfs . org / schedule/$[], []$https : / / gtfs . org / sch
+edule / reference / #dataset -[] ^^\les$[].
+ []
+
+) [11
 
 ]
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 198.
+(blindtext)                 on input line 255.
 
-[9
+[12
 
-] [10
+] [13
 
 ]
 pdfTeX warning (ext4): destination with the same identifier (name{chapter.1}) h
 as been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.222 \chapter{The Code}
+l.279 \chapter{The Code}
                         
 Privitak A.
-[11
+[14
 
 
 ] (./zavrsni_rad.aux)
@@ -1032,18 +1076,22 @@ figures/hr_0036543289_73.pdf
 figures/hr_0036543289_73.pdf
 figures/hr_0036543289_73.pdf
 figures/hr_0036543289_73.pdf
+Figures/zetinfo.png
+Figures/mapnificent-zagreb.jpg
+Figures/gtfs-model.png
+ts1stix2.fd    2018/04/02 v2.0.0-latex stix2 TS1 font definitions
 zavrsni_rad.bbl
  ***********
 
 Package rerunfilecheck Info: File `zavrsni_rad.out' has not changed.
-(rerunfilecheck)             Checksum: B7D08A3BD83F03E89426912853D28FD3;2335.
+(rerunfilecheck)             Checksum: FE0236024BF9CA34B901D88F88F6A53B;2248.
  ) 
 Here is how much of TeX's memory you used:
- 17875 strings out of 474272
- 278817 string characters out of 5744472
+ 17975 strings out of 474272
+ 280851 string characters out of 5744472
  1932533 words of memory out of 5000000
- 39754 multiletter control sequences out of 15000+600000
- 623689 words of font info for 135 fonts, out of 8000000 for 9000
+ 39831 multiletter control sequences out of 15000+600000
+ 639057 words of font info for 140 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  87i,17n,131p,1417b,663s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/Program Files/texlive/2023/texmf-dist/fonts/type1/ascender/opensans/OpenS
@@ -1052,10 +1100,10 @@ nsans/OpenSans-Regular.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type
 1/public/stix2-type1/STIX2Text-Bold.pfb><c:/Program Files/texlive/2023/texmf-di
 st/fonts/type1/public/stix2-type1/STIX2Text-Italic.pfb><c:/Program Files/texliv
 e/2023/texmf-dist/fonts/type1/public/stix2-type1/STIX2Text-Regular.pfb>
-Output written on zavrsni_rad.pdf (14 pages, 489600 bytes).
+Output written on zavrsni_rad.pdf (17 pages, 2563743 bytes).
 PDF statistics:
- 215 PDF objects out of 1000 (max. 8388607)
- 179 compressed objects within 2 object streams
- 32 named destinations out of 1000 (max. 500000)
- 173 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 280 PDF objects out of 1000 (max. 8388607)
+ 234 compressed objects within 3 object streams
+ 49 named destinations out of 1000 (max. 500000)
+ 188 words of extra memory for PDF output out of 10000 (max. 10000000)
 

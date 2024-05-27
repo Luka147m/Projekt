@@ -23,7 +23,7 @@
 \author{Luka Miličević}
 
 % Mentor 
-\mentor{Prof.\@ Ivana Bosnić}
+\mentor{izv. prof. dr. sc.\@ Ivana Bosnić}
 
 % Datum rada na engleskom jeziku / Date in English
 \date{June, 2024}
@@ -88,39 +88,94 @@ U velikim urbanim gradovima poput Zagreba, javni gradski prijevoz predstavlja ne
 \chapter{Glavni dio}
 \label{pog:glavni_dio}
 
-\section{Zagrebački Električni Tramvaj i ulazni podaci}
+\section{Zagrebački Električni Tramvaj}
 
 Zagrebački električni tramvaj, poznatiji kao ZET, je trgovačko društvo koje je u direktnom
 vlasništvu Grada Zagreba, te ima ključnu ulogu u organizaciji javnog gradskog prijevoza u Zagrebu.
 Posluje od 1910. godine i svakodnevno pruža prijevozne usluge za gotovo milijun ljudi pomoću
-tramvaja, autobusa, uspinjače i specijalnih prijevoza. Nedavno je ZET otvorio svoje podatke javnosti
-pod Otvorenom dozvolom Republike Hrvatske. Ovi podaci obuhvaćaju GTFS static i GTFS realtime
-podatke, koji su trenutno parcijalno implementirani te su dostupni na službenoj stranici ZET-a
+tramvaja, autobusa, uspinjače i specijalnih prijevoza \cite{ZET}.
+Nedavno je ZET otvorio svoje podatke javnosti pod Otvorenom dozvolom Republike Hrvatske. Ovi podaci obuhvaćaju GTFS static i GTFS realtime podatke \ref{sec:GTFS}, koji su trenutno parcijalno implementirani te su dostupni na službenoj stranici ZET-a \cite{ZET-GTFS}.
+Ti podaci će biti temelj moje aplikacije i kroz njih ću detaljnije proći u narednim poglavljima \ref{sec:zet-gtfs}
 
-etc...
+\subsubsection{Slične aplikacije - ZET info}
+Jedna popularna aplikacija koja koristi iste ZET-ove podatke je ZET info \cite{ZET-info}. Koja primarno koristi GTFS static podatke za prikaz rasporeda tramvaja ZET-a. Ona nije službena ZET-ova aplikacija te dostupna je preko Apple App Store-a i Google play-a. Vrlo je zgodna za imati pri ruci, ali bih ja sa svojom aplikacijom htio imati i stvarne (realtime) podatke za tramvaje.
 
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width=0.85\linewidth]{Figures/zetinfo.png} 
+	\caption{ZET info}
+	\label{slk:zet-info}
+\end{figure}
+
+\newpage
 \section[GTFS]{General Transit Feed Specification}
+\label{sec:GTFS}
 
 General Transit Feed Specification, kraće GTFS je otvoreni standardizirani format za rasporede
 javnog prijevoza i pripadajuće geografske informacije. Široko se koristi diljem svijeta te ga
 podržavaju više od 10 tisuća agencija javnog prijevoza u preko 100 zemalja. Neke od platformi koje
-koriste GTFS su Google Maps, Apple Maps, Moovit, OpenStreetMap i druge. GTFS je započeo
-2005. godine kao ideja za sporedni projekt Googleovog zaposlenika Chris Harrelsona te je danas De
-facto standard industrije. GTFS se sastoji od dvije glavne verzije GTFS static (schedule) i GTFS
-realtime.
+koriste GTFS su Google Maps, Apple Maps, Moovit, OpenStreetMap i druge \cite{GTFS}. GTFS je započeo 2005. godine kao ideja za sporedni projekt Googleovog zaposlenika Chris Harrelsona te je danas De facto standard industrije. GTFS se sastoji od dva glavna dijela GTFS schedule (static) i GTFS realtime.
 
-etc...
+Činjenica da je GTFS otvoreni standard omogućuje da agencije za prijevoz informacije učine dostupnima pomoću bilo kojeg od mnogih alata koji već podržavaju GTFS i korisnicima da preuzmu i obrađuju te informacije sa proizvoljnom aplikacijom koja podržava GTFS ili ako žele razviju svoje programe za to. Otvoreni standardi dovode do stvaranja podataka koji se mogu lako dijeliti i potiču daljnji razvitak.
+
+Jedan zanimljiv primjer male aplikacije koja koristi GTFS podatke da prikaže područja na karti do kojih možete doći javnim prijevozom u određenom vremenu je otvoreni projekt Mapnificent koji je javno dostupan na Github-u \cite{Mapnificent}. Na slici \ref{slk:mapnificent-zagreb} je prikazano dokle je moguće doći javnim prijevozom od zgrade FER-a unutar 12 minuta. 
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=0.9\linewidth]{Figures/mapnificent-zagreb.jpg} 
+  \caption{Mapnificent Zagreb}
+  \label{slk:mapnificent-zagreb}
+\end{figure}
 
 \subsection{GTFS static}
 
 GTFS static ili GTFS schedule je kolekcija od barem 6 osnovnih, do 26 CSV (comma-separated
 values) datoteka s ekstenzijom .txt zapakiranih unutar jedne komprimirane .zip datoteke. Te datoteke
-sadrže informacije o rutama, rasporedima, stanicama, i ostalim informacijama o prijevozu. CSV
-format pruža otvorenost i jednostavnost rukovanja s datotekama i čini strojno čitanje lakoćom.
-Važno je napomenuti da je način kodiranja datoteka imperativan, obavezuje se korištenje UTF-8
-kodiranja (podržan je i UTF-8 BOM).
+sadrže informacije o rutama, rasporedima, stanicama, i ostalim raznim informacijama o prijevozu \cite{GTFS-schedule}. Sam format datoteka koji je CSV pruža otvorenost i jednostavnost rukovanja jer mnogo programskim alata i jezika ima metode za efektivnu obradu CSV što čini implementaciju strojnog čitanja lakoćom. Važno za napomenuti da je način kodiranja datoteka imperativan, obavezuje se korištenje UTF-8 kodiranja (podržan je i UTF-8 BOM).
 
-etc...
+
+Na dijagramu \ref{slk:gtfs-model} prikazan je jedan primjer važeće strukture GTFS static modela kojeg prikladno prikazuju datoteke u ER (Entity–relationship) modelu. Zelenom bojom su označene neophodne datoteke, a plavom par dodatnih opcionalnih datoteka te za svaku od njih struktura i međusobne relacije. 
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width=0.9\linewidth]{Figures/gtfs-model.png} 
+	\caption{GTFS-static model \cite{GTFS-schedule-model}}
+	\label{slk:gtfs-model}
+\end{figure}
+
+\newpage
+
+\subsubsection{Neophodne datoteke}
+Moraju biti definirane da bi zadovoljili GTFS standard. One zajedno spojene pomoću pojedinih identifikatora čine cjelovitu sliku mreže javnog prijevoza
+\begin{itemize}
+	\item \textbf{Agency.txt} -
+	Opće informacije o prijevoznoj agenciji, uključujući njezino ime, web stranicu, i vremensku zonu.
+	\item \textbf{Routes.txt} -
+	Definira različite linije javnog prijevoza. Svaka ruta obuhvaća informacije o identifikatorima ruta, tipovima vozila i drugim detaljima.
+	\item \textbf{Trips.txt} -
+	Informacije o specifičnim putovanjima na određenim rutama, uključujući vremena polaska i druge povezane podatke.
+	\item \textbf{Stop\_times.txt} -
+	Informacije o vremenima dolaska i odlaska vozila na svakoj stanici tijekom svakog putovanja.
+	\item \textbf{Stops.txt} -
+	Informacije o stanicama, uključujući identifikatore, nazive i geografske koordinate.
+	\item \textbf{Calendar.txt} -
+	Informacije o tjednom rasporedu putovanja.
+\end{itemize}
+
+\subsubsection{Opcionalne datoteke}
+Pored neophodnih datoteka korisno je imati i dodatne opcionalne datoteke poput:
+\begin{itemize}
+	\item \textbf{Shapes.txt} -
+	Informacije o geografskim koordinatama rute i omogućuje lijepo iscrtavanje rute na karti.
+	\item \textbf{Transfers.txt} -
+	Informacije o povezivanju više ruta kako bi se olakšala mogućnost presjedanja i kombiniranja prijevoznih linija.
+	\item \textbf{Calendar\_dates.txt} -
+	Omogućuje definiranje iznimaka u redovnom rasporedu kada usluga radi ili ne radi na pojedinoj liniji zbog smetnji ili radova, ili pak posebnih prijevoza.
+\end{itemize}
+
+\subsubsection{ZET GTFS podaci}
+\label{sec:zet-gtfs}
 
 \subsection{GTFS realtime}
 
@@ -185,6 +240,8 @@ etc...
 
 % Literatura se automatski generira iz zadane .bib datoteke / References are automatically generated from the supplied .bib file
 % Upiši ime BibTeX datoteke bez .bib nastavka / Enter the name of the BibTeX file without .bib extension
+
+\nocite{*}
 
 \bibliography{literatura}
 

@@ -24,13 +24,37 @@
 \providecommand{\BIBdecl}{\relax}
 \BIBdecl
 
-\bibitem{example_article}
-\BIBentryALTinterwordspacing
-\BIBentryALTinterwordspacing
-J.~Doe i J.~Smith, ``An example article'', \emph{Journal of Examples}, sv.~42,
-  br.~3, str. 1--10, May 2024., special issue on examples.
-  \url{https://doi.org/10.1234/example.doi}
-\BIBentrySTDinterwordspacing
-\BIBentrySTDinterwordspacing
+\bibitem{ZET}
+{Zagrebački Električni Tramvaj}, ``{ZET - O nama}'',
+  \url{https://www.zet.hr/o-nama/259}, [Stranica posjećena: 16.05.2024.].
+
+\bibitem{ZET-GTFS}
+------, ``{ZET - GTFS podaci}'',
+  \url{https://www.zet.hr/odredbe/datoteke-u-gtfs-formatu/669}, [Stranica
+  posjećena: 27.05.2024.].
+
+\bibitem{ZET-info}
+{ZET info}, \url{https://zet-info.com/}.
+
+\bibitem{GTFS}
+{General Transit Feed Specification}, ``{GTFS - About}'',
+  \url{https://gtfs.org/}.
+
+\bibitem{Mapnificent}
+{Mapnificent}, \url{https://github.com/mapnificent/mapnificent}.
+
+\bibitem{GTFS-schedule}
+{General Transit Feed Specification}, ``{GTFS - Schedule/Static}'',
+  \url{https://gtfs.org/schedule/},
+  \url{https://gtfs.org/schedule/reference/#dataset-files}.
+  \url{https://developers.google.com/transit/gtfs/reference}.
+
+\bibitem{GTFS-schedule-model}
+{Trafiklab}, ``{Informacije o GTFS schedule modelu i slika modela}'',
+  \url{https://www.trafiklab.se/docs/using-trafiklab-data/using-gtfs-files/static-gtfs-files/}.
+
+\bibitem{GTFS-realtime}
+{General Transit Feed Specification}, ``{GTFS - Realtime}'',
+  \url{https://gtfs.org/realtime/}.
 
 \end{thebibliography}
