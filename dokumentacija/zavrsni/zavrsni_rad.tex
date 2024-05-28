@@ -283,11 +283,17 @@ Ovo je najveća datoteka (oko 70MB, \textasciitilde{}1000000 linija) koja sadrž
 	\label{slk:routes}
 \end{figure}
 
-Ovdje nam je jedina nova bitna informacija route\_long\_name koja nam daje puno ime rute (početno mjesto i krajnje mjesto)
+Ovdje nam je jedina nova bitna informacija route\_long\_name koja nam daje puno ime rute (početno mjesto i krajnje mjesto)\\
+To bi bile najbitnije GTFS static informacije koje sam ja upotrijebio za izradu aplikacije koji su bili jako bitni za izradu baze podataka koja sprema te odvojene datoteke kao tablice i spaja ih s odgovarajućim ključevima i time omogućuje lako i brzo pretraživanje te formuliranje odgovora \ref{sec:baza}.
 
 \newpage
 \subsubsection{ZET realtime podaci}
-Na slici \ref{slk:reply1} se nalazi jedan mali isječak od inače jako velike poruke (obično sadrže oko 500 - 600 entiteta), ali radi jednostavnosti je prikazan samo jedan.
+Na ZET-ovoj stranici se nalazi link za GTFS realtime podatke \ref{slk:zet-stranica} koji kada se skinu su binarna datoteka u .proto formatu. Protobuf je opisan u narednom poglavlju \ref{sec:protobuf}. Ovdje ćemo samo brzo proći kroz konačne podatke kada se obavi deserijalizacija.\\
+Na slici \ref{slk:reply1} se nalazi jedan mali isječak od inače jako velike poruke (obično sadrže oko 500 - 600 entiteta), ali radi jednostavnosti je prikazan samo jedan.\\
+Na početku svake poruke se nalazi header i možemo primijetiti da se koristi starija verzija GTFS 1.0, sada je aktualna 2.0 verzija koja ima bolje definiranu schemu s više informacija i pruža veću fleksibilnost. Također piše da se svaki put šalju svi podaci "FULL\_DATASET" i na kraju je vremenska oznaka generiranja poruke koja je u UNIX formatu.\\
+Zatim polje entity koje sadrži entitet (objekt) koji reprezentira informacije o jednom vozilu. Svaki od njih ima jedinstveni ID i tripUpdate. TripUpdate se sastoji od osnovnih informacija o putu na kojem je vozilo, ID tog puta, kada je započeo put, je li put prema rasporedu, broj rute kojoj pripada taj put, vremenska oznaka generiranja tih podataka i stopTimeUpdate koji sadrži informacije o zadnjoj posjećenoj stanici njen ID, redni broj i vremenska oznaka.\\
+Jedna stvar koju je vrijedno napomenuti da su ZET-ovi podaci prilično osnovni tjst. sadrže najosnovnije informacije, vjerojatni razlog toga je što su ZET-ovi podaci u fazi razvoja i na stranici je navedeno da je ovo prototip. Nadam se da će malo više i detaljnije upotpuniti podatke, na primjer jedna jako velika stvar koja bi bila jako korisna jesu vehicle podaci (slika \ref{slk:reply2}) koji sadrže točne geografske lokacije vozila. Trenutačno je aplikacija napravljena tako da na karti prikaže zadnje potvrđene pozicije tramvaja koje su zapravo podaci iz stopTimeUpdate odnosno lokacije zadnje posjećenih stanica i markeri koji su predikcije položaja tramvaja temeljene na vremenima iz GTFS static podataka. Implementacija tih vehicle podataka bi izbacilo potrebu za predikcijom i puno olakšala direktno prikazivanje točnih lokacija tramvaja.
+
 \begin{figure}[htb]
 	\centering
 	\begin{minipage}[htb]{0.48\linewidth}
@@ -333,6 +339,7 @@ rutama koje preuzmemo s ZET-ove stranice.
 etc...
 
 \subsection{Baza podataka}
+\label{sec:baza}
 
 \subsection{Pomoćne skripte}
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.3)  28 MAY 2024 16:07
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.3)  28 MAY 2024 16:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -961,23 +961,28 @@ File: Figures/routes.png Graphic file (type png)
 Package pdftex.def Info: Figures/routes.png  used on input line 281.
 (pdftex.def)             Requested size: 308.71106pt x 55.97672pt.
  [11 <./Figures/routes.png>]
-<Figures/reply.png, id=246, 881.2925pt x 1330.9725pt>
+Overfull \hbox (1.03781pt too wide) in paragraph at lines 291--296
+\T1/stix2/m/n/12 i pruºa ve¢u flek-si-bil-nost. Ta-ko-žer pi²e da se svaki put 
+²a-lju svi po-daci "FULL_DATASET"
+ []
+
+<Figures/reply.png, id=250, 881.2925pt x 1330.9725pt>
 File: Figures/reply.png Graphic file (type png)
 <use Figures/reply.png>
-Package pdftex.def Info: Figures/reply.png  used on input line 295.
+Package pdftex.def Info: Figures/reply.png  used on input line 301.
 (pdftex.def)             Requested size: 211.68661pt x 319.68364pt.
-<Figures/reply2.png, id=247, 588.1975pt x 415.5525pt>
+<Figures/reply2.png, id=251, 588.1975pt x 415.5525pt>
 File: Figures/reply2.png Graphic file (type png)
 <use Figures/reply2.png>
-Package pdftex.def Info: Figures/reply2.png  used on input line 302.
+Package pdftex.def Info: Figures/reply2.png  used on input line 308.
 (pdftex.def)             Requested size: 211.68661pt x 149.5544pt.
- [12 <./Figures/reply.png> <./Figures/reply2.png>] [13]
+[12] [13 <./Figures/reply.png> <./Figures/reply2.png>] [14]
 Poglavlje 3..
-[14
+[15
 
 ]
 Poglavlje 4..
-(./zavrsni_rad.bbl [15
+(./zavrsni_rad.bbl [16
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 47--51
@@ -997,26 +1002,26 @@ Underfull \hbox (badness 10000) in paragraph at lines 57--59
 '', []$https : / / gtfs . org /
  []
 
-) [16
+) [17
 
 ]
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 373.
+(blindtext)                 on input line 380.
 
-[17
+[18
 
-] [18
+] [19
 
 ]
 pdfTeX warning (ext4): destination with the same identifier (name{chapter.1}) h
 as been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.397 \chapter{The Code}
+l.404 \chapter{The Code}
                         
 Privitak A.
-[19
+[20
 
 
 ] (./zavrsni_rad.aux)
@@ -1152,10 +1157,10 @@ Package rerunfilecheck Info: File `zavrsni_rad.out' has not changed.
 (rerunfilecheck)             Checksum: 554B0BC5E08810DD32F208CBB3AC2749;2359.
  ) 
 Here is how much of TeX's memory you used:
- 18077 strings out of 474272
- 283003 string characters out of 5744472
+ 18079 strings out of 474272
+ 283020 string characters out of 5744472
  1932533 words of memory out of 5000000
- 39916 multiletter control sequences out of 15000+600000
+ 39917 multiletter control sequences out of 15000+600000
  639057 words of font info for 140 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  87i,17n,131p,1417b,663s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1165,10 +1170,10 @@ nsans/OpenSans-Regular.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type
 1/public/stix2-type1/STIX2Text-Bold.pfb><c:/Program Files/texlive/2023/texmf-di
 st/fonts/type1/public/stix2-type1/STIX2Text-Italic.pfb><c:/Program Files/texliv
 e/2023/texmf-dist/fonts/type1/public/stix2-type1/STIX2Text-Regular.pfb>
-Output written on zavrsni_rad.pdf (22 pages, 3213673 bytes).
+Output written on zavrsni_rad.pdf (23 pages, 3216036 bytes).
 PDF statistics:
- 344 PDF objects out of 1000 (max. 8388607)
- 279 compressed objects within 3 object streams
- 66 named destinations out of 1000 (max. 500000)
+ 353 PDF objects out of 1000 (max. 8388607)
+ 287 compressed objects within 3 object streams
+ 67 named destinations out of 1000 (max. 500000)
  236 words of extra memory for PDF output out of 10000 (max. 10000000)
 
