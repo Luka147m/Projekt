@@ -174,24 +174,141 @@ Pored neophodnih datoteka korisno je imati i dodatne opcionalne datoteke poput:
 	Omogućuje definiranje iznimaka u redovnom rasporedu kada usluga radi ili ne radi na pojedinoj liniji zbog smetnji ili radova, ili pak posebnih prijevoza.
 \end{itemize}
 
-\subsubsection{ZET GTFS podaci}
-\label{sec:zet-gtfs}
-
-\subsection{GTFS realtime}
+\subsection[GTFS-rt]{GTFS realtime}
 
 GTFS realtime ili GTFS-rt je ekstenzija GTFS-a koja je nastala 2011. godine te je također de facto
 industrijski standard za dijeljenje stvarnih podataka o prijevozu. Jer je GTFS otvoreni standard,
 realtime se razvio s ciljem maksimalne interoperabilnosti i lakoće korištenja da bi olakšali
 programerima razvoj aplikacija i lakoću dijeljenja informacija o prijevozu između agencija. GTFS-rt
 sadrži informacije u stvarnom vremenu o lokacijama vozila, predviđenim vremenima dolaska te
-obavijestima o promjenama ruta i otkazivanjima putem web poslužitelja koji koristi protocol buffers
-(protobuf). Podaci o stvarnoj lokaciji stvaraju se neprekidno od strane agencije putem sustava za
-automatsko praćenje vozila dok se vremena dolaska na odredište izračunavaju korištenjem modela
-strojnog učenja koji analiziraju povijesne podatke o položaju i voznom redu
+obavijestima o promjenama ruta i otkazivanjima putem web poslužitelja (putem nekog API) koji koristi protocol buffers (protobuf, poglavlje \ref{sec:protobuf}). Podaci o stvarnoj lokaciji stvaraju se neprekidno od strane agencije sustavom za automatsko praćenje vozila dok se vremena dolaska na odredište najčešće izračunavaju pomoću strojnog učenja koji analiziraju povijesne podatke o položaju i voznom redu te daje očekivana vremena. Upravo jer se podaci neprestano kreiraju koriste se protocol buffers koji jako brzo i efektivno rade binarnu serijalizaciju podataka u male pakete koji se lako šalju \cite{GTFS-realtime}.
 
-etc...
+Glavni "objekt" GTFS realtime feed-a (stream) je FeedMessage koji sadrži FeedHeader i FeedEntity.
+FeedHeader sadrži osnovne informacije (metapodatke) o podacima poput verzije GTFS-a, "incrementiality" koji opisuje šalje li se cijeli skup podataka (dataset) ili samo razlika od posljednje verzije te vremenska oznaka (timestamp) kada su podaci generirani.
+Feed entity sadrži jedan ili više entiteta koji sadrže najnovije informacije o stanju puta, pozicijama vozila, promjenama na rutama i upozorenjima. Neka od njih su: 
 
+\begin{itemize}
+	\item \textbf{tripUpdate} - predstavlja informacije jednog te sadrži objekte trip (osnovne informacije o ruti/putu), stopTimeUpdate, vehicle (informacije o položaju vozila npr. geografske koordinate)
+	\item \textbf{stopTimeUpdate} - nalazi se unutar tripUpdate i on sadrži informacije o dolascima/odlascima sa stanica te kašnjenja
+	\item \textbf{alert} - sadrži upozorenja od nesreća, radova na cesti i njihovi obilazaka, vremenskih upozorenja i drugih raznih iznimaka
+\end{itemize}
+
+Primjer GTFS-rt podataka se može vidjeti u sljedećem poglavlju na slikama \ref{slk:reply1} i \ref{slk:reply2}.
+
+\subsection{ZET GTFS podaci}
+\label{sec:zet-gtfs}
+
+Kao što je već rečeno ZET-ovi podaci su dostupni na službenoj stranici svima pod Otvorenom dozvolom Republike Hrvatske \cite{ZET-GTFS}. Na slici \ref{slk:zet-stranica} je prikazana ta stranica te na njoj možemo pronaći linkove za GTFS static i GTFS realtime podatke.
+
+Prvo ćemo proći kroz ZET-ove GTFS static podatke, a potom i GTFS realtime podatke. Kada sta stranice skinemo static arhivu i otvorimo ju s odgovarajućim alatom za pregled komprimiranih arhiva dobivamo datoteke sa slike \ref{slk:zet-podaci}.
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Figures/zet-stranica.jpg} 
+	\caption{ZET stranica za GTFS podatke}
+	\label{slk:zet-stranica}
+\end{figure} 
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Figures/zet-podaci.jpg} 
+	\caption{ZET GTFS static podaci}
+	\label{slk:zet-podaci}
+\end{figure} 
+
+Kao što vidimo tu su sve neophodne datoteke (trips.txt, stops.txt, stop\_times.txt, routes.txt, calendar.txt i agency.txt) te par dodatnih datoteka feed\_info.txt i calendar\_dates.txt koje nisu pretežito korisne za moju implementaciju aplikacije. Od svih tih jedino nisam spomenuo što sadrži datoteka feed\_info.txt - Ona sadržava opće informacije o GTFS feed-u, odnosno  informacije poput naziva agencije koja je stvorila feed, vremena kada je feed generira, verzije GTFS standarda koja se koristi, i slično.
+
+Pobliže ćemo pogledati datoteke trips.txt, stops.txt, stop\_times.txt i routes.txt jer sam njih primarno koristio.
+
+\subsubsection{trips.txt}
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Figures/trips.png} 
+	\caption{Izgled trips.txt}
+	\label{slk:trips}
+\end{figure}
+
+Bitne informacije u trips.txt su:
+\begin{itemize}
+	\item route\_id - identifikator rute, odnosno broj linije (npr. Kod 17 Borongaj, to je 17)
+	\item trip\_id - identifikator putovanja na pojedinoj ruti (svaka ruta ima više tramvaja koji više puta dnevno putuju na toj ruti)
+	\item trip\_short\_name i direction\_id - ime smjera tramvaja i binarni broj koji određuje smjer (npr. Borongaj)
+\end{itemize}
+
+Također možemo primijetiti da datoteka sadrži i shape\_id koji se koristi kao ključ za relaciju trips.txt i shapes.txt koja kao što je rečeno sadrži detaljne koordinate putanje pojedine rute, s kojom bi se na karti s lakoćom moglo iscrtati put glatkom neisprekidanom krivuljom.
+Ali u ZET-ovim podacima se ne može pronaći shapes.txt te sam kao zaobilazak tom problemu "laički" uzeo koordinate svih stanica na pojedinoj ruti i spojio ih ravnom linijom. Izgled te linije nije najljepši, ali je približno rješenje. Još jedan način koji sam probao je koristeći routing komponente, ali to rješenje također ima nedostataka, ali o tom više u poglavlju o frontend implementaciji \ref{sec:frontend}.
+
+\subsubsection{stops.txt}
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Figures/stops.png} 
+	\caption{Izgled stops.txt}
+	\label{slk:stops}
+\end{figure}
+
+Bitne informacije u stops.txt su:
+\begin{itemize}
+	\item stop\_id - identifikator pojedine stanice
+	\item stop\_name - naziv stanice
+	\item stop\_lat i stop\_lon - koordinate stanice
+\end{itemize}
+Vrijedi napomenuti da nedostaju neki podaci, ali nama to nije bitno za implementaciju makar bi bilo korisno imati i stop\_description za dodatne informacije.
+
+\subsubsection{stop\_times.txt}
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Figures/stop_times.png} 
+	\caption{Izgled stop\_times.txt}
+	\label{slk:stop_times}
+\end{figure}
+
+Bitne informacije u stop\_times.txt su:
+\begin{itemize}
+	\item trip\_id - identifikator putovanja na pojedinoj ruti
+	\item arrival\_time i departure\_time - vrijeme dolaska i odlaska
+	\item stop\_id - identifikator pojedine stanice
+	\item stop\_sequence - redni broj stanice na putu
+\end{itemize}
+Ovo je najveća datoteka (oko 70MB, \textasciitilde{}1000000 linija) koja sadrži za svako pojedino putovanje (trip\_id) informacije o svim stanicama na putu, očekivanom vremenu dolaska i odlaska sa stanice i redoslijedu. Ona će biti ključna za iscrtavanje rute i predviđanju lokacije tramvaja.
+
+\subsubsection{routes.txt}
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Figures/routes.png} 
+	\caption{Izgled routes.txt}
+	\label{slk:routes}
+\end{figure}
+
+Ovdje nam je jedina nova bitna informacija route\_long\_name koja nam daje puno ime rute (početno mjesto i krajnje mjesto)
+
+\newpage
+\subsubsection{ZET realtime podaci}
+Na slici \ref{slk:reply1} se nalazi jedan mali isječak od inače jako velike poruke (obično sadrže oko 500 - 600 entiteta), ali radi jednostavnosti je prikazan samo jedan.
+\begin{figure}[htb]
+	\centering
+	\begin{minipage}[htb]{0.48\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{Figures/reply.png} 
+		\caption{Dio ZET-ovog GTFS-rt feed-a}
+		\label{slk:reply1}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[htb]{0.48\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{Figures/reply2.png} 
+		\caption{Primjer vehicle podataka}
+		\label{slk:reply2}
+	\end{minipage}
+\end{figure}
+
+
+\newpage
 \section[Protobuf]{Protocol buffers}
+\label{sec:protobuf}
 
 Protocol Buffers su jezično i platformski neutralni, proširivi mehanizmi za serijalizaciju
 strukturiranih podataka. Razvijeni od strane Googlea, prvotno su bili namijenjeni internoj uporabi,
@@ -222,6 +339,7 @@ etc...
 \subsection{Backend - node.js}
 
 \subsection{Frontend - REACT}
+\label{sec:frontend}
 
 \section{Izgled aplikacije}
 

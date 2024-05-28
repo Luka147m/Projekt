@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.3)  27 MAY 2024 18:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.3)  28 MAY 2024 16:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -800,7 +800,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 {c:/Program Files/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:
 /Program Files/texlive/2023/texmf-dist/fonts/enc/dvips/opensans/a_jg4h6q.enc}]
-<figures/hr_0036543289_73.pdf, id=85, 598.235pt x 845.1575pt>
+<figures/hr_0036543289_73.pdf, id=89, 598.235pt x 845.1575pt>
 File: figures/hr_0036543289_73.pdf Graphic file (type pdf)
 <use figures/hr_0036543289_73.pdf>
 Package pdftex.def Info: figures/hr_0036543289_73.pdf  used on input line 48.
@@ -809,7 +809,7 @@ File: figures/hr_0036543289_73.pdf Graphic file (type pdf)
 <use figures/hr_0036543289_73.pdf>
 Package pdftex.def Info: figures/hr_0036543289_73.pdf  used on input line 48.
 (pdftex.def)             Requested size: 598.23354pt x 845.15544pt.
-<figures/hr_0036543289_73.pdf, id=88, page=1, 598.235pt x 845.1575pt>
+<figures/hr_0036543289_73.pdf, id=92, page=1, 598.235pt x 845.1575pt>
 File: figures/hr_0036543289_73.pdf Graphic file (type pdf)
 <use figures/hr_0036543289_73.pdf, page 1>
 Package pdftex.def Info: figures/hr_0036543289_73.pdf , page1 used on input lin
@@ -886,7 +886,7 @@ e
 e 100.
 LaTeX Font Info:    Font shape `T1/opensans-TLF/b/n' will be
 (Font)              scaled to size 12.0pt on input line 100.
-<Figures/zetinfo.png, id=146, 2415.77531pt x 1680.2775pt>
+<Figures/zetinfo.png, id=151, 2415.77531pt x 1680.2775pt>
 File: Figures/zetinfo.png Graphic file (type png)
 <use Figures/zetinfo.png>
 Package pdftex.def Info: Figures/zetinfo.png  used on input line 106.
@@ -900,14 +900,14 @@ l.111 \newpage
                [3
 
 ]
-<Figures/mapnificent-zagreb.jpg, id=158, 1155.1155pt x 546.24075pt>
+<Figures/mapnificent-zagreb.jpg, id=162, 1155.1155pt x 546.24075pt>
 File: Figures/mapnificent-zagreb.jpg Graphic file (type jpg)
 <use Figures/mapnificent-zagreb.jpg>
 Package pdftex.def Info: Figures/mapnificent-zagreb.jpg  used on input line 126
 .
 (pdftex.def)             Requested size: 396.91325pt x 187.69478pt.
  [4 <./Figures/zetinfo.png>]
-<Figures/gtfs-model.png, id=171, 7858.35875pt x 4599.1825pt>
+<Figures/gtfs-model.png, id=175, 7858.35875pt x 4599.1825pt>
 File: Figures/gtfs-model.png Graphic file (type png)
 <use Figures/gtfs-model.png>
 Package pdftex.def Info: Figures/gtfs-model.png  used on input line 142.
@@ -920,13 +920,64 @@ LaTeX Font Info:    Trying to load font information for TS1+stix2 on input line
 File: ts1stix2.fd 2018/04/02 v2.0.0-latex stix2 TS1 font definitions
 )
 [6{c:/Program Files/texlive/2023/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-t
-s1.enc} <./Figures/gtfs-model.png>] [7] [8]
+s1.enc} <./Figures/gtfs-model.png>] [7]
+<Figures/zet-stranica.jpg, id=206, 573.342pt x 440.847pt>
+File: Figures/zet-stranica.jpg Graphic file (type jpg)
+<use Figures/zet-stranica.jpg>
+Package pdftex.def Info: Figures/zet-stranica.jpg  used on input line 207.
+(pdftex.def)             Requested size: 308.71106pt x 237.38115pt.
+<Figures/zet-podaci.jpg, id=207, 652.23676pt x 115.632pt>
+File: Figures/zet-podaci.jpg Graphic file (type jpg)
+<use Figures/zet-podaci.jpg>
+Package pdftex.def Info: Figures/zet-podaci.jpg  used on input line 214.
+(pdftex.def)             Requested size: 308.71106pt x 54.72992pt.
+
+Overfull \hbox (10.66884pt too wide) in paragraph at lines 219--220
+\T1/stix2/m/n/12 utes.txt, ca-len-dar.txt i agency.txt) te par do-dat-nih da-to
+-teka feed_info.txt i ca-len-dar_dates.txt
+ []
+
+[8 <./Figures/zet-stranica.jpg>]
+<Figures/trips.png, id=215, 1499.6025pt x 377.41pt>
+File: Figures/trips.png Graphic file (type png)
+<use Figures/trips.png>
+Package pdftex.def Info: Figures/trips.png  used on input line 227.
+(pdftex.def)             Requested size: 308.71106pt x 77.69203pt.
+ [9 <./Figures/zet-podaci.jpg> <./Figures/trips.png>]
+<Figures/stops.png, id=224, 1700.3525pt x 377.41pt>
+File: Figures/stops.png Graphic file (type png)
+<use Figures/stops.png>
+Package pdftex.def Info: Figures/stops.png  used on input line 246.
+(pdftex.def)             Requested size: 308.71106pt x 68.51826pt.
+<Figures/stop_times.png, id=225, 1947.275pt x 377.41pt>
+File: Figures/stop_times.png Graphic file (type png)
+<use Figures/stop_times.png>
+Package pdftex.def Info: Figures/stop_times.png  used on input line 263.
+(pdftex.def)             Requested size: 308.71106pt x 59.82822pt.
+ [10 <./Figures/stops.png> <./Figures/stop_times.png>]
+<Figures/routes.png, id=237, 1870.99pt x 339.2675pt>
+File: Figures/routes.png Graphic file (type png)
+<use Figures/routes.png>
+Package pdftex.def Info: Figures/routes.png  used on input line 281.
+(pdftex.def)             Requested size: 308.71106pt x 55.97672pt.
+ [11 <./Figures/routes.png>]
+<Figures/reply.png, id=246, 881.2925pt x 1330.9725pt>
+File: Figures/reply.png Graphic file (type png)
+<use Figures/reply.png>
+Package pdftex.def Info: Figures/reply.png  used on input line 295.
+(pdftex.def)             Requested size: 211.68661pt x 319.68364pt.
+<Figures/reply2.png, id=247, 588.1975pt x 415.5525pt>
+File: Figures/reply2.png Graphic file (type png)
+<use Figures/reply2.png>
+Package pdftex.def Info: Figures/reply2.png  used on input line 302.
+(pdftex.def)             Requested size: 211.68661pt x 149.5544pt.
+ [12 <./Figures/reply.png> <./Figures/reply2.png>] [13]
 Poglavlje 3..
-[9
+[14
 
 ]
 Poglavlje 4..
-(./zavrsni_rad.bbl [10
+(./zavrsni_rad.bbl [15
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 47--51
@@ -940,26 +991,32 @@ Underfull \hbox (badness 10000) in paragraph at lines 47--51
 edule / reference / #dataset -[] ^^\les$[].
  []
 
-) [11
+
+Underfull \hbox (badness 10000) in paragraph at lines 57--59
+[]\T1/stix2/m/n/12 General Tran-sit Feed Spe-ci-fi-ca-tion, ``GTFS - Re-al-time
+'', []$https : / / gtfs . org /
+ []
+
+) [16
 
 ]
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 255.
+(blindtext)                 on input line 373.
 
-[12
+[17
 
-] [13
+] [18
 
 ]
 pdfTeX warning (ext4): destination with the same identifier (name{chapter.1}) h
 as been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.279 \chapter{The Code}
+l.397 \chapter{The Code}
                         
 Privitak A.
-[14
+[19
 
 
 ] (./zavrsni_rad.aux)
@@ -1080,17 +1137,25 @@ Figures/zetinfo.png
 Figures/mapnificent-zagreb.jpg
 Figures/gtfs-model.png
 ts1stix2.fd    2018/04/02 v2.0.0-latex stix2 TS1 font definitions
+Figures/zet-stranica.jpg
+Figures/zet-podaci.jpg
+Figures/trips.png
+Figures/stops.png
+Figures/stop_times.png
+Figures/routes.png
+Figures/reply.png
+Figures/reply2.png
 zavrsni_rad.bbl
  ***********
 
 Package rerunfilecheck Info: File `zavrsni_rad.out' has not changed.
-(rerunfilecheck)             Checksum: FE0236024BF9CA34B901D88F88F6A53B;2248.
+(rerunfilecheck)             Checksum: 554B0BC5E08810DD32F208CBB3AC2749;2359.
  ) 
 Here is how much of TeX's memory you used:
- 17975 strings out of 474272
- 280851 string characters out of 5744472
+ 18077 strings out of 474272
+ 283003 string characters out of 5744472
  1932533 words of memory out of 5000000
- 39831 multiletter control sequences out of 15000+600000
+ 39916 multiletter control sequences out of 15000+600000
  639057 words of font info for 140 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  87i,17n,131p,1417b,663s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1100,10 +1165,10 @@ nsans/OpenSans-Regular.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type
 1/public/stix2-type1/STIX2Text-Bold.pfb><c:/Program Files/texlive/2023/texmf-di
 st/fonts/type1/public/stix2-type1/STIX2Text-Italic.pfb><c:/Program Files/texliv
 e/2023/texmf-dist/fonts/type1/public/stix2-type1/STIX2Text-Regular.pfb>
-Output written on zavrsni_rad.pdf (17 pages, 2563743 bytes).
+Output written on zavrsni_rad.pdf (22 pages, 3213673 bytes).
 PDF statistics:
- 280 PDF objects out of 1000 (max. 8388607)
- 234 compressed objects within 3 object streams
- 49 named destinations out of 1000 (max. 500000)
- 188 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 344 PDF objects out of 1000 (max. 8388607)
+ 279 compressed objects within 3 object streams
+ 66 named destinations out of 1000 (max. 500000)
+ 236 words of extra memory for PDF output out of 10000 (max. 10000000)
 

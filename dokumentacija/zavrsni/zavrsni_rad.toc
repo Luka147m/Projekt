@@ -9,26 +9,31 @@
 \contentsline {subsection}{\numberline {2.2.1.}GTFS static}{5}{subsection.2.2.1}%
 \contentsline {subsubsection}{Neophodne datoteke}{6}{section*.6}%
 \contentsline {subsubsection}{Opcionalne datoteke}{7}{section*.7}%
-\contentsline {subsubsection}{ZET GTFS podaci}{7}{section*.8}%
-\contentsline {subsection}{\numberline {2.2.2.}GTFS realtime}{7}{subsection.2.2.2}%
-\contentsline {section}{\numberline {2.3.}Protobuf}{7}{section.2.3}%
-\contentsline {section}{\numberline {2.4.}Arhitektura sustava}{8}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1.}Baza podataka}{8}{subsection.2.4.1}%
-\contentsline {subsection}{\numberline {2.4.2.}Pomoćne skripte}{8}{subsection.2.4.2}%
-\contentsline {subsection}{\numberline {2.4.3.}Backend - node.js}{8}{subsection.2.4.3}%
-\contentsline {subsection}{\numberline {2.4.4.}Frontend - REACT}{8}{subsection.2.4.4}%
-\contentsline {section}{\numberline {2.5.}Izgled aplikacije}{8}{section.2.5}%
-\contentsline {chapter}{\numberline {3.}Rezultati i rasprava}{9}{chapter.3}%
-\contentsline {chapter}{\numberline {4.}Zaključak}{10}{chapter.4}%
-\contentsline {chapter}{Literatura}{11}{chapter*.9}%
+\contentsline {subsection}{\numberline {2.2.2.}GTFS-rt}{7}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3.}ZET GTFS podaci}{8}{subsection.2.2.3}%
+\contentsline {subsubsection}{trips.txt}{9}{section*.10}%
+\contentsline {subsubsection}{stops.txt}{10}{section*.12}%
+\contentsline {subsubsection}{stop\_times.txt}{10}{section*.14}%
+\contentsline {subsubsection}{routes.txt}{11}{section*.16}%
+\contentsline {subsubsection}{ZET realtime podaci}{12}{section*.18}%
+\contentsline {section}{\numberline {2.3.}Protobuf}{13}{section.2.3}%
+\contentsline {section}{\numberline {2.4.}Arhitektura sustava}{13}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1.}Baza podataka}{13}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2.}Pomoćne skripte}{13}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.3.}Backend - node.js}{13}{subsection.2.4.3}%
+\contentsline {subsection}{\numberline {2.4.4.}Frontend - REACT}{13}{subsection.2.4.4}%
+\contentsline {section}{\numberline {2.5.}Izgled aplikacije}{13}{section.2.5}%
+\contentsline {chapter}{\numberline {3.}Rezultati i rasprava}{14}{chapter.3}%
+\contentsline {chapter}{\numberline {4.}Zaključak}{15}{chapter.4}%
+\contentsline {chapter}{Literatura}{16}{chapter*.20}%
 \babel@toc {croatian}{}\relax 
-\contentsline {chapter}{Sa\v {z}etak}{12}{chapter*.10}%
+\contentsline {chapter}{Sa\v {z}etak}{17}{chapter*.21}%
 \babel@toc {croatian}{}\relax 
 \babel@toc {croatian}{}\relax 
 \babel@toc {croatian}{}\relax 
 \babel@toc {english}{}\relax 
-\contentsline {chapter}{Abstract}{13}{chapter*.11}%
+\contentsline {chapter}{Abstract}{18}{chapter*.22}%
 \babel@toc {croatian}{}\relax 
 \babel@toc {english}{}\relax 
 \babel@toc {croatian}{}\relax 
-\contentsline {chapter}{\numberline {A:}The Code}{14}{chapter.1}%
+\contentsline {chapter}{\numberline {A:}The Code}{19}{chapter.1}%
