@@ -4,6 +4,7 @@
 
 
 \usepackage{blindtext}
+\usepackage{float}
 
 
 %--- PODACI O RADU / THESIS INFORMATION ----------------------------------------
@@ -316,15 +317,43 @@ Jedna stvar koju je vrijedno napomenuti da su ZET-ovi podaci prilično osnovni t
 \section[Protobuf]{Protocol buffers}
 \label{sec:protobuf}
 
-Protocol Buffers su jezično i platformski neutralni, proširivi mehanizmi za serijalizaciju
-strukturiranih podataka. Razvijeni od strane Googlea, prvotno su bili namijenjeni internoj uporabi,
-ali su kasnije postali dostupni pod otvorenom licencijom. Glavni cilj protocol buffera je pružiti
-jednostavnost i visoke performanse, te su posebno dizajnirani kako bi bili manji i brži od XML i
-JSON formata. Datoteke koje definiraju strukturu podataka u protocol buffer formatu obično imaju
-ekstenziju .proto.
+Protocol Buffers su jezično i platformski neutralni, proširivi mehanizmi za serijalizaciju strukturiranih podataka. Razvijeni od strane Googlea, prvotno su bili namijenjeni internoj uporabi, ali su kasnije postali dostupni pod otvorenom licencom \cite{protobuf}. Glavni cilj protocol buffera je pružiti jednostavnost i visoke performanse, te su posebno dizajnirani kako bi bili manji i brži od XML i JSON formata.
 
-etc...
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{0.75\linewidth}
+		\setstretch{1.5}
+		Protobuf koristi .proto datoteke za definiranje strukture podataka koji koriste posebnu sintaksu. Trenutno su podržane verzije proto2 i proto3 u kojima se s ključnom riječi message definira struktura podataka poruke. Na slici \ref{slk:proto} je mali primjer jedne definicije poruke Person koja sadrži tri polja za podatke id, name i email. Svaka od njih mora imati tip podatka i vrijednost koja služi za identifikaciju polja kod binarne serijalizacije. Neki tipovi podataka koji su podržani su int32, int64, float, double, bool, string, enum i ugrađene poruke.
+		
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.20\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{Figures/proto.png}
+		\caption{Primjer .proto definicije}
+		\label{slk:proto}
+	\end{minipage}
+\end{figure}
 
+Kada smo definirali strukturu svoje poruke potrebno je iskoristiti proto compiler (protoc) da bi generirali kod koji se koristi za serijalizaciju i deserializaciju podataka u odabranom programskom jeziku (C++, Java, Python, Go, JavaScript i mnogo drugih). Za primjer sa slike \ref{slk:proto} i za programski jezik Python, protoc compiler generira modul person\_pb2 koji sadrži potrebne metode za kreiranje objekata te strukture, serijalizaciju i deserijalizaciju tih podataka. 
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width=0.6\linewidth]{Figures/protoc.png} 
+	\caption{Python kod s generiranim proto modulom}
+	\label{slk:routes}
+\end{figure}
+
+Neke prednosti korištenja protocol buffer-a za razliku od tradicionalnijih opcija poput XML-a i JSON-a su:
+
+\begin{itemize}
+	\item Protobuf koristi binarni format za serijalizaciju, koji je mnogo kompaktniji i brži za parsiranje.
+	\item Dizajniran s backward i forwards compatibility na umu 
+	\item Cross-Language compatibility - međujezična kompatibilnost
+	\item Imaju schema validation koji striktno čuvaju strukturu podataka
+\end{itemize}
+
+\newpage
 \section{Arhitektura sustava}
 
 Sustav će se temeljiti na modelu Klijent-Poslužitelj. Korisnik će koristiti svoje računalo za pristup
