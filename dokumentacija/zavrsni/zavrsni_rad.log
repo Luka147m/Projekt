@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.3)  4 JUN 2024 13:34
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.3)  4 JUN 2024 16:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1100,13 +1100,33 @@ Underfull \hbox (badness 10000) in paragraph at lines 536--537
 (c:/Program Files/texlive/2023/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
-[17] [18]
+Underfull \hbox (badness 10000) in paragraph at lines 549--564
+
+ []
+
+[17]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[18]
+Overfull \hbox (6.4586pt too wide) in paragraph at lines 657--659
+[]\T1/stix2/m/n/12 Pomo¢u me-tode \T1/stix2/m/it/12 requests.get('https://www.z
+et.hr/gtfs-scheduled/latest') \T1/stix2/m/n/12 sa stra-nice ZET-
+ []
+
+
+Overfull \hbox (2.9858pt too wide) in paragraph at lines 657--659
+\T1/stix2/m/n/12 koju ko-risti funk-cija \T1/cmtt/m/n/12 find_route_between_sto
+ps(stop_a, stop_b) \T1/stix2/m/n/12 koja pro-na-lazi rute
+ []
+
+[19] [20] [21]
 Poglavlje 3..
-[19
+[22
 
 ]
 Poglavlje 4..
-(./zavrsni_rad.bbl [20
+(./zavrsni_rad.bbl [23
 
 ]
 Underfull \hbox (badness 3128) in paragraph at lines 47--51
@@ -1120,26 +1140,26 @@ Underfull \hbox (badness 10000) in paragraph at lines 57--59
 '', []$https : / / gtfs . org /
  []
 
-) [21
+) [24
 
 ]
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 639.
+(blindtext)                 on input line 731.
 
-[22
+[25
 
-] [23
+] [26
 
 ]
 pdfTeX warning (ext4): destination with the same identifier (name{chapter.1}) h
 as been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.663 \chapter{The Code}
+l.755 \chapter{The Code}
                         
 Privitak A.
-[24
+[27
 
 
 ] (./zavrsni_rad.aux)
@@ -1283,13 +1303,13 @@ zavrsni_rad.bbl
  ***********
 
 Package rerunfilecheck Info: File `zavrsni_rad.out' has not changed.
-(rerunfilecheck)             Checksum: 6A49588F3DE06C03E55DC8EF020FC176;2359.
+(rerunfilecheck)             Checksum: 0E215C1DCB329E5652AD843D28161422;2569.
  ) 
 Here is how much of TeX's memory you used:
- 21179 strings out of 474272
- 329080 string characters out of 5744472
- 2045533 words of memory out of 5000000
- 42872 multiletter control sequences out of 15000+600000
+ 21257 strings out of 474272
+ 330262 string characters out of 5744472
+ 2069533 words of memory out of 5000000
+ 42894 multiletter control sequences out of 15000+600000
  661606 words of font info for 145 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  87i,17n,131p,1429b,1706s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1299,11 +1319,13 @@ nsans/OpenSans-Regular.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type
 1/public/stix2-type1/STIX2Text-Bold.pfb><c:/Program Files/texlive/2023/texmf-di
 st/fonts/type1/public/stix2-type1/STIX2Text-Italic.pfb><c:/Program Files/texliv
 e/2023/texmf-dist/fonts/type1/public/stix2-type1/STIX2Text-Regular.pfb><c:/Prog
-ram Files/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb>
-Output written on zavrsni_rad.pdf (27 pages, 2931379 bytes).
+ram Files/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb><c:/
+Program Files/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb>
+
+Output written on zavrsni_rad.pdf (30 pages, 2965398 bytes).
 PDF statistics:
- 486 PDF objects out of 1000 (max. 8388607)
- 422 compressed objects within 5 object streams
- 162 named destinations out of 1000 (max. 500000)
+ 572 PDF objects out of 1000 (max. 8388607)
+ 502 compressed objects within 6 object streams
+ 218 named destinations out of 1000 (max. 500000)
  211 words of extra memory for PDF output out of 10000 (max. 10000000)
 

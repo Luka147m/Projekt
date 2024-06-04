@@ -560,7 +560,7 @@ Neki od pogleda su \textit{stopsjson, tripstops i triptime}.
 	\caption{K\^od pogleda \textit{stopsjson}}
 	\label{slk:stopsjson}
 \end{figure}
-
+\\
 
 Pogled \textit{tripstops} spaja tablice \textit{stop\_times} i \textit{stops} pomoću \textit{stop\_id} kao ključa. Objedinjuje informacije tih dviju tablica kako bi imali potpune informacije o putu poput redoslijeda stanica, njihovih naziva i lokacija te vremena dolaska i odlaska.
 \begin{figure}[h]
@@ -585,6 +585,7 @@ Pogled \textit{tripstops} spaja tablice \textit{stop\_times} i \textit{stops} po
 	\label{slk:tripstops}
 \end{figure}
 
+Pogled \textit{triptime} filtrira tablicu \textit{tripstops} kako bi izračunali vrijeme potrebno do iduće stanice
 \begin{figure}[h]
 	\centering
 	\begin{minipage}{0.8\linewidth}
@@ -599,12 +600,103 @@ Pogled \textit{tripstops} spaja tablice \textit{stop\_times} i \textit{stops} po
 	\label{slk:triptime}
 \end{figure}
 
-\subsection{Pomoćne skripte}
+Možemo direktno pristupati virtualnim tablicama, ali za potrebe aplikacije potrebno je još filtrirati ih prema određenom parametru, zato u bazi podataka imamo i funkcije definirane u jeziku plpgsql.
+One su: 
+\begin{itemize}
+	\item \textit{find\_route\_between\_stops(stop\_a, stop\_b)} - koja prima dva parametra (dvije stanice) i vraća listu ruti koje prolaze kroz te dvije stanice.
+	\item \textit{get\_trip\_info(trip\_id)} - koja prima parametar \textit{trip\_id} i vraća list svih stanica puta, nazive i lokacije stanica, vremena dolaska i odlaska te vrijeme potrebno do sljedeće stanice, koristi se za prikaz informacija klikom na marker.
+\end{itemize}
+
+\begin{figure}[h]
+	\centering
+	\begin{minipage}{0.8\linewidth}
+		\begin{lstlisting}[language=SQL]
+SELECT jsonb_agg(
+	jsonb_build_object(
+	'stop_id', stop_id,
+	'stop_sequence', stop_sequence,
+	'stop_name', stop_name,
+	'stop_headsign', stop_headsign,
+	'stop_lat', stop_lat,
+	'stop_lon', stop_lon,
+	'arrival_time', arrival_time,
+	'departure_time', departure_time,
+	'time_till_next_stop', time_till_next_stop::interval
+	)
+) INTO trip_info
+FROM (
+	SELECT *,
+	COALESCE(
+		LEAD(arrival_time) OVER (ORDER BY stop_sequence) - arrival_time, INTERVAL '0 seconds'
+	) AS time_till_next_stop
+
+		\end{lstlisting}
+	\end{minipage}
+	\caption{Isječak k\^oda funkcije \textit{get\_trip\_info(trip\_id)}}
+	\label{slk:sqlfunkcija}
+\end{figure}
+
+Navedene funkcije koristi poslužiteljska strana zajedno s parametrom. Primjer korištenja je:
+\begin{figure}[h]
+	\centering
+	\begin{minipage}{0.9\linewidth}
+		\begin{lstlisting}[language=SQL]
+		SELECT find_routes_between_stops('Prisavlje', 'Miramarska') AS routes
+		SELECT get_trip_info('0_21_26820_268_10001') AS trip_info
+		\end{lstlisting}
+	\end{minipage}
+	\caption{Primjer korištenja funkcija}
+	\label{slk:sqlprimjer}
+\end{figure}
+
+
+\subsection{Pomoćna skripte}
 \label{sec:skripta}
+Za potrebe aplikacije izrađena je jedna pomoćna skripta koju pokreće poslužiteljski dio aplikacije prilikom pokretanja. Ona je zadužena za dohvaćanje najnovijih datoteka sa ZET-ove stranice te je napisana u Pythonu koristeći module \textit{psycopg2, requests i zipfile}.
 
-\subsection{Backend - node.js}
+Pomoću metode \textit{requests.get('https://www.zet.hr/gtfs-scheduled/latest')} sa stranice ZET-a dohvaća najnoviju GTFS static arhivu te potom metodom \textit{extractAll} iz modula \textit{zipfile} raspakirava arhivu i sprema datoteke. Komunikacija s bazom podataka PostgreSQL je ostvarena metodama iz modula \textit{psycopg2}. Prvo je potrebno priložiti vjerodajnice odnosno \textit{username i password} te \textit{host, port i database} (određuju lokaciju baze podataka) za uspješno spajanje.\\
+Na slici \ref{slk:pytonskripta} prikazan je isječak k\^oda pomoću kojeg je ostvareno učitavanje podataka iz datoteka u odgovarajuće tablice. Python funkcije rade u tri koraka, prvo definiramo SQL naredbu zatim šaljemo tu naredbu bazi podataka i na kraju gledamo odgovor je li ispravno izvršena. Funkcija \textit{load\_csv\_to\_postgres(connection, cursor, 'routes', 'routes.txt')} učitava podatke iz \textit{routes.txt}  i sprema ih u bazu podataka kao tablica s imenom \textit{routes}, a funkcija \texttt{create\_route\_find\_table(connection, cursor)} kreira tablicu \textit{route\_find} koju koristi funkcija \texttt{find\_route\_between\_stops(stop\_a, stop\_b)} koja pronalazi rute koje prolaze kroz neke dvije stanice.
 
-\subsection{Frontend - REACT}
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{0.9\linewidth}
+		\begin{lstlisting}[language=Python]
+		def load_csv_to_postgres(connection, cursor, table_name, csv_file_path):
+			try:
+				drop_table_sql = f'TRUNCATE {table_name} CASCADE;'
+				execute_sql(connection, cursor, drop_table_sql)
+
+				copy_sql = f""" COPY {table_name} FROM '{csv_file_path}' WITH
+						CSV HEADER DELIMITER as ','"""
+				execute_sql(connection, cursor, copy_sql)
+				print(f"Loaded {table_name}")
+			except Exception as e:
+				print(f"Error loading {table_name}: {e}")
+
+		def create_route_find_table(connection, cursor):
+			create_table_sql = """ CREATE TABLE route_find AS
+					SELECT trips.route_id, trips.trip_id, stop_times.stop_sequence,
+						   stop_id, stops.stop_name
+					FROM stop_times
+					JOIN trips USING (trip_id)
+					JOIN stops USING (stop_id); """
+			# SQL naredba za brisanje stare tablice i stvaranje indeksa
+			try:
+				# execute naredbe
+				execute_sql(connection, cursor, create_table_sql)
+
+				print("route_find table created successfully.")
+			except Exception as e:
+				print(f"Error creating route_find table: {e}")
+		\end{lstlisting}
+	\end{minipage}
+	\caption{Isječak k\^oda skripte}
+	\label{slk:pytonskripta}
+\end{figure}
+
+\subsection{Poslužiteljski dio aplikacije - node.js}
+
+\subsection{Klijentski dio aplikacije - REACT}
 \label{sec:frontend}
 
 \section{Izgled aplikacije}
