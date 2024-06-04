@@ -63,7 +63,6 @@ const Markers = ({
 
   const handleMarkerClick = (trip_id, stop_id, tram_id, route_id) => {
     setScrollToStop(stop_id);
-
     setWatchedRoute(route_id);
 
     const oldInstance = instanceMap[selectedMarker];
@@ -305,11 +304,17 @@ const Markers = ({
             }}
           >
             <Popup autoPan={false} offset={L.point(0, -24)}>
-              {'Tramvaj: ' + tram.id}
-              <br />
-              {'Ruta: ' + tram.route_id}
-              <br />
-              {'Trenutna stanica: ' + tram.stop_name}
+              <div className="popupStyle">
+                <div className="popupRoute">{tram.route_id}</div>
+                <div>
+                  <div className="popupStop">
+                    {'Trenutna stanica: '} <strong>{tram.stop_name}</strong>
+                  </div>
+                  <div className="trainId">
+                    {'Tramvaj: '} <strong>{tram.id}</strong>
+                  </div>
+                </div>
+              </div>
             </Popup>
           </Marker>
         ))}

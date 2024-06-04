@@ -3,8 +3,6 @@
   src: url('./fonts/digital-7.ttf');
 }
 
-
-
 body {
   background-color: #1264ab;
   margin: 0;
@@ -64,8 +62,27 @@ body {
   color: white;
 }
 
+.selectBox {
+  width: 100%;
+}
+
+.popupStyle {
+  display: flex;
+}
+
+.popupRoute { 
+  font-size: xx-large;
+  font-weight: 'bold';
+  margin-right: '10px';
+  padding-right: 15px;
+}
+
+.popupStop {
+  font-size: large;
+}
+
 .main-select{
-  width: 300px;
+  width: 90%;
 }
 
 .clock-container {

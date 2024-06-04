@@ -108,6 +108,7 @@ const Sidebar = ({
           onChange={(selectedOption) => {
             setSelectedValue1(selectedOption.value);
           }}
+          className="selectBox"
         />
         <h4>Odredište:</h4>
         <Select
@@ -117,6 +118,7 @@ const Sidebar = ({
           onChange={(selectedOption) => {
             setSelectedValue2(selectedOption.value);
           }}
+          className="selectBox"
         />
         <button className="customBtn" onClick={() => findRoute()}>
           Pronađi
