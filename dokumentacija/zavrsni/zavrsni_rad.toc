@@ -21,19 +21,19 @@
 \contentsline {subsection}{\numberline {2.4.1.}Baza podataka}{16}{subsection.2.4.1}%
 \contentsline {subsection}{\numberline {2.4.2.}Pomoćna skripte}{19}{subsection.2.4.2}%
 \contentsline {subsection}{\numberline {2.4.3.}Poslužiteljski dio aplikacije - node.js}{21}{subsection.2.4.3}%
-\contentsline {subsection}{\numberline {2.4.4.}Klijentski dio aplikacije - REACT}{21}{subsection.2.4.4}%
-\contentsline {section}{\numberline {2.5.}Izgled aplikacije}{21}{section.2.5}%
-\contentsline {chapter}{\numberline {3.}Rezultati i rasprava}{22}{chapter.3}%
-\contentsline {chapter}{\numberline {4.}Zaključak}{23}{chapter.4}%
-\contentsline {chapter}{Literatura}{24}{chapter*.29}%
+\contentsline {subsection}{\numberline {2.4.4.}Klijentski dio aplikacije - REACT}{23}{subsection.2.4.4}%
+\contentsline {section}{\numberline {2.5.}Izgled aplikacije}{23}{section.2.5}%
+\contentsline {chapter}{\numberline {3.}Rezultati i rasprava}{24}{chapter.3}%
+\contentsline {chapter}{\numberline {4.}Zaključak}{25}{chapter.4}%
+\contentsline {chapter}{Literatura}{26}{chapter*.32}%
 \babel@toc {croatian}{}\relax 
-\contentsline {chapter}{Sa\v {z}etak}{25}{chapter*.30}%
+\contentsline {chapter}{Sa\v {z}etak}{27}{chapter*.33}%
 \babel@toc {croatian}{}\relax 
 \babel@toc {croatian}{}\relax 
-\babel@toc {croatian}{}\relax 
-\babel@toc {english}{}\relax 
-\contentsline {chapter}{Abstract}{26}{chapter*.31}%
 \babel@toc {croatian}{}\relax 
 \babel@toc {english}{}\relax 
+\contentsline {chapter}{Abstract}{28}{chapter*.34}%
 \babel@toc {croatian}{}\relax 
-\contentsline {chapter}{\numberline {A:}The Code}{27}{chapter.1}%
+\babel@toc {english}{}\relax 
+\babel@toc {croatian}{}\relax 
+\contentsline {chapter}{\numberline {A:}The Code}{29}{chapter.1}%

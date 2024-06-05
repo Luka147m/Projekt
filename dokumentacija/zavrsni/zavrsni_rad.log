@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.3)  4 JUN 2024 16:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.3)  5 JUN 2024 16:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -665,7 +665,7 @@ File: listings.cfg 2023/02/27 1.9 listings configuration
 ))
 Package: listings 2023/02/27 1.9 (Carsten Heinz)
 LaTeX Font Info:    Trying to load font information for T1+stix2 on input line 
-104.
+122.
 
 (c:/Program Files/texlive/2023/texmf-dist/tex/latex/stix2-type1/t1stix2.fd
 File: t1stix2.fd 2018/04/02 v2.0.0-latex stix2 T1 font definitions
@@ -678,40 +678,40 @@ File: l3backend-pdftex.def 2023-10-23 L3 backend support: PDF output (pdfTeX)
 ) (./zavrsni_rad.aux)
 \openout1 = `zavrsni_rad.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 104.
-LaTeX Font Info:    ... okay on input line 104.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 104.
-LaTeX Font Info:    ... okay on input line 104.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 104.
-LaTeX Font Info:    ... okay on input line 104.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 104.
-LaTeX Font Info:    ... okay on input line 104.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 104.
-LaTeX Font Info:    ... okay on input line 104.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 104.
-LaTeX Font Info:    ... okay on input line 104.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 104.
-LaTeX Font Info:    ... okay on input line 104.
-LaTeX Font Info:    Checking defaults for LS1/stix2/m/n on input line 104.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for LS1/stix2/m/n on input line 122.
 LaTeX Font Info:    Trying to load font information for LS1+stix2 on input line
- 104.
+ 122.
 
 (c:/Program Files/texlive/2023/texmf-dist/tex/latex/stix2-type1/ls1stix2.fd
 File: ls1stix2.fd 2018/04/02 v2.0.0-latex stix2 LS1 font definitions
 )
-LaTeX Font Info:    ... okay on input line 104.
-LaTeX Font Info:    Checking defaults for LS2/stix2/m/n on input line 104.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for LS2/stix2/m/n on input line 122.
 LaTeX Font Info:    Trying to load font information for LS2+stix2 on input line
- 104.
+ 122.
 
 (c:/Program Files/texlive/2023/texmf-dist/tex/latex/stix2-type1/ls2stix2.fd
 File: ls2stix2.fd 2018/04/02 v2.0.0-latex stix2 LS2 font definitions
 )
-LaTeX Font Info:    ... okay on input line 104.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 104.
-LaTeX Font Info:    ... okay on input line 104.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 104.
-LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
 \c@mv@tabular=\count329
 \c@mv@boldtabular=\count330
 
@@ -790,86 +790,86 @@ Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Info: Command `\dddot' is already robust on input line 104.
-LaTeX Info: Command `\ddddot' is already robust on input line 104.
-Package hyperref Info: Link coloring OFF on input line 104.
+LaTeX Info: Command `\dddot' is already robust on input line 122.
+LaTeX Info: Command `\ddddot' is already robust on input line 122.
+Package hyperref Info: Link coloring OFF on input line 122.
  (./zavrsni_rad.out) (./zavrsni_rad.out)
 \@outlinefile=\write3
 \openout3 = `zavrsni_rad.out'.
 
 \c@lstlisting=\count337
 LaTeX Font Info:    Trying to load font information for T1+opensans-TLF on inpu
-t line 107.
+t line 125.
 
 (c:/Program Files/texlive/2023/texmf-dist/tex/latex/opensans/T1opensans-TLF.fd
 File: T1opensans-TLF.fd 2019/06/24 Font definitions for T1/opensans-TLF.
 )
 LaTeX Font Info:    Font shape `T1/opensans-TLF/m/n' will be
-(Font)              scaled to size 14.0pt on input line 107.
+(Font)              scaled to size 14.0pt on input line 125.
 LaTeX Font Info:    Font shape `T1/opensans-TLF/bx/n' in size <14> not availabl
 e
 (Font)              Font shape `T1/opensans-TLF/b/n' tried instead on input lin
-e 107.
+e 125.
 LaTeX Font Info:    Font shape `T1/opensans-TLF/b/n' will be
-(Font)              scaled to size 14.0pt on input line 107.
+(Font)              scaled to size 14.0pt on input line 125.
 LaTeX Font Info:    Font shape `T1/opensans-TLF/bx/n' in size <20> not availabl
 e
 (Font)              Font shape `T1/opensans-TLF/b/n' tried instead on input lin
-e 107.
+e 125.
 LaTeX Font Info:    Font shape `T1/opensans-TLF/b/n' will be
-(Font)              scaled to size 20.0pt on input line 107.
-LaTeX Font Info:    Calculating math sizes for size <14> on input line 107.
+(Font)              scaled to size 20.0pt on input line 125.
+LaTeX Font Info:    Calculating math sizes for size <14> on input line 125.
 LaTeX Font Info:    Trying to load font information for LS1+stix2scr on input l
-ine 107.
+ine 125.
 (c:/Program Files/texlive/2023/texmf-dist/tex/latex/stix2-type1/ls1stix2scr.fd
 File: ls1stix2scr.fd 2018/04/02 v2.0.0-latex stix2 script LS1 font definitions
 )
 LaTeX Font Info:    Trying to load font information for LS2+stix2ex on input li
-ne 107.
+ne 125.
 (c:/Program Files/texlive/2023/texmf-dist/tex/latex/stix2-type1/ls2stix2ex.fd
 File: ls2stix2ex.fd 2018/04/02 v2.0.0-latex stix2 extentions LS2 font definitio
 ns
 )
 LaTeX Font Info:    Trying to load font information for LS1+stix2frak on input 
-line 107.
+line 125.
 
 (c:/Program Files/texlive/2023/texmf-dist/tex/latex/stix2-type1/ls1stix2frak.fd
 File: ls1stix2frak.fd 2018/04/02 v2.0.0-latex stix2 fraktur LS1 font definition
 s
 )
 LaTeX Font Info:    Trying to load font information for LS1+stix2bb on input li
-ne 107.
+ne 125.
  (c:/Program Files/texlive/2023/texmf-dist/tex/latex/stix2-type1/ls1stix2bb.fd
 File: ls1stix2bb.fd 2018/04/02 v2.0.0-latex stix2 blackboard LS1 font definitio
 ns
 )
 LaTeX Font Info:    Trying to load font information for LS2+stix2cal on input l
-ine 107.
+ine 125.
 
 (c:/Program Files/texlive/2023/texmf-dist/tex/latex/stix2-type1/ls2stix2cal.fd
 File: ls2stix2cal.fd 2018/04/02 v2.0.0-latex stix2 calligraphic LS2 font defini
 tions
 )
 LaTeX Font Info:    Trying to load font information for LS1+stix2sf on input li
-ne 107.
+ne 125.
 (c:/Program Files/texlive/2023/texmf-dist/tex/latex/stix2-type1/ls1stix2sf.fd
 File: ls1stix2sf.fd 2018/04/02 v2.0.0-latex stix2 sans-serif LS1 font definitio
 ns
 )
 LaTeX Font Info:    Trying to load font information for LS2+stix2tt on input li
-ne 107.
+ne 125.
 
 (c:/Program Files/texlive/2023/texmf-dist/tex/latex/stix2-type1/ls2stix2tt.fd
 File: ls2stix2tt.fd 2018/04/02 v2.0.0-latex stix2 typewriter LS2 font definitio
 ns
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 107
+LaTeX Font Info:    Trying to load font information for U+msa on input line 125
 .
 
 (c:/Program Files/texlive/2023/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 107
+LaTeX Font Info:    Trying to load font information for U+msb on input line 125
 .
 
 (c:/Program Files/texlive/2023/texmf-dist/tex/latex/amsfonts/umsb.fd
@@ -881,42 +881,42 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 <figures/hr_0036543289_73.pdf, id=89, 598.235pt x 845.1575pt>
 File: figures/hr_0036543289_73.pdf Graphic file (type pdf)
 <use figures/hr_0036543289_73.pdf>
-Package pdftex.def Info: figures/hr_0036543289_73.pdf  used on input line 114.
+Package pdftex.def Info: figures/hr_0036543289_73.pdf  used on input line 132.
 (pdftex.def)             Requested size: 598.23354pt x 845.15544pt.
 File: figures/hr_0036543289_73.pdf Graphic file (type pdf)
 <use figures/hr_0036543289_73.pdf>
-Package pdftex.def Info: figures/hr_0036543289_73.pdf  used on input line 114.
+Package pdftex.def Info: figures/hr_0036543289_73.pdf  used on input line 132.
 (pdftex.def)             Requested size: 598.23354pt x 845.15544pt.
 <figures/hr_0036543289_73.pdf, id=92, page=1, 598.235pt x 845.1575pt>
 File: figures/hr_0036543289_73.pdf Graphic file (type pdf)
 <use figures/hr_0036543289_73.pdf, page 1>
 Package pdftex.def Info: figures/hr_0036543289_73.pdf , page1 used on input lin
-e 114.
+e 132.
 (pdftex.def)             Requested size: 598.23354pt x 845.15544pt.
 File: figures/hr_0036543289_73.pdf Graphic file (type pdf)
 <use figures/hr_0036543289_73.pdf, page 1>
 Package pdftex.def Info: figures/hr_0036543289_73.pdf , page1 used on input lin
-e 114.
+e 132.
 (pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
 File: figures/hr_0036543289_73.pdf Graphic file (type pdf)
 <use figures/hr_0036543289_73.pdf, page 1>
 Package pdftex.def Info: figures/hr_0036543289_73.pdf , page1 used on input lin
-e 114.
+e 132.
 (pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
 File: figures/hr_0036543289_73.pdf Graphic file (type pdf)
 <use figures/hr_0036543289_73.pdf, page 1>
 Package pdftex.def Info: figures/hr_0036543289_73.pdf , page1 used on input lin
-e 114.
+e 132.
 (pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
 File: figures/hr_0036543289_73.pdf Graphic file (type pdf)
 <use figures/hr_0036543289_73.pdf, page 1>
 Package pdftex.def Info: figures/hr_0036543289_73.pdf , page1 used on input lin
-e 114.
+e 132.
 (pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
 
 [2 <./Figures/hr_0036543289_73.pdf>]
 LaTeX Font Info:    Font shape `T1/stix2/m/sl' in size <12> not available
-(Font)              Font shape `T1/stix2/m/it' tried instead on input line 119.
+(Font)              Font shape `T1/stix2/m/it' tried instead on input line 137.
 
  [3
 
@@ -925,9 +925,9 @@ enc}]
 LaTeX Font Info:    Font shape `T1/opensans-TLF/bx/n' in size <18> not availabl
 e
 (Font)              Font shape `T1/opensans-TLF/b/n' tried instead on input lin
-e 130.
+e 149.
 LaTeX Font Info:    Font shape `T1/opensans-TLF/b/n' will be
-(Font)              scaled to size 18.0pt on input line 130.
+(Font)              scaled to size 18.0pt on input line 149.
  (./zavrsni_rad.toc)
 \tf@toc=\write4
 \openout4 = `zavrsni_rad.toc'.
@@ -937,7 +937,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.134 \chapter
+l.153 \chapter
               {Uvod} [1
 
 
@@ -948,7 +948,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.154 \chapter
+l.173 \chapter
               {Glavni dio} [2
 
 ]
@@ -956,40 +956,40 @@ Poglavlje 2..
 LaTeX Font Info:    Font shape `T1/opensans-TLF/bx/n' in size <16> not availabl
 e
 (Font)              Font shape `T1/opensans-TLF/b/n' tried instead on input lin
-e 157.
+e 176.
 LaTeX Font Info:    Font shape `T1/opensans-TLF/b/n' will be
-(Font)              scaled to size 16.0pt on input line 157.
+(Font)              scaled to size 16.0pt on input line 176.
 LaTeX Font Info:    Font shape `T1/opensans-TLF/bx/n' in size <12> not availabl
 e
 (Font)              Font shape `T1/opensans-TLF/b/n' tried instead on input lin
-e 166.
+e 185.
 LaTeX Font Info:    Font shape `T1/opensans-TLF/b/n' will be
-(Font)              scaled to size 12.0pt on input line 166.
+(Font)              scaled to size 12.0pt on input line 185.
 <Figures/zetinfo.png, id=151, 2415.77531pt x 1680.2775pt>
 File: Figures/zetinfo.png Graphic file (type png)
 <use Figures/zetinfo.png>
-Package pdftex.def Info: Figures/zetinfo.png  used on input line 172.
+Package pdftex.def Info: Figures/zetinfo.png  used on input line 191.
 (pdftex.def)             Requested size: 374.86775pt x 260.72235pt.
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.3}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.177 \newpage
+l.196 \newpage
                [3
 
 ]
 <Figures/mapnificent-zagreb.jpg, id=162, 1155.1155pt x 546.24075pt>
 File: Figures/mapnificent-zagreb.jpg Graphic file (type jpg)
 <use Figures/mapnificent-zagreb.jpg>
-Package pdftex.def Info: Figures/mapnificent-zagreb.jpg  used on input line 192
+Package pdftex.def Info: Figures/mapnificent-zagreb.jpg  used on input line 211
 .
 (pdftex.def)             Requested size: 396.91325pt x 187.69478pt.
  [4 <./Figures/zetinfo.png>]
 <Figures/gtfs-model.png, id=175, 3449.38687pt x 5893.76906pt>
 File: Figures/gtfs-model.png Graphic file (type png)
 <use Figures/gtfs-model.png>
-Package pdftex.def Info: Figures/gtfs-model.png  used on input line 208.
+Package pdftex.def Info: Figures/gtfs-model.png  used on input line 227.
 (pdftex.def)             Requested size: 411.01773pt x 702.27554pt.
  [5 <./Figures/mapnificent-zagreb.jpg>]
 Overfull \vbox (23.09245pt too high) has occurred while \output is active []
@@ -997,7 +997,7 @@ Overfull \vbox (23.09245pt too high) has occurred while \output is active []
 
 [6 <./Figures/gtfs-model.png>]
 LaTeX Font Info:    Trying to load font information for TS1+stix2 on input line
- 218.
+ 237.
 
 (c:/Program Files/texlive/2023/texmf-dist/tex/latex/stix2-type1/ts1stix2.fd
 File: ts1stix2.fd 2018/04/02 v2.0.0-latex stix2 TS1 font definitions
@@ -1007,15 +1007,15 @@ s1.enc}] [8]
 <Figures/zet-stranica.jpg, id=211, 573.342pt x 440.847pt>
 File: Figures/zet-stranica.jpg Graphic file (type jpg)
 <use Figures/zet-stranica.jpg>
-Package pdftex.def Info: Figures/zet-stranica.jpg  used on input line 273.
+Package pdftex.def Info: Figures/zet-stranica.jpg  used on input line 292.
 (pdftex.def)             Requested size: 308.71106pt x 237.38115pt.
 <Figures/zet-podaci.jpg, id=212, 652.23676pt x 115.632pt>
 File: Figures/zet-podaci.jpg Graphic file (type jpg)
 <use Figures/zet-podaci.jpg>
-Package pdftex.def Info: Figures/zet-podaci.jpg  used on input line 280.
+Package pdftex.def Info: Figures/zet-podaci.jpg  used on input line 299.
 (pdftex.def)             Requested size: 308.71106pt x 54.72992pt.
 
-Overfull \hbox (1.66904pt too wide) in paragraph at lines 285--286
+Overfull \hbox (1.66904pt too wide) in paragraph at lines 304--305
 \T1/stix2/m/it/12 utes.txt\T1/stix2/m/n/12 , \T1/stix2/m/it/12 ca-len-dar.txt \
 T1/stix2/m/n/12 i \T1/stix2/m/it/12 agency.txt\T1/stix2/m/n/12 ) te par do-dat-
 nih da-to-teka \T1/stix2/m/it/12 feed_info.txt \T1/stix2/m/n/12 i \T1/stix2/m/i
@@ -1023,34 +1023,34 @@ t/12 ca-len-dar_dates.txt
  []
 
 
-Overfull \hbox (8.9098pt too wide) in paragraph at lines 285--286
+Overfull \hbox (8.9098pt too wide) in paragraph at lines 304--305
 \T1/stix2/m/n/12 koje nisu pre-te-ºito ko-risne za im-ple-men-ta-ciju apli-ka-c
 ije. Op-ci-onalna da-to-teka \T1/stix2/m/it/12 feed_info.txt
  []
 
 [9 <./Figures/zet-stranica.jpg> <./Figures/zet-podaci.jpg>] [10] [11]
-Underfull \hbox (badness 10000) in paragraph at lines 392--397
+Underfull \hbox (badness 10000) in paragraph at lines 411--416
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 392--397
+Underfull \hbox (badness 10000) in paragraph at lines 411--416
 
  []
 
 
-Overfull \hbox (1.03781pt too wide) in paragraph at lines 392--397
+Overfull \hbox (1.03781pt too wide) in paragraph at lines 411--416
 \T1/stix2/m/n/12 i pruºa ve¢u flek-si-bil-nost. Ta-ko-žer pi²e da se svaki put 
 ²a-lju svi po-daci "FULL_DATASET"
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 392--397
+Underfull \hbox (badness 10000) in paragraph at lines 411--416
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 392--397
+Underfull \hbox (badness 10000) in paragraph at lines 411--416
 
  []
 
@@ -1058,7 +1058,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 392--397
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 4
-05.
+24.
 
 (c:/Program Files/texlive/2023/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
@@ -1072,27 +1072,27 @@ File: lstlang1.sty 2023/02/27 1.9 listings language file
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [14] [15]
-Underfull \hbox (badness 10000) in paragraph at lines 523--526
+Underfull \hbox (badness 10000) in paragraph at lines 542--545
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 523--526
+Underfull \hbox (badness 10000) in paragraph at lines 542--545
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 523--526
+Underfull \hbox (badness 10000) in paragraph at lines 542--545
 
  []
 
 <Figures/arhitektura.png, id=329, 549.85425pt x 211.992pt>
 File: Figures/arhitektura.png Graphic file (type png)
 <use Figures/arhitektura.png>
-Package pdftex.def Info: Figures/arhitektura.png  used on input line 529.
+Package pdftex.def Info: Figures/arhitektura.png  used on input line 548.
 (pdftex.def)             Requested size: 352.81552pt x 136.027pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 536--537
+Underfull \hbox (badness 10000) in paragraph at lines 555--556
 
  []
 
@@ -1100,7 +1100,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 536--537
 (c:/Program Files/texlive/2023/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
-Underfull \hbox (badness 10000) in paragraph at lines 549--564
+Underfull \hbox (badness 10000) in paragraph at lines 568--583
 
  []
 
@@ -1109,57 +1109,54 @@ Underfull \hbox (badness 10000) in paragraph at lines 549--564
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [18]
-Overfull \hbox (6.4586pt too wide) in paragraph at lines 657--659
+Overfull \hbox (6.4586pt too wide) in paragraph at lines 676--678
 []\T1/stix2/m/n/12 Pomo¢u me-tode \T1/stix2/m/it/12 requests.get('https://www.z
 et.hr/gtfs-scheduled/latest') \T1/stix2/m/n/12 sa stra-nice ZET-
  []
 
 
-Overfull \hbox (2.9858pt too wide) in paragraph at lines 657--659
+Overfull \hbox (2.9858pt too wide) in paragraph at lines 676--678
 \T1/stix2/m/n/12 koju ko-risti funk-cija \T1/cmtt/m/n/12 find_route_between_sto
 ps(stop_a, stop_b) \T1/stix2/m/n/12 koja pro-na-lazi rute
  []
 
-[19] [20] [21]
+[19] [20]
+LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 728.
+ [21] [22] [23]
 Poglavlje 3..
-[22
+[24
 
 ]
 Poglavlje 4..
-(./zavrsni_rad.bbl [23
+(./zavrsni_rad.bbl [25
 
 ]
-Underfull \hbox (badness 3128) in paragraph at lines 47--51
-\T1/stix2/m/n/12 schedule/$[], []$https : / / gtfs . org / schedule / reference
- / #dataset -[] ^^\les$[]. []$https : / / developers .
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 57--59
+Underfull \hbox (badness 10000) in paragraph at lines 55--57
 []\T1/stix2/m/n/12 General Tran-sit Feed Spe-ci-fi-ca-tion, ``GTFS - Re-al-time
 '', []$https : / / gtfs . org /
  []
 
-) [24
+) [26
 
 ]
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 731.
+(blindtext)                 on input line 838.
 
-[25
+[27
 
-] [26
+] [28
 
 ]
 pdfTeX warning (ext4): destination with the same identifier (name{chapter.1}) h
 as been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.755 \chapter{The Code}
+l.862 \chapter{The Code}
                         
 Privitak A.
-[27
+[29
 
 
 ] (./zavrsni_rad.aux)
@@ -1303,13 +1300,13 @@ zavrsni_rad.bbl
  ***********
 
 Package rerunfilecheck Info: File `zavrsni_rad.out' has not changed.
-(rerunfilecheck)             Checksum: 0E215C1DCB329E5652AD843D28161422;2569.
+(rerunfilecheck)             Checksum: 6A685B0B2F0E810E1C5BDF19ED72DBEB;2569.
  ) 
 Here is how much of TeX's memory you used:
- 21257 strings out of 474272
- 330262 string characters out of 5744472
- 2069533 words of memory out of 5000000
- 42894 multiletter control sequences out of 15000+600000
+ 21394 strings out of 474272
+ 332060 string characters out of 5744472
+ 2071533 words of memory out of 5000000
+ 42970 multiletter control sequences out of 15000+600000
  661606 words of font info for 145 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  87i,17n,131p,1429b,1706s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1322,10 +1319,10 @@ e/2023/texmf-dist/fonts/type1/public/stix2-type1/STIX2Text-Regular.pfb><c:/Prog
 ram Files/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb><c:/
 Program Files/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb>
 
-Output written on zavrsni_rad.pdf (30 pages, 2965398 bytes).
+Output written on zavrsni_rad.pdf (32 pages, 2976551 bytes).
 PDF statistics:
- 572 PDF objects out of 1000 (max. 8388607)
- 502 compressed objects within 6 object streams
- 218 named destinations out of 1000 (max. 500000)
+ 652 PDF objects out of 1000 (max. 8388607)
+ 580 compressed objects within 6 object streams
+ 279 named destinations out of 1000 (max. 500000)
  211 words of extra memory for PDF output out of 10000 (max. 10000000)
 

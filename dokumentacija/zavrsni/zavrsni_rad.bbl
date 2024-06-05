@@ -45,9 +45,7 @@
 
 \bibitem{GTFS-schedule}
 {General Transit Feed Specification}, ``{GTFS - Schedule/Static}'',
-  \url{https://gtfs.org/schedule/},
-  \url{https://gtfs.org/schedule/reference/#dataset-files}.
-  \url{https://developers.google.com/transit/gtfs/reference}.
+  \url{https://gtfs.org/schedule/}.
 
 \bibitem{GTFS-schedule-model}
 {Trafiklab}, ``{Informacije o GTFS schedule modelu i slika modela}'',
@@ -62,5 +60,12 @@
 
 \bibitem{postgresql}
 {PostgreSQL}, \url{https://www.postgresql.org/about/}.
+
+\bibitem{GTFS-reference}
+{Google}, ``{GTFS reference}'',
+  \url{https://developers.google.com/transit/gtfs/reference}.
+
+\bibitem{nodejs}
+{Node.js}, \url{https://nodejs.org/en}.
 
 \end{thebibliography}

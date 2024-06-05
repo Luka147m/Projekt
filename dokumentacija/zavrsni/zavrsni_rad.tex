@@ -12,6 +12,24 @@
 \definecolor{mygreen}{rgb}{0,0.6,0}
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
 \definecolor{mymauve}{rgb}{0.58,0,0.82}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+
+\lstdefinelanguage{JavaScript}{
+	keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break, try},
+	keywordstyle=\color{blue}\bfseries,
+	ndkeywords={class, export, boolean, throw, implements, import, this},
+	ndkeywordstyle=\color{darkgray}\bfseries,
+	identifierstyle=\color{black},
+	sensitive=false,
+	comment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	commentstyle=\color{purple}\ttfamily,
+	stringstyle=\color{red}\ttfamily,
+	morestring=[b]',
+	morestring=[b]"
+}
 
 % Define the style for listings
 \lstdefinestyle{mystyle}{
@@ -118,7 +136,8 @@
 
 \begin{zahvale}
   % Ovdje upišite zahvale / Write in the acknowledgment
-  Hvala na kavi...
+Na samom početku želim izraziti svoju duboku zahvalnost svojoj obitelji i prijateljima za neizmjernu podršku i razumijevanje tijekom mog obrazovanja.
+Posebnu zahvalnost dugujem svojoj mentorici, izv. prof. dr. sc. Ivani Bosnić, čije me stručno vodstvo i savjeti pratilo kroz cijeli proces izrade ovog rada. Vaša podrška bila je ključna za moj akademski napredak i uspjeh.
 \end{zahvale}
 
 
@@ -474,7 +493,7 @@ Protobuf koristi .proto datoteke za definiranje strukture podataka koji koriste 
 			message Person{
 				int32 id = 1;
 				string name = 2;
-				string eamil= 3;
+				string email= 3;
 			}
 		\end{lstlisting}
 	\end{minipage}
@@ -695,7 +714,95 @@ Na slici \ref{slk:pytonskripta} prikazan je isječak k\^oda pomoću kojeg je ost
 \end{figure}
 
 \subsection{Poslužiteljski dio aplikacije - node.js}
+Poslužiteljski dio aplikacije napisan je u jeziku JavaScript, koristeći Node.js okvir. JavaScript je programski jezik primarno namijenjen korištenju unutar web preglednika, ali uz pomoć Node.js moguće je izvršavanje JavaScript koda na poslužiteljskoj strani, izvan web preglednika, čime se omogućava korištenje jednog jezika za pisanje cjelokupne aplikacije. Najvažniji dodatak Node.js-u je Express.js, minimalistički i fleksibilan web okvir koji olakšava rad s HTTP zahtjevima i izgradnju web poslužitelja. On omogućava jednostavno definiranje ruta, rukovanje HTTP zahtjevima i upravljanje \textit{middleware} funkcijama.\\
+Na slici \ref{slk:express} je primjer vrlo jednostavnog poslužitelja koji kada dobije GET zahtjev na ruti \textit{'/api/stops'} provodi upit nad bazom podataka i ovisno o odgovoru vraća uspješni (200 OK s podacima o stanicama) ili neuspješni odgovor (status 500 s porukom greške). Sve ostale dostupne rute aplikacije su napravljene prema istoj shemi.
 
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{0.9\linewidth}
+		\begin{lstlisting}[language=JavaScript]
+			const express = require('express');
+			const app = express();
+			
+			app.get('/api/stops', async (req, res) => {
+				try {
+					const result = await pool.query(`SELECT DISTINCT stop_name FROM stops`);
+					res.json(result.rows);
+				} catch (error) {
+					console.error('[Error] Executing query', error);
+					res.status(500).json({ error: 'An error occurred' });
+				}
+			});
+			
+			app.listen(8080, () => {
+				console.log('[Info] Server started on port 8080');
+			});
+		\end{lstlisting}
+	\end{minipage}
+	\caption{Primjer k\^oda jednostavnog poslužitelja}
+	\label{slk:express}
+\end{figure}
+
+Kao i kod pomoćne skripte i na poslužitelju je potrebno ostvariti vezu s bazom podataka, to je omogućeno s modulom \textit{pg}. Taj modul omogućava upravljanje vezama prema bazi i izvršavanje upita.
+Pomoću objekta \textit{pool} definiramo potrebne informacije za spajanje poput \textit{username, host, database, password i port} te onda pozivom metode \textit{query} nad objektom \textit{pool} možemo izvesti proizvoljne SQL naredbe.
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{0.9\linewidth}
+		\begin{lstlisting}[language=JavaScript]
+			const { Pool } = require('pg');
+			require('dotenv').config();
+
+			const pool = new Pool({
+				user: process.env.DB_USER,
+				host: process.env.DB_HOST,
+				database: process.env.DB_NAME,
+				password: process.env.DB_PASSWORD,
+				port: process.env.DB_PORT,
+			});
+			
+			pool.query('SELECT * FROM stops');
+		\end{lstlisting}
+	\end{minipage}
+	\caption{Primjer spajanje s bazom podataka}
+	\label{slk:baza}
+\end{figure}
+
+Poslužitelj osim poslova upravljanja zahtjevima i komunikacijom s bazom podataka radi najbitniji dio aplikacije, a to je dohvaćanje GTFS realtime podataka sa ZET-ove stranice. Taj dio je ostvaren kao funkcija koja se periodički poziva (svakih 15 sekundi) kako bi dohvatila najnoviju \textit{.protobuf} datoteku s realtime podacima, obradila ju i spremila u memoriju za brži pristup. Na slici \ref{slk:dohvatGTFS} je čitav kod koji je zadužen za dohvaćanje podataka i njegovu deserijalizaciju iz binarnog .protobuf formata u JSON oblik.\\
+Ti podaci se tada spremaju u jedan objekt \textit{data} koji je napravljen tako da sadrži brojeve ruta kao ključeve i svaki tramvaj svrstava u točnu grupu. Također postoji funkcija koja upravlja dodavanjem u taj objekt i funkcija koja periodički briše tramvaje. To je napravljeno jer ZET-ovi podaci nisu konzistentni odnosno neki tramvaji nekada samo nestanu iz podataka makar je u \textit{FeedHeader}-u \textit{.protobuf} poruke navedeno da se svaki put šalju svi podaci (cijeli \textit{dataset}).
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{0.9\linewidth}
+		\begin{lstlisting}[language=JavaScript]
+const GtfsRealtimeBindings = require('gtfs-realtime-bindings');
+async function fetchData() {
+	try {
+		const response = await fetch(feedUrl);
+		if (!response.ok) {
+			const error = new Error(
+			`${response.url}: ${response.status} ${response.statusText}`
+			);
+			error.response = response;
+			throw error;
+		}
+		const buffer = await response.arrayBuffer();
+		const feed = GtfsRealtimeBindings.transit_realtime.FeedMessage.decode(
+		new Uint8Array(buffer)
+		);
+		
+		feed.entity.forEach((entity) => {
+			if (entity) parseEntity(entity);
+		});
+	} catch (error) {
+		console.log(error);
+	}
+}
+		\end{lstlisting}
+	\end{minipage}
+	\caption{K\^od za dohvaćanje GTFS realtime podataka i deserijalizaciju}
+	\label{slk:dohvatGTFS}
+\end{figure}
 \subsection{Klijentski dio aplikacije - REACT}
 \label{sec:frontend}
 
