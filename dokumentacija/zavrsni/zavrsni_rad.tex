@@ -6,7 +6,7 @@
 \usepackage{float}
 \usepackage{adjustbox}
 \usepackage{listings}
-
+\usepackage{dirtree}
 
 % Define custom colors for syntax highlighting
 \definecolor{mygreen}{rgb}{0,0.6,0}
@@ -15,9 +15,28 @@
 \definecolor{lightgray}{rgb}{.9,.9,.9}
 \definecolor{darkgray}{rgb}{.4,.4,.4}
 \definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinelanguage{JSX}{
+	keywords={return, if, else, for, while, do, switch, import, export, default, MapContainer, ZoomControl, TileLayer, Markers, MapRouteLine, MapClickHandler},
+	basicstyle=\footnotesize\ttfamily,
+	breaklines=true,
+	keywordstyle=\color{blue},
+	commentstyle=\color{codegreen},
+	stringstyle=\color{codepurple},
+	identifierstyle=\color{black},
+	numbers=left,
+	numberstyle=\tiny\color{codegray},
+	tabsize=2,
+	showstringspaces=false,
+	captionpos=b
+}
 
 \lstdefinelanguage{JavaScript}{
-	keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break, try},
+	keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break, try, async, await},
 	keywordstyle=\color{blue}\bfseries,
 	ndkeywords={class, export, boolean, throw, implements, import, this},
 	ndkeywordstyle=\color{darkgray}\bfseries,
@@ -33,7 +52,7 @@
 
 % Define the style for listings
 \lstdefinestyle{mystyle}{
-	backgroundcolor=\color{white},   % choose the background color
+	backgroundcolor=\color{lightgray},   % choose the background color
 	basicstyle=\linespread{1.2}\ttfamily\footnotesize, % size of fonts used for the code
 	breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
 	breaklines=true,                 % sets automatic line breaking
@@ -53,44 +72,6 @@
 }
 % Apply the style to the listings package
 \lstset{style=mystyle}
-
-
-
-%\begin{lstlisting}[language=Python]
-%	import math
-%	
-%	def example_function(x):
-%	# This is a comment
-%	if x > 0:
-%	return math.sqrt(x)
-%	else:
-%	return "Input must be positive"
-%	
-%	print(example_function(9))
-%	print(example_function(-1))
-%\end{lstlisting}
-%
-%\section{C++ Example}
-%Here is an example of C++ code with syntax highlighting:
-%
-%\begin{lstlisting}[language=C++]
-%	#include <iostream>
-%	#include <cmath>
-%	
-%	int main() {
-%		int x = 9;
-%		// This is a comment
-%		if (x > 0) {
-%			std::cout << sqrt(x) << std::endl;
-%		} else {
-%			std::cout << "Input must be positive" << std::endl;
-%		}
-%		return 0;
-%	}
-%\end{lstlisting}
-
-
-
 %--- PODACI O RADU / THESIS INFORMATION ----------------------------------------
 
 % Naslov na engleskom jeziku / Title in English
@@ -270,11 +251,11 @@ obavijestima o promjenama ruta i otkazivanjima putem web poslužitelja (putem ne
 
 Glavni "objekt" GTFS realtime feed-a (stream) je \textit{FeedMessage} koji sadrži \textit{FeedHeader} i \textit{FeedEntity}.
 \textit{FeedHeader} sadrži osnovne informacije o podacima (metapodatke) poput verzije GTFS-a, "\textit{incrementiality}" koji opisuje šalje li se cijeli skup podataka (\textit{dataset}) ili samo razlika od posljednje verzije te vremenska oznaka (\textit{timestamp}) kada su podaci generirani.
-\textit{FeedEntity} sadrži jedan ili više entiteta koji sadrže najnovije informacije o stanju puta, pozicijama vozila, promjenama na rutama i upozorenjima. Neke od njih su: 
+\textit{FeedEntity} sadrži jedan ili više entiteta koji sadrže najnovije informacije o stanju puta, pozicijama vozila, promjenama na rutama i upozorenjima. Neke od vrsta \textit{FeedEntity}-a su: 
 
 \begin{itemize}
-	\item \textbf{tripUpdate} - predstavlja informacije jednog te sadrži objekte trip (osnovne informacije o ruti/putu), stopTimeUpdate, vehicle (informacije o položaju vozila npr. geografske koordinate)
-	\item \textbf{stopTimeUpdate} - nalazi se unutar tripUpdate i on sadrži informacije o dolascima/odlascima sa stanica te kašnjenja
+	\item \textbf{tripUpdate} - predstavlja informacije jednog putovanja te sadrži objekte \textit{trip} (osnovne informacije o ruti/putu), \textit{stopTimeUpdate}, \textit{vehicle} (informacije o položaju vozila npr. geografske koordinate)
+	\item \textbf{stopTimeUpdate} - nalazi se unutar \textit{tripUpdate} i on sadrži informacije o dolascima/odlascima sa stanica te kašnjenja
 	\item \textbf{alert} - sadrži upozorenja od nesreća, radova na cesti i njihovi obilazaka, vremenskih upozorenja i drugih raznih iznimaka
 \end{itemize}
 
@@ -283,7 +264,7 @@ Primjer GTFS-rt podataka se može vidjeti u sljedećem poglavlju na slikama \ref
 \subsection{ZET GTFS podaci}
 \label{sec:zet-gtfs}
 
-Kao što je već rečeno ZET-ovi podaci su dostupni na službenoj stranici svima pod Otvorenom dozvolom Republike Hrvatske \cite{ZET-GTFS}. Na slici \ref{slk:zet-stranica} je prikazana ta stranica te na njoj se mogu pronaći linkove za GTFS static i GTFS realtime podatke.
+Kao što je već rečeno ZET-ovi podaci su dostupni na službenoj stranici svima pod Otvorenom dozvolom Republike Hrvatske \cite{ZET-GTFS}. Na slici \ref{slk:zet-stranica} je prikazana ta stranica te na njoj se mogu pronaći linkovi za GTFS static i GTFS realtime podatke.
 
 Prvo ćemo prokomentirati ZET-ove GTFS static podatke, a potom i GTFS realtime podatke. Kada se podaci dohvate sa stranice, dobivenu arhivu treba otvoriti s odgovarajućim alatom za pregled komprimiranih arhiva. Kada se to napravi dobivamo datoteke sa slike \ref{slk:zet-podaci}.
 
@@ -325,15 +306,15 @@ Pobliže ćemo pogledati datoteke \textit{trips.txt}, \textit{stops.txt}, \texti
 \end{table}
 
 
-Bitne informacije u trips.txt su:
+Bitne informacije u \textit{trips.txt} su:
 \begin{itemize}
 	\item \textbf{route\_id} - identifikator rute, odnosno broj linije (npr. Kod 17 Borongaj, to je 17)
 	\item \textbf{trip\_id} - identifikator putovanja na pojedinoj ruti (svaka ruta ima više tramvaja koji više puta dnevno putuju na toj ruti)
 	\item \textbf{trip\_short\_name} i \textbf{direction\_id} - ime smjera tramvaja i binarni broj koji određuje smjer (npr. Borongaj)
 \end{itemize}
 
-Također možemo primijetiti da datoteka sadrži i shape\_id koji se koristi kao ključ za relaciju trips.txt i shapes.txt koja kao što je rečeno sadrži detaljne koordinate putanje pojedine rute, s kojom bi se na karti s lakoćom mogao iscrtati put glatkom neisprekidanom krivuljom.
-Ali u ZET-ovim podacima se ne može pronaći shapes.txt te kao obilazak tom problemu uzete su koordinate svih stanica na pojedinoj ruti koje su spojene ravnim linijom. Izgled te linije nije idealan, ali je rješenje približno. Postoje i određene \textit{routing} komponente, ali i takvo rješenje ima svoje nedostatke, ali o tom više u poglavlju o implementaciji klijentske strane aplikacije \ref{sec:frontend}.
+Također možemo primijetiti da u datoteci nedostaje \textit{shape\_id} koji se koristi kao ključ za relaciju \textit{trips.txt} i \textit{shapes.txt} koja kao što je rečeno sadrži detaljne koordinate putanje pojedine rute, s kojom bi se na karti s lakoćom mogao iscrtati put glatkom neisprekidanom krivuljom.
+Ali u ZET-ovim podacima se ne može pronaći niti \textit{shape\_id} niti \textit{shapes.txt} te kao obilazak tom problemu uzete su koordinate svih stanica na pojedinoj ruti koje su spojene ravnim linijom. Izgled te linije nije idealan, ali je rješenje približno. Postoje i određene \textit{routing} komponente, ali i takvo rješenje ima svoje nedostatke, ali o tom više u poglavlju o implementaciji klijentske strane aplikacije \ref{sec:frontend}.
 
 \subsubsection{stops.txt}
 
@@ -352,7 +333,7 @@ Ali u ZET-ovim podacima se ne može pronaći shapes.txt te kao obilazak tom prob
 	\label{tbl:stops}
 \end{table}
 
-Bitne informacije u stops.txt su:
+Bitne informacije u \textit{stops.txt} su:
 \begin{itemize}
 	\item \textbf{stop\_id} - identifikator pojedine stanice
 	\item \textbf{stop\_name} - naziv stanice
@@ -377,14 +358,14 @@ Bitne informacije u stops.txt su:
 	\label{tbl:stop_times}
 \end{table}
 
-Bitne informacije u stop\_times.txt su:
+Bitne informacije u \textit{stop\_times.txt} su:
 \begin{itemize}
 	\item \textbf{trip\_id} - identifikator putovanja na pojedinoj ruti
 	\item \textbf{arrival\_time} i \textbf{departure\_time} - vrijeme dolaska i odlaska
 	\item \textbf{stop\_id} - identifikator pojedine stanice
 	\item \textbf{stop\_sequence} - redni broj stanice na putu
 \end{itemize}
-Ovo je najveća datoteka (oko 70MB, \textasciitilde{}1000000 linija) koja za svako pojedino putovanje (trip\_id) sadrži informacije o svim stanicama na putu, očekivanom vremenu dolaska i odlaska sa stanice i redoslijedu. Ona će biti ključna za iscrtavanje rute i predviđanju lokacije tramvaja.
+Ovo je najveća datoteka (oko 70MB, \textasciitilde{}1000000 linija) koja za svako pojedino putovanje (\textit{trip\_id}) sadrži informacije o svim stanicama na putu, očekivanom vremenu dolaska i odlaska sa stanice i redoslijedu stanica. Ona će biti ključna za iscrtavanje rute i predviđanju lokacije tramvaja.
 
 \subsubsection{routes.txt}
 
@@ -403,15 +384,15 @@ Ovo je najveća datoteka (oko 70MB, \textasciitilde{}1000000 linija) koja za sva
 	\label{tbl:routes}
 \end{table}
 
-Ovdje nam je jedina nova bitna informacija \textbf{route\_long\_name} koja nam daje puno ime rute (početno mjesto i krajnje mjesto)\\
+Ovdje nam je jedina nova bitna informacija \textbf{route\_long\_name} koja nam daje puno ime rute (početno mjesto i krajnje mjesto).\\
 To bi bile najbitnije GTFS static informacije koje su upotrijebljene za izradu aplikacije, koje su od posebne značajnosti za izradu baze podataka koja sprema te odvojene datoteke kao tablice i spaja ih s odgovarajućim ključevima i time omogućuje lako i brzo pretraživanje te formuliranje odgovora \ref{sec:baza}.
 
 \newpage
 \subsubsection{ZET realtime podaci}
-Na ZET-ovoj stranici se nalazi link za GTFS realtime podatke \ref{slk:zet-stranica} koji kada se skinu su binarna datoteka u .proto formatu. Protobuf je opisan u narednom poglavlju \ref{sec:protobuf}. Ovdje ćemo samo brzo proći kroz konačne podatke kada se obavi deserijalizacija.\\\\
+Na ZET-ovoj stranici nalazi se link za GTFS realtime podatke \ref{slk:zet-stranica} koji kada se skinu su binarna datoteka u \textit{.proto} formatu. \textit{Protobuf} je opisan u narednom poglavlju \ref{sec:protobuf}. Ovdje ćemo samo brzo proći kroz konačne podatke kada se obavi deserijalizacija.\\\\
 Na slici \ref{slk:reply1} se nalazi jedan mali isječak od inače jako velike poruke (obično sadrže oko 500 - 600 entiteta), ali radi jednostavnosti je prikazan samo jedan.\\\\
-Na početku svake poruke se nalazi \textit{header} i možemo primijetiti da se koristi starija verzija GTFS 1.0, sada je aktualna 2.0 verzija koja ima bolje definiranu \textit{schemu} s više informacija i pruža veću fleksibilnost. Također piše da se svaki put šalju svi podaci "FULL\_DATASET" i na kraju je vremenska oznaka generiranja poruke koja je u UNIX formatu.\\\\
-Zatim polje \textit{entity} koje sadrži entitet (objekt) koji reprezentira informacije o jednom vozilu. Svaki od njih ima jedinstveni ID i \textit{tripUpdate}. \textit{TripUpdate} se sastoji od osnovnih informacija o putu na kojem je vozilo, ID tog puta, kada je započeo put, je li put prema rasporedu, broj rute kojoj pripada taj put, vremenska oznaka generiranja tih podataka i \textit{stopTimeUpdate} koji sadrži informacije o zadnjoj posjećenoj stanici njen ID, redni broj i vremenska oznaka.\\\\
+Na početku svake poruke nalazi se \textit{header} te možemo primijetiti da se koristi starija verzija GTFS 1.0. Sada je aktualna verzija 2.0 koja ima bolje definiranu \textit{schemu} s više informacija i pruža veću fleksibilnost. Također piše da se svaki put šalju svi podaci "FULL\_DATASET" i na kraju je vremenska oznaka generiranja poruke koja je u UNIX formatu.\\\\
+Zatim polje \textit{entity} koje sadrži entitete (objekte) koji reprezentiraju informacije o jednom vozilu. Svaki od njih ima jedinstveni \textit{ID} i \textit{tripUpdate}. \textit{TripUpdate} se sastoji od osnovnih informacija o putu na kojemu je vozilo, \textit{ID} tog puta, kada je započeo put, je li put prema rasporedu, broj rute kojoj pripada taj put, vremenska oznaka generiranja tih podataka i \textit{stopTimeUpdate} koji sadrži informacije o zadnjoj posjećenoj stanici njen ID, redni broj i vremenska oznaka.\\\\
 Jedna stvar koju je vrijedno napomenuti da su ZET-ovi podaci prilično osnovni tjst. sadrže najosnovnije informacije, vjerojatni razlog toga je što su ZET-ovi podaci u fazi razvoja i na stranici je navedeno da je ovo prototip. Na primjer jedna jako velika stvar koja bi bila jako korisna jesu \textit{vehicle} podaci (slika \ref{slk:reply2}) koji sadrže točne geografske lokacije vozila. Trenutačno je aplikacija napravljena tako da na karti prikaže zadnje potvrđene pozicije tramvaja koje su zapravo podaci iz \textit{stopTimeUpdate} odnosno lokacije zadnje posjećenih stanica i markeri koji su predikcije položaja tramvaja temeljene na vremenima iz GTFS static podataka. Implementacija tih vehicle podataka bi izbacilo potrebu za predikcijom i puno olakšala direktno prikazivanje točnih lokacija tramvaja.
 
 \begin{figure}[H]
@@ -483,7 +464,7 @@ Jedna stvar koju je vrijedno napomenuti da su ZET-ovi podaci prilično osnovni t
 Protocol Buffers su jezično i platformski neutralni, proširivi mehanizmi za serijalizaciju strukturiranih podataka. Razvijeni od strane Googlea, prvotno su bili namijenjeni internoj uporabi, ali su kasnije postali dostupni pod otvorenom licencom \cite{protobuf}. Glavni cilj protocol buffera je pružiti jednostavnost i visoke performanse, te su posebno dizajnirani kako bi bili manji i brži od XML i JSON formata.
 
 
-Protobuf koristi .proto datoteke za definiranje strukture podataka koji koriste posebnu sintaksu. Trenutno su podržane verzije proto2 i proto3 u kojima se s ključnom riječi message definira struktura podataka poruke. Na slici \ref{slk:proto} je mali primjer jedne definicije poruke Person koja sadrži tri polja za podatke id, name i email. Svaka od njih mora imati tip podatka i vrijednost koja služi za identifikaciju polja kod binarne serijalizacije. Neki tipovi podataka koji su podržani su int32, int64, float, double, bool, string, enum i ugrađene poruke.
+Protobuf koristi .proto datoteke za definiranje strukture podataka koji koriste posebnu sintaksu. Trenutno su podržane verzije proto2 i proto3 u kojima se s ključnom riječi \textit{message} definira struktura podataka poruke. Na slici \ref{slk:proto} je mali primjer jedne definicije poruke \textit{Person} koja sadrži tri polja za podatke \textit{id, name i email}. Svaka od njih mora imati tip podatka i vrijednost koja služi za identifikaciju polja kod binarne serijalizacije. Neki tipovi podataka koji su podržani su int32, int64, float, double, bool, string, enum i ugrađene poruke.
 
 \begin{figure}[H]
 	\centering
@@ -502,9 +483,9 @@ Protobuf koristi .proto datoteke za definiranje strukture podataka koji koriste 
 \end{figure}		
 
 
-Kada smo definirali strukturu svoje poruke potrebno je iskoristiti proto compiler (\textit{protoc}) da bi generirali k\^od koji se koristi za serijalizaciju i deserializaciju podataka u odabranom programskom jeziku (C++, Java, Python, Go, JavaScript i mnogo drugih). Za primjer sa slike \ref{slk:proto} i za programski jezik Python, protoc compiler generira modul person\_pb2 koji sadrži potrebne metode za kreiranje objekata te strukture, serijalizaciju i deserijalizaciju tih podataka. 
+	Kada smo definirali strukturu svoje poruke potrebno je iskoristiti proto compiler (\textit{protoc}) da bi generirali k\^od koji se koristi za serijalizaciju i deserializaciju podataka u odabranom programskom jeziku (C++, Java, Python, Go, JavaScript i mnogo drugih). Za primjer sa slike \ref{slk:proto} i za programski jezik Python, \textit{protoc} compiler generira modul \textit{person\_pb2} koji sadrži potrebne metode za kreiranje objekata te strukture, serijalizaciju i deserijalizaciju tih podataka. 
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\begin{minipage}{0.8\linewidth}
 		\begin{lstlisting}[language=Python]
@@ -803,15 +784,123 @@ async function fetchData() {
 	\caption{K\^od za dohvaćanje GTFS realtime podataka i deserijalizaciju}
 	\label{slk:dohvatGTFS}
 \end{figure}
+
 \subsection{Klijentski dio aplikacije - REACT}
 \label{sec:frontend}
 
+Klijentski dio također je izrađen u jeziku JavaScript pomoću React.js, popularnog JavaScript okvira koji se primarno koristi za izgradnju jednostraničnih aplikacija (SPA). React.js omogućava razvoj složenih i dinamičnih web aplikacija pomoću komponentnog pristupa, gdje se korisničko sučelje sastoji od manjih, ponovno upotrebljivih komponenti.\\
+Komponente su osnovni gradivni elementi u React-u, a svaka komponenta predstavlja dio korisničkog sučelja. Komponente mogu biti jednostavne, poput gumba, ili složene, poput cijele stranice. Komponente su definirane pomoću JavaScript funkcija ili klasa, te vraćaju JSX (JavaScript XML), koji izgleda slično HTML-u.
+\newpage
+Aplikacija se sastoji od par komponenti \textit{App.js, Map.js, MapRouteLine.js, Marker.js, Sidebar.js i TripTimeline.js} od kojih je glavna roditeljska komponenta koja sadrži sve ostale \textit{App.js} (slika \ref{slk:strukturaklijent}).
+
+\begin{figure}[H]
+	\dirtree{%
+		.1 \textbf{client}.
+		.2 \textbf{node\_modules}.
+		.2 \textbf{public} \hspace{2em} -Kazalo s slikama ikona.
+		.2 \textbf{src}.
+		.3 \textbf{App.css} \hspace{2em}-Glavni stylesheet za aplikaciju.
+		.3 \textbf{App.js} \hspace{2em} -Glavna React komponenta.
+		.3 \textbf{Map.js} \hspace{2em} -Komponenta za kartu.
+		.3 \textbf{MapRouteLine.js} \hspace{2em} -Komponenta za linije ruta na karti.
+		.3 \textbf{Markers.js} \hspace{2em} -Komponenta za markere na karti.
+		.3 \textbf{Sidebar.js} \hspace{2em} -Komponenta za izbornik.
+		.3 \textbf{TripTimeline.js} \hspace{2em} -Komponenta za vremensku liniju putovanja.
+		.2 \textbf{package-lock.json}.
+		.2 \textbf{package.json}.
+		.2 \textbf{README.md}.
+	}
+	\caption{Osnovna struktura klijentskog kôda}
+	\label{slk:strukturaklijent}
+\end{figure}
+
+\subsubsection{App.js}
+Kao što je rečeno \textit{App.js} je glavna komponenta koja se nalazi iznad svih ostalih, njezin glavni posao je da objedinjuje komponente i povremeno dohvaća (osvježava) podatke od poslužiteljskog dijela aplikacije uz pomoć \textit{fetch} naredbe. Pseudok\^od na slici \ref{slk:dohvatpodataka} prikazuje način dohvaćanja podataka.\\ K\^od iskorištava \textit{useEffect() i useState()} hook-ove. Hook-ovi su način na koji React omogućuje dinamičko upravljanje stanjem i ponašanjem funkcionalnih komponenti i njihovim životnim ciklusom. Hook \textit{useEffect()} omogućuje komponentama da definiraju popratne efekte koji se trebaju izvesti nakon što se promjeni neko stanje definirano \textit{useState()} hook-om. U k\^odu aplikacija svakih 10 sekundi ili kada se promjeni stanje s odabranim rutama dohvaća nove podatke. Za svaku pojedinu navedenu rutu izvodi se jedan GET zahtjev, to se izvodi asinkrono pomoću obećanja (\textit{Promises}) te se na kraju kada su svi zahtjevi obrađeni grupira zajedno i šalje \textit{"child"} komponenti \textit{Map} koja prikazuje tramvaje kao markere na karti.
+
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{0.9\linewidth}
+		\begin{lstlisting}[language=JavaScript]			
+			useEffect(() => {
+				if (route && route.length > 0) {
+					const intervalId = setInterval(async () => {
+							const allRouteData = await Promise.all(
+								route.map(fetchDataForRoute)
+							);
+							const combinedData = allRouteData.flat();
+							setRouteData(combinedData);
+					}, 10000);
+					
+					return () => clearInterval(intervalId);
+				} else {setRouteData(null);}
+			}, [route, setRouteData]);
+			
+			const fetchDataForRoute = async (routeValue) => {
+				const response = await fetch(
+						`/api/route/${routeValue}`
+				);
+				...
+			};
+		\end{lstlisting}
+	\end{minipage}
+	\caption{Pseudok\^od dohvaćanja podataka od poslužitelja}
+	\label{slk:dohvatpodataka}
+\end{figure}
+
+\subsubsection{Map.js}
+Komponenta \textit{Map.js} kojoj je glavna uloga da prikazuje kartu ostvarena je pomoću \textit{leaflet.js}-a.
+\textit{Leaflet.js} je popularna open-source JavaScript biblioteka za interaktivne mape. Omogućava jednostavno dodavanje dinamičkih karti, postavljanje markera, crtanje linija i poligona, interakciju s kartama, dodavanje pop-up prozora i još mnogo toga \cite{leaflet}.
+Postoji React verzija \textit{leaflet.js} koja objekte tretira kao komponente i s kojom je još jednostavnije raditi u React-u.\\
+Karta koju \textit{leaflet.js} koristi je dohvaćena iz OpenStreetMap projekta, koji je otvorena i slobodna baza geografskih podataka koju održavaju volonteri.\\
+
+Na slici \ref{slk:mapjs} se nalazi isječak koda koji opisuje što sadrži \textit{Map.js} te možemo primijetiti komponente \textit{MapContainer, ZoomControl, TileLayer} koje su standardne komponente iz \textit{leaflet.js} i koje definiraju izgled karte , dok komponenta \textit{Markers} koja se koristi za postavljanje markera na kartu i komponenta \textit{MapRouteLine} koja se koristi za crtanje linija ruta na karti su definirane za potrebe aplikacije.
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{0.9\linewidth}
+		\begin{lstlisting}[language=JSX]
+	return (
+		<MapContainer
+		center={[45.808680463038435, 15.977835680373971]}
+		zoom={13}
+		zoomControl={false}
+		whenReady={(event) => setMapContext(event.target)}
+		>
+		<ZoomControl position="bottomright" />
+		<TileLayer
+		attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+		url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+		/>
+		<Markers
+		routeData={routeData}
+		tripInfo={tripInfo}
+		....
+		/>
+		<MapRouteLine coordinates={coordinates} />
+		<MapClickHandler />
+		</MapContainer>
+	);
+		\end{lstlisting}
+	\end{minipage}
+	\caption{Isječak k\^oda Map.js}
+	\label{slk:mapjs}
+\end{figure}
+
+\subsubsection{Markers.js}
+\textit{Markers.js} komponenta je zadužena za stvaranje marker na karti koji će prikazivati pozicije tramvaja i njihove dotične animacije. Sami markeri na karti su ostvareni uz pomoć \textit{react-leaflet.js} komponenti \textit{Marker i Popup}. Animacije markera koje predstavljaju predikcije položaja tramvaja su bazirane na vremenima iz ZET-ovih rasporeda koji su dio static datoteka (poglavlje \ref{sec:zet-gtfs}). Osim prikaza obrađuje i klikove na pojedine markere koji tada aktiviraju popratne akcije prikaza dodatnih informacija o putu pomoću \textit{Popup i TripTimeline} komponenti.
+
+\subsubsection{MapRouteLine.js}
+\textit{MapRouteLine.js} ostvaruje iscrtavanje putanje tramvaja na karti koje je ostvareno dohvaćanjem pozicija stanica tramvaja i spajanjem tih koordinata u jednu \textit{Polyline} liniju. Idealno rješenje ovog problema bi bili podaci iz datoteke \textit{shapes.txt} koji detaljno propisuju putanju rute, ali ta datoteka nedostaje u ZET-ovim static podacima.
+Još jedan način rješavanja ovog problema je korištenjem \textit{routing} komponente kojoj predajemo koordinate stanica te onda ona provodi pronalaženje puta na karti između svake dvije točke i time stvara glatku putanju na karti. Problem kod tog načina je da se za pronalaženje puta koriste putevi kojim auti mogu voziti, a ne tračnice kojim tramvaji voze što također dovodi do nepreciznosti tjst. neistinitosti nacrtane putanje naspram stvarne, tako da je taj način odbačen.
+
+\subsubsection{Sidebar.js}
+\textit{Sidebar.js} je glavna i jedina komponenta koja ostvaruje komunikaciju s korisnikom. Korisniku su dostupne padajuće liste ostvarene komponentom \textit{Select} kojima bira rute ili stanice kod dijela za pretraživanje ruta. Također sadrži par tipki koje služe za upravljanjem nad odabranim rutama. Kada se odabere ruta ili pretraže rute za stanicu komponenta mijenja stanje aplikacije što izaziva dohvaćanje novih podataka.
+
+\subsubsection{TripTimeline.js}
+Klikom na marker se izaziva \textit{useEffect()} hook u komponenti \textit{TripTimeline.js} koje aktivira njen prikaz. Ta komponenta je zadužena za prikazivanje rasporeda puta tramvaja, koje je ostvareno kao vremenska crta pomoću \textit{VerticalTimeline} komponente. Raspored puta sadrži u redoslijedu stanice na koje će tramvaj doći, njihovo vrijeme očekivanog dolaska i vremena potrebnog do sljedeće stanice.
+
 \section{Izgled aplikacije}
-
-
-%-------------------------------------------------------------------------------
-\chapter{Rezultati i rasprava}
-\label{pog:rezultati_i_rasprava}
 
 
 %--- ZAKLJUČAK / CONCLUSION ----------------------------------------------------

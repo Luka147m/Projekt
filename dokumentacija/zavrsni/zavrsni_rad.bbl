@@ -68,4 +68,10 @@
 \bibitem{nodejs}
 {Node.js}, \url{https://nodejs.org/en}.
 
+\bibitem{react}
+{React.js}, \url{https://react.dev/}.
+
+\bibitem{leaflet}
+{Leaflet.js}, \url{https://leafletjs.com/}.
+
 \end{thebibliography}
