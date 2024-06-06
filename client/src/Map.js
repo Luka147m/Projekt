@@ -17,6 +17,7 @@ const Map = ({
   setScrollToStop,
   selectedMarker,
   setSelectedMarker,
+  setRouteDetails,
 }) => {
   const [coordinates, setCoordinates] = useState(null);
   const [mapContext, setMapContext] = useState();
@@ -62,6 +63,7 @@ const Map = ({
         setSelectedMarker={setSelectedMarker}
         mapContext={mapContext}
         setWatchedRoute={setWatchedRoute}
+        setRouteDetails={setRouteDetails}
       />
       <MapRouteLine coordinates={coordinates} />
       <MapClickHandler />

@@ -43,32 +43,34 @@ $$;
 ALTER FUNCTION public.find_routes_between_stops(stop_a_name text, stop_b_name text) OWNER TO postgres;
 
 --
--- Name: get_route_info(integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Name: get_trip_details(text); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
-CREATE FUNCTION public.get_route_info(route_id_param integer) RETURNS json
+CREATE FUNCTION public.get_trip_details(p_trip_id text) RETURNS json
     LANGUAGE plpgsql
     AS $$
 DECLARE
-    result_json json;
+    result json;
 BEGIN
-    SELECT json_agg(json_build_object(
-        'route_id', route_id,
-        'trip_id', trip_id,
-        'route_long_name', route_long_name,
-        'trip_headsign', trip_headsign
-    ))
-    INTO result_json
-    FROM trips 
-    JOIN routes USING(route_id) 
-    WHERE route_id = route_id_param;
+    SELECT json_build_object(
+        'route_id', r.route_id,
+        'route_long_name', r.route_long_name,
+        'trip_headsign', t.trip_headsign
+    )
+    INTO result
+    FROM 
+        trips t
+    JOIN 
+        routes r ON t.route_id = r.route_id
+    WHERE 
+        t.trip_id = p_trip_id;
 
-    RETURN result_json;
+    RETURN result;
 END;
 $$;
 
 
-ALTER FUNCTION public.get_route_info(route_id_param integer) OWNER TO postgres;
+ALTER FUNCTION public.get_trip_details(p_trip_id text) OWNER TO postgres;
 
 --
 -- Name: get_trip_info(text); Type: FUNCTION; Schema: public; Owner: postgres

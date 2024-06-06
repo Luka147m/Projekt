@@ -44,6 +44,7 @@ const Markers = ({
   setSelectedMarker,
   mapContext,
   setWatchedRoute,
+  setRouteDetails,
 }) => {
   const [animationDataArray, setAnimationDataArray] = useState([]);
   const [instanceMap, setInstanceMap] = useState({});
@@ -92,6 +93,13 @@ const Markers = ({
           lon: parseFloat(tram.stop_lon),
         }));
         setCoordinates(newCoordinates);
+      });
+
+    fetch(`/api/routeDetails/${trip_id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data[0].get_trip_details);
+        setRouteDetails(data[0].get_trip_details);
       });
   };
 

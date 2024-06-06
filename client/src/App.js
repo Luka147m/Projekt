@@ -22,6 +22,7 @@ function App() {
   const [time, setTime] = useState(new Date());
   // Odabrani marker
   const [selectedMarker, setSelectedMarker] = useState(null);
+  const [routeDetails, setRouteDetails] = useState(null);
   const [clockType, setClockType] = useState('analog');
 
   useEffect(() => {
@@ -121,6 +122,7 @@ function App() {
         setScrollToStop={setScrollToStop}
         selectedMarker={selectedMarker}
         setSelectedMarker={setSelectedMarker}
+        setRouteDetails={setRouteDetails}
       />
       <div className="clock-container" onClick={toggleClockType}>
         {clockType === 'analog' ? (
@@ -138,7 +140,11 @@ function App() {
       </div>
 
       {tripInfo && (
-        <TripTimeline tripInfo={tripInfo} scrollToStop={scrollToStop} />
+        <TripTimeline
+          tripInfo={tripInfo}
+          scrollToStop={scrollToStop}
+          routeDetails={routeDetails}
+        />
       )}
 
       <div className="info-legend">

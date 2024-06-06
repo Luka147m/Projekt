@@ -5,7 +5,7 @@ import {
 } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 
-const TripTimeline = ({ tripInfo, scrollToStop }) => {
+const TripTimeline = ({ tripInfo, scrollToStop, routeDetails }) => {
   useEffect(() => {
     if (scrollToStop) {
       const elementToScrollTo = document.getElementById(`${scrollToStop}`);
@@ -18,7 +18,15 @@ const TripTimeline = ({ tripInfo, scrollToStop }) => {
   return (
     <div className="info-container">
       <div className="sticky-header">
-        <h3>Informacije o putu</h3>
+        <h4>Informacije o putu</h4>
+        {routeDetails !== null && (
+          <div>
+            <h2>
+              {routeDetails.route_id} {routeDetails.route_long_name}
+            </h2>
+            <h3>Smjer: {routeDetails.trip_headsign}</h3>
+          </div>
+        )}
       </div>
       <div className="timeline-container">
         <VerticalTimeline layout={'1-column-left'} lineColor="#000">

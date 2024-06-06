@@ -50,12 +50,10 @@ async function fetchAndRefreshData() {
   }, 15000);
 }
 
-app.get('/api/routeInfo/:routeId', async (req, res) => {
-  const routeId = req.params.routeId;
+app.get('/api/routeDetails/:tripId', async (req, res) => {
+  const tripId = req.params.tripId;
   try {
-    const result = await pool.query(
-      `SELECT get_route_info('${routeId}') AS route_info`
-    );
+    const result = await pool.query(`SELECT get_trip_details('${tripId}');`);
     res.json(result.rows);
   } catch (error) {
     console.error('[Error] Executing query', error);
@@ -112,12 +110,12 @@ app.get('/api/trip/:tripId', async (req, res) => {
   }
 });
 
-// let result = spawnSync('python', [pythonScriptPath]);
-// if (result.error) {
-//   console.error(`[Error] Running Python script: ${result.error.message}`);
-// } else {
-//   console.log(`[Info] Python script output:\n ${result.stdout}`);
-// }
+let result = spawnSync('python', [pythonScriptPath]);
+if (result.error) {
+  console.error(`[Error] Running Python script: ${result.error.message}`);
+} else {
+  console.log(`[Info] Python script output:\n ${result.stdout}`);
+}
 
 async function startServer() {
   await fetchStops();
