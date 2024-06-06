@@ -605,6 +605,7 @@ One su:
 \begin{itemize}
 	\item \textit{find\_route\_between\_stops(stop\_a, stop\_b)} - koja prima dva parametra (dvije stanice) i vraća listu ruti koje prolaze kroz te dvije stanice.
 	\item \textit{get\_trip\_info(trip\_id)} - koja prima parametar \textit{trip\_id} i vraća list svih stanica puta, nazive i lokacije stanica, vremena dolaska i odlaska te vrijeme potrebno do sljedeće stanice, koristi se za prikaz informacija klikom na marker.
+	\item \textit{get\_trip\_details(trip\_id)} - koja prima parametar \textit{trip\_id} i vraća puni naziv rute i smjer.
 \end{itemize}
 
 \begin{figure}[h]
@@ -900,8 +901,117 @@ Još jedan način rješavanja ovog problema je korištenjem \textit{routing} kom
 \subsubsection{TripTimeline.js}
 Klikom na marker se izaziva \textit{useEffect()} hook u komponenti \textit{TripTimeline.js} koje aktivira njen prikaz. Ta komponenta je zadužena za prikazivanje rasporeda puta tramvaja, koje je ostvareno kao vremenska crta pomoću \textit{VerticalTimeline} komponente. Raspored puta sadrži u redoslijedu stanice na koje će tramvaj doći, njihovo vrijeme očekivanog dolaska i vremena potrebnog do sljedeće stanice.
 
+\newpage
 \section{Izgled aplikacije}
+Prilikom prvog pristupa stranici dočekani smo praznom kartom bez ikakvih markera. U gornjem lijevom kutu se nalazi glavni izbornik koji se sastoji od padajućih izbornika i polja koji sadrži listu odabranih ruta (to polje je vidljivo samo kada je barem jedna ruta odabrana). Svi padajući izbornici ujedno podržavaju i pretraživanje.\\
+Desno od glavnog izbornika se nalazi analogni sat za vrijeme koji se može promijeniti u digitalni sat klikom na njega. Ispod sata se nalazi legenda markera uz pomoć koje se može vidjeti što koji marker predstavlja kada je miš iznad odgovarajuće ikone ("\textit{on hover}"). Također ispod legende se nalaze i tipke za uvećavanje/smanjivanje karte, ali to je moguće i lakše obaviti kotačićem na mišu.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{Figures/default.png} 
+	\caption{Početni zaslon aplikacije}
+	\label{slk:default}
+\end{figure}
+
+Korištenjem padajućeg izbornika označenog tekstom \textit{"Odaberi rutu:"} možemo ili klikom odabrati rutu koju želimo pratiti ili jednostavno upišemo broj tramvajske linije i pritisnemo tipku \textit{enter} (slika \ref{slk:glavni}). Tada će odabrana ruta biti dodana u kutiju odabranih ruta (slika \ref{slk:odabrane}) i na karti će se prikazati markeri tramvaja.\\
+Aplikacija sadrži funkcionalnost pronalaska tramvajskih linija odnosno funkcionalnost koja pomaže pronaći tramvajske linije koje prolaze kroz početnu i krajnju tramvajsku stanicu. Time olakšava uporabu korisnicima koji nisu upoznati s voznim redom tramvajskih linija. Pomoću dva padajuća izbornika (slika \ref{slk:pretrazivanje}) potrebno je odabrati željenu početnu i krajnju stanicu te klikom na tipku \textit{"Pretraži"} obavlja se pretraga. Ako je pretraga bila uspješna stanice će se automatski dodati u polje odabranih stanica, a ako nije bila uspješna tada će se prikazati poruka \textit{"Nije pronađena nijedna linija!"} koja će nakon 10 sekundi nestati.\\
+Polje sa odabranim tramvajskim linijama za svaku liniju ima jedan gumb za brisanje te linije \textit{"Obriši"}. Ako je odabrano više od 3 tramvajske linije tada će se prikazati i dodatan gumb \textit{"Obriši sve"} s kojim lakše i brže brišemo sve odabrane linije.\\
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}[c]{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{Figures/glavni.png}
+		\caption{Glavni izbornik}
+		\label{slk:glavni}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[c]{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{Figures/pretrazivanje.png}
+		\caption{Izbornik za pronalaženje ruta}
+		\label{slk:pretrazivanje}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[c]{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{Figures/odabrani.png}
+		\caption{Odabrane rute}
+		\label{slk:odabrane}
+	\end{minipage}
+\end{figure}
+
+Kada smo odabrali neku od linija na zaslonu će se prikazati markeri tramvaja (slika \ref{slk:zaslonmark}). 
+Značenja boja markera tramvaja su:
+\begin{figure}[H]
+	\centering
+	\begin{minipage}[b]{0.68\textwidth}
+		\begin{itemize}
+			\item Crni marker - Zadnja potvrđena lokacija tramvaja
+			\item Zeleni marker - Predikcija lokacije tramvaja
+			\item Plavi marker - Odabrani tramvaj
+			\item Ljubičasti marker - Predikcija odabranog tramvaja
+		\end{itemize}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[c]{0.24\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{Figures/legenda.png}
+		\caption{Legenda}
+		\label{slk:legenda}
+	\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{Figures/zaslonodabrano.png} 
+	\caption{Zaslon s markerima odabranih linija}
+	\label{slk:zaslonmark}
+\end{figure}
+Klikom na bilo koji od crnih markera, odabrani marker će poplaviti i iznad njega će se otvoriti mali oblačić s informacijama o trenutnoj stanici te će se odgovarajući marker predikcije lokacije tramvaja promijeniti u ljubičastu boju za lakše uočavanje. Ako želimo od značiti marker možemo pritisnuti bilo gdje drugdje na karti ili na neki drugi marker.\\
+Također na karti će se iscrtati cjelokupni put tramvajske linije i otvoriti će se novi prozor s puno više informaciji o voznom redu.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{Figures/odabrantram.png} 
+	\caption{Zaslon s odabranim tramvajem}
+	\label{slk:tramodabran}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{Figures/primjer1.png} 
+	\caption{Zaslon s iscrtanim putem}
+	\label{slk:put}
+\end{figure}
+
+Prozor s dodatnim informacijama o putu je vidljiv samo kada je jedan od tramvaja odabran. On sadrži informacije o broju tramvajske linije, punom nazivu tramvajske linije koji se sastoji od početne i krajnje stanice, smjera kretanja tramvaja te sadrži vremensku liniju voznog rasporeda tramvaja.\\Raspored tramvaja sadrži sve stanice na tramvajskoj liniji i informacije o očekivanom vremenu dolaska na pojedinu stanicu i o očekivanim potrebnim vremenima do sljedeće stanice. Ta vremena su temeljena na povijesnim podacima koji se nalaze unutar ZET-ovih static podataka. Kroz raspored se može proći uporabom kotačića na mišu i time vidjeti sve prijašnje i naredne stanice.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.4\linewidth]{Figures/informacije.png} 
+	\caption{Prozor s voznim redom tramvaja}
+	\label{slk:inf}
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}[c]{0.45\linewidth}
+		\centering
+		\includegraphics[width=\textwidth]{Figures/mobitel.png}
+		\caption*{(a)}
+		\label{slk:mobitel1}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[c]{0.45\linewidth}
+		\centering
+		\includegraphics[width=\textwidth]{Figures/mobitel2.png}
+		\caption*{(b)}
+		\label{slk:mobitel2}
+	\end{minipage}
+	\caption{Izgled aplikacije na manjim zaslonima}
+	\label{fig:mobiteli}
+\end{figure}
 
 %--- ZAKLJUČAK / CONCLUSION ----------------------------------------------------
 \chapter{Zaključak}

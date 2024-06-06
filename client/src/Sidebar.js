@@ -90,13 +90,16 @@ const Sidebar = ({
     <div className="sidebar-component">
       <h1>Zet tracker</h1>
       {routes && (
-        <Select
-          options={options}
-          isClearable={false}
-          isSearchable={true}
-          onChange={handleRouteChange}
-          className="main-select"
-        />
+        <div className="main-select-box">
+          <h3>Odaberi rutu: </h3>
+          <Select
+            options={options}
+            isClearable={false}
+            isSearchable={true}
+            onChange={handleRouteChange}
+            className="main-select"
+          />
+        </div>
       )}
       <fieldset className="routeFind-box">
         <legend>Pronađi liniju</legend>

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.3)  5 JUN 2024 22:34
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.3)  6 JUN 2024 21:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1118,36 +1118,100 @@ Underfull \hbox (badness 10000) in paragraph at lines 549--564
 
  []
 
-[17]
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[18]
-Overfull \hbox (6.4586pt too wide) in paragraph at lines 657--659
+[17] [18]
+Overfull \hbox (6.4586pt too wide) in paragraph at lines 658--660
 []\T1/stix2/m/n/12 Pomo¢u me-tode \T1/stix2/m/it/12 requests.get('https://www.z
 et.hr/gtfs-scheduled/latest') \T1/stix2/m/n/12 sa stra-nice ZET-
  []
 
 
-Overfull \hbox (2.9858pt too wide) in paragraph at lines 657--659
+Overfull \hbox (2.9858pt too wide) in paragraph at lines 658--660
 \T1/stix2/m/n/12 koju ko-risti funk-cija \T1/cmtt/m/n/12 find_route_between_sto
 ps(stop_a, stop_b) \T1/stix2/m/n/12 koja pro-na-lazi rute
  []
 
-[19] [20]
+[19] [20] [21]
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 708.
- [21] [22] [23]
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 709.
+ [22] [23] [24]
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 812.
- [24]
-Underfull \hbox (badness 10000) in paragraph at lines 852--856
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 813.
+ [25]
+Underfull \hbox (badness 10000) in paragraph at lines 853--857
 
  []
 
-[25] [26] [27]
+[26] [27] [28]
+<Figures/default.png, id=584, 1591.9475pt x 796.9775pt>
+File: Figures/default.png Graphic file (type png)
+<use Figures/default.png>
+Package pdftex.def Info: Figures/default.png  used on input line 911.
+(pdftex.def)             Requested size: 441.01773pt x 220.78079pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 916--919
+
+ []
+
+[29 <./Figures/default.png>]
+<Figures/glavni.png, id=595, 230.66174pt x 302.3295pt>
+File: Figures/glavni.png Graphic file (type png)
+<use Figures/glavni.png>
+Package pdftex.def Info: Figures/glavni.png  used on input line 924.
+(pdftex.def)             Requested size: 132.30666pt x 173.4183pt.
+<Figures/pretrazivanje.png, id=596, 245.718pt x 430.60875pt>
+File: Figures/pretrazivanje.png Graphic file (type png)
+<use Figures/pretrazivanje.png>
+Package pdftex.def Info: Figures/pretrazivanje.png  used on input line 931.
+(pdftex.def)             Requested size: 132.30666pt x 231.8682pt.
+<Figures/odabrani.png, id=597, 198.7425pt x 176.45924pt>
+File: Figures/odabrani.png Graphic file (type png)
+<use Figures/odabrani.png>
+Package pdftex.def Info: Figures/odabrani.png  used on input line 938.
+(pdftex.def)             Requested size: 132.30666pt x 117.47585pt.
+<Figures/legenda.png, id=599, 93.951pt x 133.6995pt>
+File: Figures/legenda.png Graphic file (type png)
+<use Figures/legenda.png>
+Package pdftex.def Info: Figures/legenda.png  used on input line 959.
+(pdftex.def)             Requested size: 105.84666pt x 150.63596pt.
+<Figures/zaslonodabrano.png, id=600, 1591.9475pt x 796.9775pt>
+File: Figures/zaslonodabrano.png Graphic file (type png)
+<use Figures/zaslonodabrano.png>
+Package pdftex.def Info: Figures/zaslonodabrano.png  used on input line 967.
+(pdftex.def)             Requested size: 441.01773pt x 220.78079pt.
+ [30 <./Figures/glavni.png> <./Figures/pretrazivanje.png> <./Figures/odabrani.p
+ng> <./Figures/legenda.png>]
+<Figures/odabrantram.png, id=611, 1621.05624pt x 833.1125pt>
+File: Figures/odabrantram.png Graphic file (type png)
+<use Figures/odabrantram.png>
+Package pdftex.def Info: Figures/odabrantram.png  used on input line 975.
+(pdftex.def)             Requested size: 441.01773pt x 226.64682pt.
+<Figures/primjer1.png, id=612, 1631.09375pt x 1011.78pt>
+File: Figures/primjer1.png Graphic file (type png)
+<use Figures/primjer1.png>
+Package pdftex.def Info: Figures/primjer1.png  used on input line 982.
+(pdftex.def)             Requested size: 441.01773pt x 273.5702pt.
+ [31 <./Figures/zaslonodabrano.png> <./Figures/odabrantram.png>]
+<Figures/informacije.png, id=620, 248.72925pt x 364.9635pt>
+File: Figures/informacije.png Graphic file (type png)
+<use Figures/informacije.png>
+Package pdftex.def Info: Figures/informacije.png  used on input line 991.
+(pdftex.def)             Requested size: 176.40439pt x 258.84744pt.
+ [32 <./Figures/primjer1.png>]
+<Figures/mobitel.png, id=628, 512.91624pt x 1170.3725pt>
+File: Figures/mobitel.png Graphic file (type png)
+<use Figures/mobitel.png>
+Package pdftex.def Info: Figures/mobitel.png  used on input line 1001.
+(pdftex.def)             Requested size: 198.45662pt x 452.83604pt.
+<Figures/mobitel2.png, id=629, 512.91624pt x 1677.26625pt>
+File: Figures/mobitel2.png Graphic file (type png)
+<use Figures/mobitel2.png>
+Package pdftex.def Info: Figures/mobitel2.png  used on input line 1008.
+(pdftex.def)             Requested size: 198.45662pt x 648.96143pt.
+
+[33 <./Figures/informacije.png>] [34 <./Figures/mobitel.png> <./Figures/mobitel
+2.png>]
 Poglavlje 3..
-(./zavrsni_rad.bbl [28
+(./zavrsni_rad.bbl [35
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 55--57
@@ -1155,26 +1219,26 @@ Underfull \hbox (badness 10000) in paragraph at lines 55--57
 '', []$https : / / gtfs . org /
  []
 
-[29
+[36
 
-]) [30]
+]) [37]
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 927.
+(blindtext)                 on input line 1037.
 
-[31
+[38
 
-] [32
+] [39
 
 ]
 pdfTeX warning (ext4): destination with the same identifier (name{chapter.1}) h
 as been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.951 \chapter{The Code}
-                        
+l.1061 \chapter{The Code}
+                         
 Privitak A.
-[33
+[40
 
 
 ] (./zavrsni_rad.aux)
@@ -1316,17 +1380,28 @@ lstlang1.sty    2023/02/27 1.9 listings language file
 lstlang1.sty    2023/02/27 1.9 listings language file
 Figures/arhitektura.png
 lstlang1.sty    2023/02/27 1.9 listings language file
+Figures/default.png
+Figures/glavni.png
+Figures/pretrazivanje.png
+Figures/odabrani.png
+Figures/legenda.png
+Figures/zaslonodabrano.png
+Figures/odabrantram.png
+Figures/primjer1.png
+Figures/informacije.png
+Figures/mobitel.png
+Figures/mobitel2.png
 zavrsni_rad.bbl
  ***********
 
 Package rerunfilecheck Info: File `zavrsni_rad.out' has not changed.
-(rerunfilecheck)             Checksum: 580EE5C28F9F2CC88490B8DECBA519A4;2419.
+(rerunfilecheck)             Checksum: 2B09C7366DAE97A805771F49E6538BD8;2419.
  ) 
 Here is how much of TeX's memory you used:
- 21606 strings out of 474272
- 335215 string characters out of 5744472
- 2070533 words of memory out of 5000000
- 43119 multiletter control sequences out of 15000+600000
+ 21732 strings out of 474272
+ 338103 string characters out of 5744472
+ 2069533 words of memory out of 5000000
+ 43230 multiletter control sequences out of 15000+600000
  661606 words of font info for 145 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  87i,17n,131p,1429b,1706s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1339,10 +1414,10 @@ e/2023/texmf-dist/fonts/type1/public/stix2-type1/STIX2Text-Regular.pfb><c:/Prog
 ram Files/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb><c:/
 Program Files/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb>
 
-Output written on zavrsni_rad.pdf (36 pages, 2999442 bytes).
+Output written on zavrsni_rad.pdf (43 pages, 7320671 bytes).
 PDF statistics:
- 736 PDF objects out of 1000 (max. 8388607)
- 659 compressed objects within 7 object streams
- 336 named destinations out of 1000 (max. 500000)
- 203 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 805 PDF objects out of 1000 (max. 8388607)
+ 699 compressed objects within 7 object streams
+ 351 named destinations out of 1000 (max. 500000)
+ 258 words of extra memory for PDF output out of 10000 (max. 10000000)
 
