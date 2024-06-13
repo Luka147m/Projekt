@@ -151,31 +151,26 @@ U velikim urbanim gradovima poput Zagreba, javni gradski prijevoz predstavlja ne
 
 
 %-------------------------------------------------------------------------------
-\chapter{Glavni dio}
-\label{pog:glavni_dio}
-
-\section{Zagrebački Električni Tramvaj}
-
+\chapter{Zagrebački Električni Tramvaj}
 Zagrebački električni tramvaj, poznatiji kao ZET, je trgovačko društvo koje je u direktnom
 vlasništvu Grada Zagreba, te ima ključnu ulogu u organizaciji javnog gradskog prijevoza u Zagrebu.
 Posluje od 1910. godine i svakodnevno pruža prijevozne usluge za gotovo milijun ljudi pomoću
 tramvaja, autobusa, uspinjače i specijalnih prijevoza \cite{ZET}.
 Nedavno je ZET otvorio svoje podatke javnosti pod Otvorenom dozvolom Republike Hrvatske. Ovi podaci obuhvaćaju GTFS static i GTFS realtime podatke \ref{sec:GTFS}, koji su trenutno parcijalno implementirani te su dostupni na službenoj stranici ZET-a \cite{ZET-GTFS}.
 Ti podaci će biti temelj aplikacije i kroz njih ćemo detaljnije proći u narednim poglavljima \ref{sec:zet-gtfs}
-
-\subsubsection{Slične aplikacije - ZET info}
+\\\\
+\section{Slične aplikacije - ZET info}
 Jedna popularna aplikacija koja koristi iste ZET-ove podatke je ZET info \cite{ZET-info}. Koja primarno koristi GTFS static podatke za prikaz rasporeda tramvaja ZET-a. Ona nije službena ZET-ova aplikacija te dostupna je preko Apple App Store-a i Google play-a. Vrlo je zgodna za imati pri ruci za pregledavanje rasporeda vožnji, ali bi aplikacijom ovog završnog rada htjeli ostvariti i upotrebu stvarnih (realtime) podataka za tramvaje.
 
-
-\begin{figure}[htb]
+\begin{figure}[H]
 	\centering
-	\includegraphics[width=0.85\linewidth]{Figures/zetinfo.png} 
+	\includegraphics[width=0.9\linewidth]{Figures/zetinfo.png} 
 	\caption{ZET info}
 	\label{slk:zet-info}
 \end{figure}
 
 \newpage
-\section[GTFS]{General Transit Feed Specification}
+\chapter{\mbox{General Transit Feed Specification}}
 \label{sec:GTFS}
 
 General Transit Feed Specification, kraće GTFS je otvoreni standardizirani format za rasporede
@@ -185,7 +180,7 @@ koriste GTFS su Google Maps, Apple Maps, Moovit, OpenStreetMap i druge \cite{GTF
 
 Činjenica da je GTFS otvoreni standard omogućuje da agencije za prijevoz, informacije učine dostupnima pomoću bilo kojeg od mnogih alata koji već podržavaju GTFS i korisnicima da preuzmu i obrađuju te informacije s proizvoljnom aplikacijom koja podržava GTFS ili ako žele razviju svoje programe za to. Otvoreni standardi dovode do stvaranja podataka koji se mogu lako dijeliti i potiču daljnji razvitak.
 
-Jedan zanimljiv primjer male aplikacije koja koristi GTFS podatke da prikaže područja na karti do kojih možete doći javnim prijevozom u određenom vremenu je otvoreni projekt Mapnificent koji je javno dostupan na Github-u \cite{Mapnificent}. Na slici \ref{slk:mapnificent-zagreb} je prikazano dokle je moguće doći javnim prijevozom od zgrade FER-a unutar 12 minuta. 
+Jedan zanimljiv primjer male aplikacije koja koristi GTFS podatke da prikaže područja na karti do kojih možete doći javnim prijevozom u određenom vremenu je otvoreni projekt Mapnificent koji je javno dostupan na Githubu \cite{Mapnificent}. Na slici \ref{slk:mapnificent-zagreb} je prikazano dokle je moguće doći javnim prijevozom od zgrade FER-a unutar 12 minuta. 
 
 \begin{figure}[htb]
   \centering
@@ -193,8 +188,8 @@ Jedan zanimljiv primjer male aplikacije koja koristi GTFS podatke da prikaže po
   \caption{Mapnificent Zagreb}
   \label{slk:mapnificent-zagreb}
 \end{figure}
-
-\subsection{GTFS static}
+\newpage
+\section{GTFS static}
 
 GTFS static ili GTFS schedule je kolekcija od barem 6 osnovnih, do 26 CSV (comma-separated
 values) datoteka s ekstenzijom \textit{.txt} zapakiranih unutar jedne komprimirane \textit{.zip} datoteke. Te datoteke
@@ -212,7 +207,7 @@ Na dijagramu \ref{slk:gtfs-model} prikazan je jedan primjer važeće strukture G
 
 \newpage
 
-\subsubsection{Neophodne datoteke}
+\subsection{Neophodne datoteke}
 Moraju biti definirane da bi zadovoljili GTFS standard. One spojene zajedno, pomoću pojedinih identifikatora čine cjelovitu sliku mreže javnog prijevoza
 \begin{itemize}
 	\item \textbf{Agency.txt} -
@@ -229,7 +224,7 @@ Moraju biti definirane da bi zadovoljili GTFS standard. One spojene zajedno, pom
 	Informacije o tjednom rasporedu putovanja.
 \end{itemize}
 
-\subsubsection{Opcionalne datoteke}
+\subsection{Opcionalne datoteke}
 Pored neophodnih datoteka korisno je imati i dodatne opcionalne datoteke poput:
 \begin{itemize}
 	\item \textbf{Shapes.txt} -
@@ -240,7 +235,7 @@ Pored neophodnih datoteka korisno je imati i dodatne opcionalne datoteke poput:
 	Omogućuje definiranje iznimaka u redovnom rasporedu kada usluga radi ili ne radi na pojedinoj liniji zbog smetnji ili radova, ili pak posebnih prijevoza.
 \end{itemize}
 
-\subsection[GTFS-rt]{GTFS realtime}
+\section[GTFS-rt]{GTFS realtime}
 
 GTFS realtime ili GTFS-rt je ekstenzija GTFS-a koja je nastala 2011. godine te je također \textit{de facto}
 industrijski standard za dijeljenje stvarnih podataka o prijevozu. Jer je GTFS otvoreni standard,
@@ -261,7 +256,7 @@ Glavni "objekt" GTFS realtime feed-a (stream) je \textit{FeedMessage} koji sadr�
 
 Primjer GTFS-rt podataka se može vidjeti u sljedećem poglavlju na slikama \ref{slk:reply1} i \ref{slk:reply2}.
 
-\subsection{ZET GTFS podaci}
+\section{ZET GTFS podaci}
 \label{sec:zet-gtfs}
 
 Kao što je već rečeno ZET-ovi podaci su dostupni na službenoj stranici svima pod Otvorenom dozvolom Republike Hrvatske \cite{ZET-GTFS}. Na slici \ref{slk:zet-stranica} je prikazana ta stranica te na njoj se mogu pronaći linkovi za GTFS static i GTFS realtime podatke.
@@ -389,7 +384,7 @@ Ovdje nam je jedina nova bitna informacija \textbf{route\_long\_name} koja nam d
 To bi bile najbitnije GTFS static informacije koje su upotrijebljene za izradu aplikacije, koje su od posebne značajnosti za izradu baze podataka koja sprema te odvojene datoteke kao tablice i spaja ih s odgovarajućim ključevima i time omogućuje lako i brzo pretraživanje te formuliranje odgovora \ref{sec:baza}.
 
 \newpage
-\subsubsection{ZET realtime podaci}
+\section{ZET realtime podaci}
 Na ZET-ovoj stranici nalazi se link za GTFS realtime podatke \ref{slk:zet-stranica} koji kada se skinu su binarna datoteka u \textit{.proto} formatu. \textit{Protobuf} je opisan u narednom poglavlju \ref{sec:protobuf}. Ovdje ćemo samo brzo proći kroz konačne podatke kada se obavi deserijalizacija.\\\\
 Na slici \ref{slk:reply1} se nalazi jedan mali isječak od inače jako velike poruke (obično sadrže oko 500 - 600 entiteta), ali radi jednostavnosti je prikazan samo jedan.\\\\
 Na početku svake poruke nalazi se \textit{header} te možemo primijetiti da se koristi starija verzija GTFS 1.0. Sada je aktualna verzija 2.0 koja ima bolje definiranu \textit{schemu} s više informacija i pruža veću fleksibilnost. Također piše da se svaki put šalju svi podaci "FULL\_DATASET" i na kraju je vremenska oznaka generiranja poruke koja je u UNIX formatu.\\\\
@@ -459,7 +454,7 @@ Jedna stvar koju je vrijedno napomenuti da su ZET-ovi podaci prilično osnovni t
 
 
 \newpage
-\section[Protobuf]{Protocol buffers}
+\chapter{Protocol buffers}
 \label{sec:protobuf}
 
 Protocol Buffers su jezično i platformski neutralni, proširivi mehanizmi za serijalizaciju strukturiranih podataka. Razvijeni od strane Googlea, prvotno su bili namijenjeni internoj uporabi, ali su kasnije postali dostupni pod otvorenom licencom \cite{protobuf}. Glavni cilj protocol buffera je pružiti jednostavnost i visoke performanse, te su posebno dizajnirani kako bi bili manji i brži od XML i JSON formata.
@@ -481,9 +476,8 @@ Protobuf koristi \textit{.proto} datoteke za definiranje strukture podataka koji
 	\end{minipage}
 	\caption{Primjer .proto definicije}
 	\label{slk:proto}
-\end{figure}		
-
-
+\end{figure}
+\newpage		
 	Kada smo definirali strukturu svoje poruke potrebno je iskoristiti proto compiler (\textit{protoc}) da bi generirali k\^od koji se koristi za serijalizaciju i deserijalizaciju podataka u odabranom programskom jeziku (podržani C++, Java, Python, Go, JavaScript i mnogo drugih). Za primjer sa slike \ref{slk:proto} i za programski jezik Python, \textit{protoc} compiler generira modul \textit{person\_pb2} koji sadrži potrebne metode za kreiranje objekata te strukture, serijalizaciju i deserijalizaciju tih podataka. 
 
 \begin{figure}[H]
@@ -519,7 +513,7 @@ Neke prednosti korištenja protocol buffera za razliku od tradicionalnijih opcij
 \end{itemize}
 
 \newpage
-\section{Arhitektura sustava}
+\chapter{Arhitektura sustava}
 
 Sustav se temelji na modelu Klijent-Poslužitelj. Taj model je danas jedan od najčešće korištenih arhitektura za raspodijeljene sustave. On se sastoji od dva dijela, poslužitelja koji nudi uslugu i klijenta koji traži uslugu. Klijent će biti korisnikovo računalo koje pomoću web preglednika koristi klijentski dio aplikacije (React frontend) te putem HTTP komunikacijskog kanala komunicira s poslužiteljskim dijelom aplikacije (node.js i PostgreSQL).\\\\
 Klijentski dio aplikacije je izrađen pomoću React.js, popularnog JavaScript okvir za izgradnju korisničkih sučelja, primarno korišten za jednostranične aplikacije (Single-page Application, SPA).\\\\
@@ -532,7 +526,7 @@ Poslužiteljski dio aplikacije izrađen je pomoću node.js, koji je također Jav
 	\label{slk:sustav}
 \end{figure}
 \newpage
-\subsection{Baza podataka}
+\section{Baza podataka}
 \label{sec:baza}
 Baza podataka je izvedena pomoću PostgreSQL-a. PostgreSQL je besplatan i otvoreni, objektno-relacijski sustav za upravljanje bazama podataka. Temelji se na SQL jeziku i nudi brojna proširenja koji olakšavaju pohranu i skaliranje, povećavaju sigurnost te rješavaju probleme paralelnosti pristupa. Nastao je 1986. godine na Kalifornijskom sveučilištu u Berkeleyju. \cite{postgresql}\\
 
@@ -653,7 +647,7 @@ Navedene funkcije koristi poslužiteljska strana zajedno s parametrom.
 \end{figure}
 
 
-\subsection{Pomoćna skripte}
+\section{Pomoćna skripte}
 \label{sec:skripta}
 Za potrebe aplikacije izrađena je jedna pomoćna skripta koju pokreće poslužiteljski dio aplikacije prilikom pokretanja. Ona je zadužena za dohvaćanje najnovijih datoteka sa ZET-ove stranice te je napisana u Pythonu koristeći module \textit{psycopg2, requests i zipfile}.\\\\
 Pomoću metode \textit{requests.get('https://www.zet.hr/gtfs-scheduled/latest')} sa stranice ZET-a dohvaća najnoviju GTFS static arhivu te potom metodom \textit{extractAll} iz modula \textit{zipfile} raspakirava arhivu i sprema datoteke. Komunikacija s bazom podataka PostgreSQL je ostvarena metodama iz modula \textit{psycopg2}. Prvo je potrebno priložiti vjerodajnice odnosno \textit{username i password} te \textit{host, port i database} (određuju lokaciju baze podataka) za uspješno spajanje.\\\\
@@ -696,7 +690,7 @@ Na slici \ref{slk:pytonskripta} prikazan je isječak k\^oda pomoću kojeg je ost
 	\label{slk:pytonskripta}
 \end{figure}
 \newpage
-\subsection{Poslužiteljski dio aplikacije - node.js}
+\section{Poslužiteljski dio aplikacije - node.js}
 Poslužiteljski dio aplikacije napisan je u jeziku JavaScript, koristeći Node.js okvir. JavaScript je programski jezik primarno namijenjen korištenju unutar web preglednika, ali uz pomoć Node.js moguće je izvršavanje JavaScript koda na poslužiteljskoj strani, izvan web preglednika, čime se omogućava korištenje jednog jezika za pisanje cjelokupne aplikacije. Najvažniji dodatak Node.js-u je Express.js, minimalistički i fleksibilan web okvir koji olakšava rad s HTTP zahtjevima i izgradnju web poslužitelja. On omogućava jednostavno definiranje ruta, rukovanje HTTP zahtjevima i upravljanje \textit{middleware} funkcijama.\\
 Na slici \ref{slk:express} je primjer vrlo jednostavnog poslužitelja koji kada dobije GET zahtjev na ruti \textit{'/api/stops'} provodi upit nad bazom podataka i ovisno o odgovoru vraća uspješni (200 OK s podacima o stanicama) ili neuspješni odgovor (status 500 s porukom greške). Sve ostale dostupne rute aplikacije su napravljene prema istoj shemi.
 
@@ -789,7 +783,7 @@ async function fetchData() {
 \end{figure}
 \newpage
 
-\subsection{Klijentski dio aplikacije - REACT}
+\section{Klijentski dio aplikacije - REACT}
 \label{sec:frontend}
 
 Klijentski dio također je izrađen u jeziku JavaScript pomoću React.js, popularnog JavaScript okvira koji se primarno koristi za izgradnju jednostraničnih aplikacija (SPA). React.js omogućava razvoj složenih i dinamičnih web aplikacija pomoću komponentnog pristupa, gdje se korisničko sučelje sastoji od manjih, ponovno upotrebljivih komponenti.\\
@@ -905,7 +899,7 @@ Još jedan način rješavanja ovog problema je korištenjem \textit{routing} kom
 Klikom na marker se izaziva \textit{useEffect()} hook u komponenti \textit{TripTimeline.js} koje aktivira njen prikaz. Ta komponenta je zadužena za prikazivanje rasporeda puta tramvaja, koje je ostvareno kao vremenska crta pomoću \textit{VerticalTimeline} komponente. Raspored puta sadrži u redoslijedu stanice na koje će tramvaj doći, njihovo vrijeme očekivanog dolaska i vremena potrebnog do sljedeće stanice.
 
 \newpage
-\section{Izgled aplikacije}
+\chapter{Izgled aplikacije}
 Prilikom prvog pristupa stranici dočekani smo praznom kartom bez ikakvih markera. U gornjem lijevom kutu se nalazi glavni izbornik koji se sastoji od padajućih izbornika i polja koji sadrži listu odabranih ruta (to polje je vidljivo samo kada je barem jedna ruta odabrana). Svi padajući izbornici ujedno podržavaju i pretraživanje.\\
 Desno od glavnog izbornika se nalazi analogni sat za vrijeme koji se može promijeniti u digitalni sat klikom na njega. Ispod sata se nalazi legenda markera uz pomoć koje se može vidjeti što koji marker predstavlja kada je miš iznad odgovarajuće ikone ("\textit{on hover}"). Također ispod legende se nalaze i tipke za uvećavanje/smanjivanje karte, ali to je moguće i lakše obaviti kotačićem na mišu.
 
@@ -915,10 +909,11 @@ Desno od glavnog izbornika se nalazi analogni sat za vrijeme koji se može promi
 	\caption{Početni zaslon aplikacije}
 	\label{slk:default}
 \end{figure}
-
-Korištenjem padajućeg izbornika označenog tekstom \textit{"Odaberi rutu:"} možemo ili klikom odabrati rutu koju želimo pratiti ili jednostavno upišemo broj tramvajske linije i pritisnemo tipku \textit{enter} (slika \ref{slk:glavni}). Tada će odabrana ruta biti dodana u kutiju odabranih ruta (slika \ref{slk:odabrane}) i na karti će se prikazati markeri tramvaja.\\
 \newpage
+Korištenjem padajućeg izbornika označenog tekstom \textit{"Odaberi rutu:"} možemo ili klikom odabrati rutu koju želimo pratiti ili jednostavno upišemo broj tramvajske linije i pritisnemo tipku \textit{enter} (slika \ref{slk:glavni}). Tada će odabrana ruta biti dodana u kutiju odabranih ruta (slika \ref{slk:odabrane}) i na karti će se prikazati markeri tramvaja.\\
+
 Aplikacija sadrži funkcionalnost pronalaska tramvajskih linija odnosno funkcionalnost koja pomaže pronaći tramvajske linije koje prolaze kroz početnu i krajnju tramvajsku stanicu. Time olakšava uporabu korisnicima koji nisu upoznati s voznim redom tramvajskih linija. Pomoću dva padajuća izbornika (slika \ref{slk:pretrazivanje}) potrebno je odabrati željenu početnu i krajnju stanicu te klikom na tipku \textit{"Pretraži"} obavlja se pretraga. Ako je pretraga bila uspješna stanice će se automatski dodati u polje odabranih stanica, a ako nije bila uspješna tada će se prikazati poruka \textit{"Nije pronađena nijedna linija!"} koja će nakon 10 sekundi nestati.\\
+
 Polje sa odabranim tramvajskim linijama za svaku liniju ima jedan gumb za brisanje te linije \textit{"Obriši"}. Ako je odabrano više od 3 tramvajske linije tada će se prikazati i dodatan gumb \textit{"Obriši sve"} s kojim lakše i brže brišemo sve odabrane linije.\\
 
 \begin{figure}[H]
@@ -988,7 +983,9 @@ Također na karti će se iscrtati cjelokupni put tramvajske linije i otvoriti ć
 	\label{slk:put}
 \end{figure}
 \newpage
-Prozor s dodatnim informacijama o putu (slika \ref{slk:inf}) je vidljiv samo kada je jedan od tramvaja odabran. On sadrži informacije o broju i punom nazivu tramvajske linije koji se sastoji od početne i krajnje stanice te smjera kretanja tramvaja i sadrži vremensku liniju voznog rasporeda tramvaja.\\Raspored tramvaja sadrži sve stanice na tramvajskoj liniji i informacije o očekivanom vremenu dolaska na pojedinu stanicu i o potrebnim vremenima do sljedeće stanice. Ta vremena su temeljena na povijesnim podacima koji se nalaze unutar ZET-ovih static podataka. Kroz raspored se može proći uporabom kotačića na mišu i time vidjeti sve prijašnje i naredne stanice.
+Prozor s dodatnim informacijama o putu (slika \ref{slk:inf}) je vidljiv samo kada je jedan od tramvaja odabran. On sadrži informacije o broju i punom nazivu tramvajske linije koji se sastoji od početne i krajnje stanice te smjera kretanja tramvaja i sadrži vremensku liniju voznog rasporeda tramvaja.\\
+
+Raspored tramvaja sadrži sve stanice na tramvajskoj liniji i informacije o očekivanom vremenu dolaska na pojedinu stanicu i o potrebnim vremenima do sljedeće stanice. Ta vremena su temeljena na povijesnim podacima koji se nalaze unutar ZET-ovih static podataka. Kroz raspored se može proći uporabom kotačića na mišu i time vidjeti sve prijašnje i naredne stanice.
 
 \begin{figure}[H]
 	\centering
