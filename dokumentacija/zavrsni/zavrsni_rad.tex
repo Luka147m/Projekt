@@ -183,7 +183,7 @@ javnog prijevoza i pripadajuće geografske informacije. Široko se koristi dilje
 podržavaju više od 10 tisuća agencija javnog prijevoza u preko 100 zemalja. Neke od platformi koje
 koriste GTFS su Google Maps, Apple Maps, Moovit, OpenStreetMap i druge \cite{GTFS}. GTFS je započeo 2005. godine kao ideja za sporedni projekt Googleovog zaposlenika Chris Harrelsona te je danas \textit{De facto} standard industrije. GTFS se sastoji od dva glavna dijela GTFS schedule (static) i GTFS realtime.
 
-Činjenica da je GTFS otvoreni standard omogućuje da agencije za prijevoz, informacije učine dostupnima pomoću bilo kojeg od mnogih alata koji već podržavaju GTFS i korisnicima da preuzmu i obrađuju te informacije sa proizvoljnom aplikacijom koja podržava GTFS ili ako žele razviju svoje programe za to. Otvoreni standardi dovode do stvaranja podataka koji se mogu lako dijeliti i potiču daljnji razvitak.
+Činjenica da je GTFS otvoreni standard omogućuje da agencije za prijevoz, informacije učine dostupnima pomoću bilo kojeg od mnogih alata koji već podržavaju GTFS i korisnicima da preuzmu i obrađuju te informacije s proizvoljnom aplikacijom koja podržava GTFS ili ako žele razviju svoje programe za to. Otvoreni standardi dovode do stvaranja podataka koji se mogu lako dijeliti i potiču daljnji razvitak.
 
 Jedan zanimljiv primjer male aplikacije koja koristi GTFS podatke da prikaže područja na karti do kojih možete doći javnim prijevozom u određenom vremenu je otvoreni projekt Mapnificent koji je javno dostupan na Github-u \cite{Mapnificent}. Na slici \ref{slk:mapnificent-zagreb} je prikazano dokle je moguće doći javnim prijevozom od zgrade FER-a unutar 12 minuta. 
 
@@ -365,7 +365,7 @@ Bitne informacije u \textit{stop\_times.txt} su:
 	\item \textbf{stop\_id} - identifikator pojedine stanice
 	\item \textbf{stop\_sequence} - redni broj stanice na putu
 \end{itemize}
-Ovo je najveća datoteka sa oko 70MB (\textasciitilde{}1000000 linija) koja za svako pojedino putovanje (\textit{trip\_id}) sadrži informacije o svim stanicama na putu, očekivanom vremenu dolaska i odlaska sa stanice i redoslijedu stanica. Ona će biti ključna za iscrtavanje rute i predviđanju lokacije tramvaja.
+Ovo je najveća datoteka s oko 70 MB (\textasciitilde{}1000000 linija) koja za svako pojedino putovanje (\textit{trip\_id}) sadrži informacije o svim stanicama na putu, očekivanom vremenu dolaska i odlaska sa stanice i redoslijedu stanica. Ona će biti ključna za iscrtavanje rute i predviđanju lokacije tramvaja.
 \newpage
 \subsubsection{routes.txt}
 
@@ -793,7 +793,7 @@ async function fetchData() {
 \label{sec:frontend}
 
 Klijentski dio također je izrađen u jeziku JavaScript pomoću React.js, popularnog JavaScript okvira koji se primarno koristi za izgradnju jednostraničnih aplikacija (SPA). React.js omogućava razvoj složenih i dinamičnih web aplikacija pomoću komponentnog pristupa, gdje se korisničko sučelje sastoji od manjih, ponovno upotrebljivih komponenti.\\
-Komponente su osnovni gradivni elementi u React-u, a svaka komponenta predstavlja dio korisničkog sučelja. Komponente mogu biti jednostavne, poput gumba, ili složene, poput cijele stranice. Komponente su definirane pomoću JavaScript funkcija ili klasa, te vraćaju JSX (JavaScript XML), koji izgleda slično HTML-u.\\
+Komponente su osnovni gradivni elementi u Reactu, a svaka komponenta predstavlja dio korisničkog sučelja. Komponente mogu biti jednostavne, poput gumba, ili složene, poput cijele stranice. Komponente su definirane pomoću JavaScript funkcija ili klasa, te vraćaju JSX (JavaScript XML), koji izgleda slično HTML-u.\\
 
 Aplikacija se sastoji od par komponenti \textit{App.js, Map.js, MapRouteLine.js, Marker.js, Sidebar.js i TripTimeline.js} od kojih je glavna roditeljska komponenta koja sadrži sve ostale \textit{App.js} (slika \ref{slk:strukturaklijent}).
 
@@ -855,7 +855,7 @@ Kao što je rečeno \textit{App.js} je glavna komponenta koja se nalazi iznad sv
 \subsubsection{Map.js}
 Komponenta \textit{Map.js} kojoj je glavna uloga da prikazuje kartu ostvarena je pomoću \textit{leaflet.js}-a.
 \textit{Leaflet.js} je popularna open-source JavaScript biblioteka za interaktivne mape. Omogućava jednostavno dodavanje dinamičkih karti, postavljanje markera, crtanje linija i poligona, interakciju s kartama, dodavanje pop-up prozora i još mnogo toga \cite{leaflet}.
-Postoji React verzija \textit{leaflet.js} koja objekte tretira kao komponente i s kojom je još jednostavnije raditi u React-u.\\
+Postoji React verzija \textit{leaflet.js} koja objekte tretira kao komponente i s kojom je još jednostavnije raditi u Reactu.\\
 Karta koju \textit{leaflet.js} koristi je dohvaćena iz OpenStreetMap projekta, koji je otvorena i slobodna baza geografskih podataka koju održavaju volonteri.\\
 
 Na slici \ref{slk:mapjs} se nalazi isječak k\^oda koji opisuje što sadrži \textit{Map.js} te možemo primijetiti komponente \textit{MapContainer, ZoomControl, TileLayer} koje su standardne komponente iz \textit{leaflet.js} i koje definiraju izgled karte , dok komponenta \textit{Markers} koja se koristi za postavljanje markera na kartu i komponenta \textit{MapRouteLine} koja se koristi za crtanje linija ruta na karti su definirane za potrebe aplikacije.
