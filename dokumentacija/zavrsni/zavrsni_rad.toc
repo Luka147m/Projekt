@@ -2,31 +2,31 @@
 \babel@toc {croatian}{}\relax 
 \babel@toc {croatian}{}\relax 
 \contentsline {chapter}{\numberline {1.}Uvod}{3}{chapter.1}%
-\contentsline {chapter}{\numberline {2.}Zagrebački Električni Tramvaj}{4}{chapter.2}%
+\contentsline {chapter}{\numberline {2.}Zagrebački električni tramvaj}{4}{chapter.2}%
 \contentsline {section}{\numberline {2.1.}Slične aplikacije - ZET info}{4}{section.2.1}%
-\contentsline {chapter}{\numberline {3.}\mbox {General Transit Feed Specification}}{6}{chapter.3}%
-\contentsline {section}{\numberline {3.1.}GTFS static}{7}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1.}Neophodne datoteke}{9}{subsection.3.1.1}%
+\contentsline {chapter}{\numberline {3.}\mbox {Format General Transit Feed Specification}}{6}{chapter.3}%
+\contentsline {section}{\numberline {3.1.}Format GTFS static}{7}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1.}Obavezne datoteke}{9}{subsection.3.1.1}%
 \contentsline {subsection}{\numberline {3.1.2.}Opcionalne datoteke}{9}{subsection.3.1.2}%
-\contentsline {section}{\numberline {3.2.}GTFS-rt}{10}{section.3.2}%
-\contentsline {section}{\numberline {3.3.}ZET GTFS podaci}{11}{section.3.3}%
+\contentsline {section}{\numberline {3.2.}Format GTFS realtime}{10}{section.3.2}%
+\contentsline {section}{\numberline {3.3.}Podaci ZET-a u formatu GTFS}{11}{section.3.3}%
 \contentsline {subsubsection}{trips.txt}{12}{section*.7}%
 \contentsline {subsubsection}{stops.txt}{13}{section*.9}%
 \contentsline {subsubsection}{stop\_times.txt}{13}{section*.11}%
 \contentsline {subsubsection}{routes.txt}{14}{section*.13}%
-\contentsline {section}{\numberline {3.4.}ZET realtime podaci}{15}{section.3.4}%
-\contentsline {chapter}{\numberline {4.}Protocol buffers}{17}{chapter.4}%
+\contentsline {section}{\numberline {3.4.}GTFS realtime podaci Zet-a}{15}{section.3.4}%
+\contentsline {chapter}{\numberline {4.}Mehanizam Protocol buffers}{17}{chapter.4}%
 \contentsline {chapter}{\numberline {5.}Arhitektura sustava}{19}{chapter.5}%
 \contentsline {section}{\numberline {5.1.}Baza podataka}{20}{section.5.1}%
-\contentsline {section}{\numberline {5.2.}Pomoćna skripte}{23}{section.5.2}%
+\contentsline {section}{\numberline {5.2.}Pomoćna skripta za dohvaćanje Zet-ovih podataka}{23}{section.5.2}%
 \contentsline {section}{\numberline {5.3.}Poslužiteljski dio aplikacije - node.js}{25}{section.5.3}%
-\contentsline {section}{\numberline {5.4.}Klijentski dio aplikacije - REACT}{28}{section.5.4}%
-\contentsline {subsubsection}{App.js}{29}{section*.29}%
-\contentsline {subsubsection}{Map.js}{30}{section*.31}%
-\contentsline {subsubsection}{Markers.js}{31}{section*.33}%
-\contentsline {subsubsection}{MapRouteLine.js}{32}{section*.34}%
-\contentsline {subsubsection}{Sidebar.js}{32}{section*.35}%
-\contentsline {subsubsection}{TripTimeline.js}{32}{section*.36}%
+\contentsline {section}{\numberline {5.4.}Klijentski dio aplikacije - React.js}{28}{section.5.4}%
+\contentsline {subsubsection}{Komponenta App.js}{29}{section*.29}%
+\contentsline {subsubsection}{Komponenta Map.js}{30}{section*.31}%
+\contentsline {subsubsection}{Komponenta Markers.js}{31}{section*.33}%
+\contentsline {subsubsection}{Komponenta MapRouteLine.js}{32}{section*.34}%
+\contentsline {subsubsection}{Komponenta Sidebar.js}{32}{section*.35}%
+\contentsline {subsubsection}{Komponenta TripTimeline.js}{32}{section*.36}%
 \contentsline {chapter}{\numberline {6.}Izgled aplikacije}{33}{chapter.6}%
 \contentsline {chapter}{\numberline {7.}Zaključak}{39}{chapter.7}%
 \contentsline {chapter}{Literatura}{40}{chapter*.45}%
