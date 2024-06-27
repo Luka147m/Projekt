@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.3)  18 JUN 2024 22:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.3)  27 JUN 2024 22:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -956,7 +956,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.39 ...sline {chapter}{Abstract}{43}{chapter*.47}
+l.39 ...sline {chapter}{Abstract}{42}{chapter*.47}
                                                   % [1
 
 
@@ -1249,26 +1249,26 @@ Poglavlje 7..
 (./zavrsni_rad.bbl [39
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 55--57
+Underfull \hbox (badness 10000) in paragraph at lines 54--56
 []\T1/stix2/m/n/12 General Tran-sit Feed Spe-ci-fi-ca-tion, ``GTFS - Re-al-time
 '', []$https : / / gtfs . org /
  []
 
-[40
+) [40
 
-]) [41] [42
+] [41
 
-] [43
+] [42
 
 ]
 pdfTeX warning (ext4): destination with the same identifier (name{chapter.1}) h
 as been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1061 \chapter{K\^od}
-                      
+l.1060 \chapter{Programski k\^od aplikacije}
+                                            
 Privitak A.
-[44
+[43
 
 
 ] (./zavrsni_rad.aux)
@@ -1425,11 +1425,11 @@ zavrsni_rad.bbl
  ***********
 
 Package rerunfilecheck Info: File `zavrsni_rad.out' has not changed.
-(rerunfilecheck)             Checksum: 898AD2730CA02149078488958E39AE59;3565.
+(rerunfilecheck)             Checksum: 1FADE2ECCEFD66D01EF02EDA3BDA5906;3681.
  ) 
 Here is how much of TeX's memory you used:
- 21740 strings out of 474272
- 338046 string characters out of 5744472
+ 21739 strings out of 474272
+ 338039 string characters out of 5744472
  2066533 words of memory out of 5000000
  43234 multiletter control sequences out of 15000+600000
  669298 words of font info for 146 fonts, out of 8000000 for 9000
@@ -1445,10 +1445,10 @@ rogram Files/texlive/2023/texmf-dist/fonts/type1/public/stix2-type1/STIX2Text-R
 egular.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/cm-supe
 r/sftt1000.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/cm-
 super/sftt1200.pfb>
-Output written on zavrsni_rad.pdf (47 pages, 7747851 bytes).
+Output written on zavrsni_rad.pdf (46 pages, 7747761 bytes).
 PDF statistics:
- 838 PDF objects out of 1000 (max. 8388607)
- 725 compressed objects within 8 object streams
- 354 named destinations out of 1000 (max. 500000)
+ 834 PDF objects out of 1000 (max. 8388607)
+ 722 compressed objects within 8 object streams
+ 353 named destinations out of 1000 (max. 500000)
  282 words of extra memory for PDF output out of 10000 (max. 10000000)
 

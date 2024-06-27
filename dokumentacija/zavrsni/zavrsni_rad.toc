@@ -14,11 +14,11 @@
 \contentsline {subsubsection}{stops.txt}{13}{section*.9}%
 \contentsline {subsubsection}{stop\_times.txt}{13}{section*.11}%
 \contentsline {subsubsection}{routes.txt}{14}{section*.13}%
-\contentsline {section}{\numberline {3.4.}GTFS realtime podaci Zet-a}{15}{section.3.4}%
+\contentsline {section}{\numberline {3.4.}GTFS realtime podaci ZET-a}{15}{section.3.4}%
 \contentsline {chapter}{\numberline {4.}Mehanizam Protocol buffers}{17}{chapter.4}%
 \contentsline {chapter}{\numberline {5.}Arhitektura sustava}{19}{chapter.5}%
 \contentsline {section}{\numberline {5.1.}Baza podataka}{20}{section.5.1}%
-\contentsline {section}{\numberline {5.2.}Pomoćna skripta za dohvaćanje Zet-ovih podataka}{23}{section.5.2}%
+\contentsline {section}{\numberline {5.2.}Pomoćna skripta za dohvaćanje ZET-ovih podataka}{23}{section.5.2}%
 \contentsline {section}{\numberline {5.3.}Poslužiteljski dio aplikacije - node.js}{25}{section.5.3}%
 \contentsline {section}{\numberline {5.4.}Klijentski dio aplikacije - React.js}{28}{section.5.4}%
 \contentsline {subsubsection}{Komponenta App.js}{29}{section*.29}%
@@ -31,13 +31,13 @@
 \contentsline {chapter}{\numberline {7.}Zaključak}{39}{chapter.7}%
 \contentsline {chapter}{Literatura}{40}{chapter*.45}%
 \babel@toc {croatian}{}\relax 
-\contentsline {chapter}{Sa\v {z}etak}{42}{chapter*.46}%
+\contentsline {chapter}{Sa\v {z}etak}{41}{chapter*.46}%
 \babel@toc {croatian}{}\relax 
 \babel@toc {croatian}{}\relax 
 \babel@toc {croatian}{}\relax 
 \babel@toc {english}{}\relax 
-\contentsline {chapter}{Abstract}{43}{chapter*.47}%
+\contentsline {chapter}{Abstract}{42}{chapter*.47}%
 \babel@toc {croatian}{}\relax 
 \babel@toc {english}{}\relax 
 \babel@toc {croatian}{}\relax 
-\contentsline {chapter}{\numberline {A:}K\^od}{44}{chapter.1}%
+\contentsline {chapter}{\numberline {A:}Programski k\^od aplikacije}{43}{chapter.1}%

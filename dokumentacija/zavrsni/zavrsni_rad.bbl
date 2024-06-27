@@ -26,12 +26,11 @@
 
 \bibitem{ZET}
 {Zagrebački Električni Tramvaj}, ``{ZET - O nama}'',
-  \url{https://www.zet.hr/o-nama/259}, [Stranica posjećena: 16.05.2024.].
+  \url{https://www.zet.hr/o-nama/259}.
 
 \bibitem{ZET-GTFS}
 ------, ``{ZET - GTFS podaci}'',
-  \url{https://www.zet.hr/odredbe/datoteke-u-gtfs-formatu/669}, [Stranica
-  posjećena: 27.05.2024.].
+  \url{https://www.zet.hr/odredbe/datoteke-u-gtfs-formatu/669}.
 
 \bibitem{ZET-info}
 {ZET info}, \url{https://zet-info.com/}.
@@ -61,6 +60,9 @@
 \bibitem{postgresql}
 {PostgreSQL}, \url{https://www.postgresql.org/about/}.
 
+\bibitem{leaflet}
+{Leaflet.js}, \url{https://leafletjs.com/}.
+
 \bibitem{GTFS-reference}
 {Google}, ``{GTFS reference}'',
   \url{https://developers.google.com/transit/gtfs/reference}.
@@ -70,8 +72,5 @@
 
 \bibitem{react}
 {React.js}, \url{https://react.dev/}.
-
-\bibitem{leaflet}
-{Leaflet.js}, \url{https://leafletjs.com/}.
 
 \end{thebibliography}

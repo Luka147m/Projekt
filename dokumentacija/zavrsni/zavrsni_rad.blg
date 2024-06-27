@@ -12,37 +12,37 @@ Reallocated singl_function (elt_size=4) to 150 items from 100.
 Database file #1: literatura.bib
 You've used 14 entries,
             4225 wiz_defined-function locations,
-            893 strings with 8948 characters,
-and the built_in function-call counts, 4586 in all, are:
-= -- 286
+            891 strings with 8880 characters,
+and the built_in function-call counts, 4494 in all, are:
+= -- 272
 > -- 56
 < -- 0
 + -- 28
 - -- 14
-* -- 93
-:= -- 759
+* -- 87
+:= -- 739
 add.period$ -- 21
 call.type$ -- 14
-change.case$ -- 9
+change.case$ -- 7
 chr.to.int$ -- 0
 cite$ -- 14
-duplicate$ -- 405
-empty$ -- 528
+duplicate$ -- 399
+empty$ -- 526
 format.name$ -- 14
-if$ -- 1087
+if$ -- 1067
 int.to.chr$ -- 0
 int.to.str$ -- 14
-missing$ -- 100
+missing$ -- 98
 newline$ -- 67
 num.names$ -- 14
-pop$ -- 286
+pop$ -- 280
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 409
+skip$ -- 407
 stack$ -- 0
-substring$ -- 11
-swap$ -- 195
+substring$ -- 7
+swap$ -- 189
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
@@ -50,4 +50,4 @@ type$ -- 14
 warning$ -- 0
 while$ -- 14
 width$ -- 16
-write$ -- 117
+write$ -- 115
